@@ -1,0 +1,7 @@
+# Virtual node default networking template
+#
+parameters:
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}
