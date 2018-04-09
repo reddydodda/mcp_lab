@@ -1,0 +1,13 @@
+classes:
+- cluster.vlab.kubernetes.compute
+parameters:
+  _param:
+    linux_system_codename: xenial
+    single_address: 10.101.0.114
+    tenant_address: 10.102.0.114
+  linux:
+    system:
+      name: k8s-cmp01
+      domain: mirantis.net
+      cluster: default
+      environment: prd

@@ -1,0 +1,14 @@
+classes:
+- cluster.vlab.infra.kvm04
+parameters:
+  _param:
+    deploy_address: 10.100.0.244
+    linux_system_codename: xenial
+    salt_master_host: 10.100.0.15
+    single_address: 10.101.0.244
+  linux:
+    system:
+      name: kvm04
+      domain: mirantis.net
+      cluster: default
+      environment: prd

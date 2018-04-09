@@ -1,0 +1,16 @@
+classes:
+- cluster.vlab.kubernetes.control
+parameters:
+  _param:
+    deploy_address: 10.100.0.113
+    keepalived_vip_priority: 101
+    linux_system_codename: xenial
+    salt_master_host: 10.100.0.15
+    single_address: 10.101.0.113
+    tenant_address: 10.102.0.113
+  linux:
+    system:
+      name: k8s-ctl03
+      domain: mirantis.net
+      cluster: default
+      environment: prd
