@@ -14,6 +14,7 @@ classes:
 - system.prometheus.server.target.federation
 - system.prometheus.server.target.federation.all_metrics
 - system.haproxy.proxy.listen.stacklight.prometheus_relay
+- system.influxdb.database.prometheus
 - cluster.vlab.stacklight
 - cluster.vlab.infra
 - cluster.vlab.stacklight.networking.virtual

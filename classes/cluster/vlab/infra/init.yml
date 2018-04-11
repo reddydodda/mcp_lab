@@ -9,9 +9,18 @@ classes:
 #- system.openssh.server.team.stacklight
 - system.rsyslog.client.single
 - cluster.vlab.openstack
+- cluster.vlab.kubernetes
 - cluster.vlab.stacklight
-- system.heka.log_collector.single
-- system.heka.log_collector.output.telegraf
+#- system.heka.log_collector.single
+#- system.heka.log_collector.output.telegraf
+- system.linux.system.repo.mcp.updates	
+- system.linux.system.repo.mcp.apt_mirantis.fluentd	
+- system.linux.system.repo.mcp.apt_mirantis.openstack	
+- system.fluentd	
+- system.fluentd.label.default_metric	
+- system.fluentd.label.default_metric.prometheus	
+- system.fluentd.label.default_output.elasticsearch	
+- system.fluentd.label.default_output.drop_event
 - system.telegraf.agent
 - system.prometheus.collector
 - service.grafana.collector
@@ -19,6 +28,7 @@ classes:
 - cluster.vlab.ceph
 - cluster.vlab.cicd
 #- cluster.vlab.infra.proxy
+- cluster.vlab.infra.chandra
 - cluster.vlab.infra.secrets
 parameters:
   _param:
@@ -45,6 +55,7 @@ parameters:
     dns_server02: 8.8.4.4
     control_vlan: 101
     tenant_vlan: 102
+    proxy_vlan: 103
 
     deploy_network_netmask: 255.255.255.0
     deploy_network_gateway: 10.100.0.1
@@ -62,6 +73,9 @@ parameters:
     infra_kvm_node01_hostname: kvm01
     infra_kvm_node02_hostname: kvm02
     infra_kvm_node03_hostname: kvm03
+    infra_kvm_node04_address: 10.101.0.244	
+    infra_kvm_node04_deploy_address: 10.100.0.244	
+    infra_kvm_node04_hostname: kvm04
 
     glusterfs_node01_address: ${_param:infra_kvm_node01_address}
     glusterfs_node02_address: ${_param:infra_kvm_node02_address}
@@ -137,6 +151,12 @@ parameters:
           names:
           - ${_param:infra_kvm_node03_hostname}
           - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+        kvm04:	
+          address: ${_param:infra_kvm_node04_address}	
+          names:	
+          - ${_param:infra_kvm_node04_hostname}	
+          - ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+
     system:
       name: ${_param:infra_config_hostname}
       domain: ${_param:cluster_domain}

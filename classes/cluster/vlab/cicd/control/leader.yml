@@ -36,6 +36,7 @@ classes:
 
   - cluster.vlab.infra
   - cluster.vlab.cicd.control
+  - cluster.vlab.cicd.control.cvp
 
 parameters:
   _param:

@@ -27,8 +27,8 @@ parameters:
     docker_image_kqueen_ui: docker-prod-local.artifactory.mirantis.com/mirantis/external/ui:${_param:apt_mk_version}
     # OpenLDAP
     openldap_organisation: "${_param:cluster_name}"
-    openldap_dn: "dc=deploy-name,dc=local"
-    openldap_domain: "deploy-name.local"
+    openldap_dn: "dc=miranits,dc=net"
+    openldap_domain: "miranits.net"
     openldap_admin_password: ${_param:openldap_admin_password_generated}
     openldap_config_password: ${_param:openldap_config_password_generated}
     openldap_readonly_password: ${_param:openldap_readonly_password_generated}
@@ -55,17 +55,17 @@ parameters:
           names:
           - ${_param:cicd_control_hostname}
           - ${_param:cicd_control_hostname}.${_param:cluster_domain}
-        ci01:
+        cid01:
           address: ${_param:cicd_control_node01_address}
           names:
           - ${_param:cicd_control_node01_hostname}
           - ${_param:cicd_control_node01_hostname}.${_param:cluster_domain}
-        ci02:
+        cid02:
           address: ${_param:cicd_control_node02_address}
           names:
           - ${_param:cicd_control_node02_hostname}
           - ${_param:cicd_control_node02_hostname}.${_param:cluster_domain}
-        ci03:
+        cid03:
           address: ${_param:cicd_control_node03_address}
           names:
           - ${_param:cicd_control_node03_hostname}

@@ -82,6 +82,8 @@ parameters:
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
     stacklight_notification_topic: stacklight_notifications
     openstack_notification_topics: "notifications,${_param:stacklight_notification_topic}"
+    openstack_log_appender: true
+    openstack_fluentd_handler_enabled: true
 
     # openstack service addresses
     openstack_proxy_address: 10.101.0.80
