@@ -55,17 +55,17 @@ parameters:
           names:
           - ${_param:cicd_control_hostname}
           - ${_param:cicd_control_hostname}.${_param:cluster_domain}
-        ci01:
+        cid01:
           address: ${_param:cicd_control_node01_address}
           names:
           - ${_param:cicd_control_node01_hostname}
           - ${_param:cicd_control_node01_hostname}.${_param:cluster_domain}
-        ci02:
+        cid02:
           address: ${_param:cicd_control_node02_address}
           names:
           - ${_param:cicd_control_node02_hostname}
           - ${_param:cicd_control_node02_hostname}.${_param:cluster_domain}
-        ci03:
+        cid03:
           address: ${_param:cicd_control_node03_address}
           names:
           - ${_param:cicd_control_node03_hostname}

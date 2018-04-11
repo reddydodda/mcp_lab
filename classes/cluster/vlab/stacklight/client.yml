@@ -12,6 +12,7 @@ classes:
 - system.docker.swarm.stack.monitoring.remote_collector
 - system.docker.swarm.stack.monitoring.remote_agent.ceph_common
 
+- system.linux.system.repo.mcp.apt_mirantis.glusterfs
 #- cluster.vlab.infra
 #- cluster.vlab.cicd.control
 

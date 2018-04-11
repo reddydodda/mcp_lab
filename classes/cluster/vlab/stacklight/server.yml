@@ -29,6 +29,7 @@ classes:
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
 - cluster.vlab.stacklight.networking.virtual
+- system.linux.system.repo.mcp.apt_mirantis.glusterfs
 
 # Kqueen metrics support
 #- system.prometheus.server.alert.etcd
