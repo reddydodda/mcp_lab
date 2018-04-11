@@ -1,12 +1,10 @@
 parameters:
   _param:
-    apt_mk_version: '2018.3.1'
     docker_registry_http_secret: ${_param:docker_registry_http_secret_generated}
     stacklight_monitor_address: ${_param:stacklight_monitor_address}
     prometheus_control_address: ${_param:stacklight_monitor_address}
     kibana_elasticsearch_host: ${_param:stacklight_log_address}
     heka_elasticsearch_host: ${_param:stacklight_log_address}
-    fluentd_elasticsearch_host: ${_param:stacklight_log_address}
     heka_influxdb_host: ${_param:stacklight_telemetry_address}
     heka_aggregator_host: ${_param:stacklight_monitor_address}
     grafana_user: admin
@@ -45,7 +43,7 @@ parameters:
     stacklight_monitor_node01_address: 10.101.0.71
     stacklight_monitor_node02_address: 10.101.0.72
     stacklight_monitor_node03_address: 10.101.0.73
-    grafana_admin_password: ${_param:grafana_password_generated}
+    grafana_admin_password: ${_param:grafana_password}
     grafana_database_type: mysql
     grafana_database_host: ${_param:openstack_database_address}
     grafana_database_password: ${_param:mysql_grafana_password}

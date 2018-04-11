@@ -16,7 +16,6 @@ classes:
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
-#- system.salt.control.cluster.openstack_gateway_single
 - system.salt.control.sizes.openstack
 - system.salt.control.cluster.openstack_benchmark_single
 #- system.salt.control.cluster.openstack_upgrade_single
@@ -38,11 +37,11 @@ parameters:
     cluster_node01_address: ${_param:infra_kvm_node01_address}
     cluster_node02_address: ${_param:infra_kvm_node02_address}
     cluster_node03_address: ${_param:infra_kvm_node03_address}
-    keepalived_vip_interface: br_ctl
+    keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
     deploy_nic: ens3
     primary_first_nic: ens4
-    primary_second_nic: eth2
+    primary_second_nic: eth4
     salt_control_size_cpu_openstack_control: 8
     salt_control_size_ram_openstack_control: 32768
     salt_control_size_disk_profile_openstack_control: small
@@ -120,9 +119,9 @@ parameters:
     nic:
       default:
         eth1:
-          bridge: br_mgm
+          bridge: br-mgm
         eth0:
-          bridge: br_ctl
+          bridge: br-ctl
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:

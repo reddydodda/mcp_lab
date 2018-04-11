@@ -1,3 +1,4 @@
+
 classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.apt_mirantis.openstack
@@ -12,7 +13,7 @@ parameters:
     interface_mtu: 1500
     cluster_vip_address: ${_param:openstack_control_address}
     linux_system_codename: xenial
-    keepalived_vip_interface: br_ctl
+    keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
     primary_first_nic: ens3
-    primary_second_nic: ens4
+    primary_second_nic: eth3

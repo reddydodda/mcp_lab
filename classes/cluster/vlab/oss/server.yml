@@ -5,7 +5,7 @@ classes:
 - system.keepalived.cluster.instance.stacklight_monitor_vip
 - system.salt.minion.cert.proxy.cicd
 - system.linux.system.repo.mcp.apt_mirantis.docker
-#- system.linux.system.repo.mcp.apt_mirantis.glusterfs
+- system.linux.system.repo.mcp.apt_mirantis.glusterfs
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.extra
 
@@ -49,6 +49,7 @@ classes:
 
 parameters:
   _param:
+
     glusterfs_service_host: ${_param:stacklight_monitor_address}
     glusterfs_node01_address: ${_param:oss_node01_address}
     glusterfs_node02_address: ${_param:oss_node02_address}
@@ -71,5 +72,5 @@ parameters:
     elasticsearch_ssl:
       enabled: false
 
-    rundeck_runbook_public_key: ${_param:rundeck_runbook_public_key_generated} 
+    rundeck_runbook_public_key: ${_param:rundeck_runbook_public_key_generated}
     rundeck_runbook_private_key: ${_param:rundeck_runbook_private_key_generated}

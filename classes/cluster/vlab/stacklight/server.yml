@@ -29,32 +29,29 @@ classes:
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
 - cluster.vlab.stacklight.networking.virtual
-- system.linux.system.repo.mcp.apt_mirantis.glusterfs
 
 # Kqueen metrics support
-#- system.prometheus.server.alert.etcd
-#- system.prometheus.server.target.static.etcd
-#- system.prometheus.server.target.static.kqueen
-#- system.haproxy.proxy.listen.cicd.kqueen
+- system.prometheus.server.alert.etcd
+- system.prometheus.server.target.static.etcd
+- system.prometheus.server.target.static.kqueen
 
 parameters:
   _param:
     heka_amqp_host: ${_param:openstack_message_queue_address}
     docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:${_param:apt_mk_version}
     remote_collector_telegraf_host: monitoring_remote_agent
+    keepalived_vip_interface: ens3
     keepalived_prometheus_vip_address: ${_param:stacklight_monitor_address}
-    keepalived_prometheus_vip_interface: ens3
+    keepalived_prometheus_vip_interface: ${_param:keepalived_vip_interface}
     alertmanager_notification_pushkin_host: ${_param:stacklight_monitor_address}
     alertmanager_notification_pushkin_port: 8887
     cluster_vip_address: ${_param:stacklight_monitor_address}
     prometheus_storage_retention: 120h
-
     # Kqueen metrics support
-#    haproxy_etcd_exposed_port: 14001
-#    prometheus_etcd_host: ${_param:cicd_control_address}
-#    prometheus_etcd_port: ${_param:haproxy_etcd_exposed_port}
-#    prometheus_kqueen_api_host: ${_param:cicd_control_address}
-#    prometheus_kqueen_api_port: ${_param:haproxy_kqueen_api_exposed_port}
+    prometheus_etcd_host: ${_param:cicd_control_address}
+    prometheus_etcd_port: ${_param:haproxy_etcd_exposed_port}
+    prometheus_kqueen_api_host: ${_param:cicd_control_address}
+    prometheus_kqueen_api_port: ${_param:haproxy_kqueen_api_exposed_port}
 
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
 
@@ -66,7 +63,8 @@ parameters:
     cluster_node03_name: ${_param:stacklight_monitor_node03_hostname}
     cluster_node03_address: ${_param:stacklight_monitor_node03_address}
     keepalived_vip_virtual_router_id: 280
-    keepalived_stacklight_monitor_vip_interface: ens3
+    keepalived_stacklight_monitor_vip_interface: ${_param:keepalived_vip_interface}
+    alertmanager_external_url: ${_param:openstack_proxy_address}
     cluster_public_host: ${_param:cluster_vip_address}
     # Proxy
     cluster_ssl_certificate:
