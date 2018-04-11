@@ -29,7 +29,7 @@ classes:
 - service.jenkins.client
 - system.jenkins.client.credential.salt
 - system.jenkins.client.job.deploy.openstack
-- system.reclass.storage.system.kubernetes_control_cluster	
+- system.reclass.storage.system.kubernetes_control_cluster
 - system.salt.minion.cert.k8s_server
 - cluster.vlab.infra.maas
 - cluster.vlab.infra

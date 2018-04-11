@@ -23,9 +23,9 @@ parameters:
           enabled: true
           proto: manual
           type: bond
-          use_interfaces:	
-          - ${_param:primary_first_nic}	
-          slaves: ${_param:primary_first_nic}	
+          use_interfaces:
+          - ${_param:primary_first_nic}
+          slaves: ${_param:primary_first_nic}
           mode: active-backup
         bond1:
           enabled: true
@@ -46,7 +46,7 @@ parameters:
           proto: static
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
-          use_interface:
+          use_interfaces:
           - bond0
         br_mesh:
           enabled: true
