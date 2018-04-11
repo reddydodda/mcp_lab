@@ -154,7 +154,7 @@ parameters:
             linux_system_codename: xenial
 
 # K8S Nodes	
-	
+
         infra_kvm_node04:	
           classes:	
             - cluster.${_param:cluster_name}.infra.kvm04	
