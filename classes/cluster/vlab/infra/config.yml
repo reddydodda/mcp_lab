@@ -155,58 +155,58 @@ parameters:
 
 # K8S Nodes	
 
-        infra_kvm_node04:	
-          classes:	
-            - cluster.${_param:cluster_name}.infra.kvm04	
-          domain: ${_param:cluster_domain}	
-          name: ${_param:infra_kvm_node04_hostname}	
-          params:	
-            deploy_address: ${_param:infra_kvm_node04_deploy_address}	
-            linux_system_codename: xenial	
-            salt_master_host: ${_param:reclass_config_master}	
-            single_address: ${_param:infra_kvm_node04_address}	
-        kubernetes_compute_node01:	
-          classes:	
-            - cluster.${_param:cluster_name}.kubernetes.compute	
-          domain: ${_param:cluster_domain}	
-          name: ${_param:kubernetes_compute_node01_hostname}	
-          params:	
-            linux_system_codename: xenial	
-            single_address: ${_param:kubernetes_compute_node01_address}	
-            tenant_address: ${_param:kubernetes_compute_node01_tenant_address}	
-        kubernetes_compute_node02:	
-          classes:	
-            - cluster.${_param:cluster_name}.kubernetes.compute	
-          domain: ${_param:cluster_domain}	
-          name: ${_param:kubernetes_compute_node02_hostname}	
-          params:	
-            linux_system_codename: xenial	
-            single_address: ${_param:kubernetes_compute_node02_address}	
-            tenant_address: ${_param:kubernetes_compute_node02_tenant_address}	
-        kubernetes_compute_node03:	
-          classes:	
-            - cluster.${_param:cluster_name}.kubernetes.compute	
-          domain: ${_param:cluster_domain}	
-          name: ${_param:kubernetes_compute_node03_hostname}	
-          params:	
-            linux_system_codename: xenial	
-            single_address: ${_param:kubernetes_compute_node03_address}	
-            tenant_address: ${_param:kubernetes_compute_node03_tenant_address}	
-        kubernetes_control_node01:	
-          name: ${_param:kubernetes_control_node01_hostname}	
-          params:	
-            deploy_address: ${_param:kubernetes_deploy_node01_address}	
-            tenant_address: ${_param:kubernetes_control_node01_tenant_address}	
-        kubernetes_control_node02:	
-          name: ${_param:kubernetes_control_node02_hostname}	
-          params:	
-            deploy_address: ${_param:kubernetes_deploy_node02_address}	
--            tenant_address: ${_param:kubernetes_control_node02_tenant_address}	
-        kubernetes_control_node03:	
-          name: ${_param:kubernetes_control_node03_hostname}	
-          params:	
-            deploy_address: ${_param:kubernetes_deploy_node03_address}	
-            tenant_address: ${_param:kubernetes_control_node03_tenant_address}	
+        infra_kvm_node04:
+          classes:
+            - cluster.${_param:cluster_name}.infra.kvm04
+          domain: ${_param:cluster_domain}
+          name: ${_param:infra_kvm_node04_hostname}
+          params:
+            deploy_address: ${_param:infra_kvm_node04_deploy_address}
+            linux_system_codename: xenial
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: ${_param:infra_kvm_node04_address}
+        kubernetes_compute_node01:
+          classes:
+            - cluster.${_param:cluster_name}.kubernetes.compute
+          domain: ${_param:cluster_domain}
+          name: ${_param:kubernetes_compute_node01_hostname}
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:kubernetes_compute_node01_address}
+            tenant_address: ${_param:kubernetes_compute_node01_tenant_address}
+        kubernetes_compute_node02:
+          classes:
+            - cluster.${_param:cluster_name}.kubernetes.compute
+          domain: ${_param:cluster_domain}
+          name: ${_param:kubernetes_compute_node02_hostname}
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:kubernetes_compute_node02_address}
+            tenant_address: ${_param:kubernetes_compute_node02_tenant_address}
+        kubernetes_compute_node03:
+          classes:
+            - cluster.${_param:cluster_name}.kubernetes.compute
+          domain: ${_param:cluster_domain}
+          name: ${_param:kubernetes_compute_node03_hostname}
+          params:
+            linux_system_codename: xenial
+            single_address: ${_param:kubernetes_compute_node03_address}
+            tenant_address: ${_param:kubernetes_compute_node03_tenant_address}
+        kubernetes_control_node01:
+          name: ${_param:kubernetes_control_node01_hostname}
+          params:
+            deploy_address: ${_param:kubernetes_deploy_node01_address}
+            tenant_address: ${_param:kubernetes_control_node01_tenant_address}
+        kubernetes_control_node02:
+          name: ${_param:kubernetes_control_node02_hostname}
+          params:
+            deploy_address: ${_param:kubernetes_deploy_node02_address}
+            tenant_address: ${_param:kubernetes_control_node02_tenant_address}
+        kubernetes_control_node03:
+          name: ${_param:kubernetes_control_node03_hostname}
+          params:
+            deploy_address: ${_param:kubernetes_deploy_node03_address}
+            tenant_address: ${_param:kubernetes_control_node03_tenant_address}
 #Ceph Nodes
 
         ceph_osd_rack01:
