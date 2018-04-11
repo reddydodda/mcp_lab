@@ -114,6 +114,8 @@ parameters:
     openstack_compute_rack01_single_subnet: 10.101.0
     openstack_compute_rack01_tenant_subnet: 10.102.0
     openstack_compute_rack01_hostname: cmp
+    cmp_node01_hostname: cmp001
+    cmp_node02_hostname: cmp002
 
     # openstack service hostnames
     openstack_proxy_hostname: prx
