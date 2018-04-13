@@ -152,6 +152,7 @@ parameters:
     glance_storage_pool: images
     glance_storage_user: glance
     nginx_proxy_gerrit_server_site_port: 8070
+
     # Billing
     #keystone_billometer_password: ${_param:keystone_billometer_password_generated}
     #keystone_billometer_address: ${_param:billometer_service_host}

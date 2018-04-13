@@ -2,6 +2,12 @@
 #
 
 parameters:
+  #ovs Bridge
+  neutron:
+    gateway:
+      bridge_mappings:
+        physnet1: br_floating
+
   linux:
     network:
       bridge: openvswitch
