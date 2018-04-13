@@ -19,6 +19,8 @@ classes:
   - system.jenkins.client.job.deploy.openstack
   - system.jenkins.client.job.deploy.update
   - system.jenkins.client.job.ceph
+  - system.jenkins.client.job.vnf-onboarding
+
   # Security
   - system.jenkins.client.security.ldap
   - system.jenkins.client.security.matrix
@@ -31,6 +33,7 @@ classes:
   # Gerrit
   - system.gerrit.client
   - system.gerrit.client.project.ci
+  - system.gerrit.client.project.vnf_onboarding
 
   - system.docker.swarm.master
 
@@ -85,6 +88,20 @@ parameters:
     gerrit_ldap_bind_password: ${_param:openldap_admin_password}
     gerrit_ldap_account_base: ou=people,${_param:openldap_dn}
     gerrit_ldap_group_base: ou=groups,${_param:openldap_dn}
+
+    #VNF_OnBoarding
+    # These are the default values of parameters defined in
+    # system.jenkins.client.job.vnf-onboarding. They can be overridden here.
+    cluster_public_protocol: https
+    vnf_gerrit_credentials: "gerrit"
+    vnf_openstack_api_url: "${_param:cluster_public_protocol}://${_param:cluster_public_host}:5000/v2.0"
+    vnf_openstack_api_credentials: "test-openstack"
+    vnf_elastic_url: "${_param:stacklight_log_address}:${_param:cluster_elasticsearch_port}"
+    vnf_docker_registry_path: "docker-dev-local.docker.mirantis.net/mirantis/vnf-onboarding"
+    vnf_artifactory_url: "https://artifactory.mcp.mirantis.net/artifactory/vnf-onboarding-sandbox"
+    contrail_api_url: "http://127.0.0.1:8082"
+
+
   jenkins:
     client:
       lib:
