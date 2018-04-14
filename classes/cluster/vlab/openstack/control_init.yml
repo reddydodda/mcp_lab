@@ -6,6 +6,7 @@ classes:
 - system.keystone.client.service.heat
 - system.keystone.client.service.heat-cfn
 - system.keystone.client.service.neutron
+- system.keystone.client.service.octavia
 - system.keystone.client.service.nova21
 - system.keystone.client.service.nova-placement
 - system.keystone.client.service.glare

@@ -1,0 +1,54 @@
+classes:
+- system.octavia.manager.single
+- system.salt.minion.ca.octavia_ca
+- system.salt.minion.cert.octavia.amphora_client
+parameters:
+  octavia:
+    manager:
+      certificates:
+        ca_private_key: '/etc/octavia/certs/private/cakey.pem'
+        ca_certificate: '/etc/octavia/certs/ca_01.pem'
+      controller_worker:
+        amp_flavor_id: ${_param:amp_flavor_id}
+        amp_image_tag: amphora
+        amp_ssh_key_name: octavia_ssh_key
+        loadbalancer_topology: 'SINGLE'
+      haproxy_amphora:
+        client_cert: '/etc/octavia/certs/client.pem'
+        client_cert_key: '/etc/octavia/certs/client.key'
+        client_cert_all: '/etc/octavia/certs/client_all.pem'
+        server_ca: '/etc/octavia/certs/ca_01.pem'
+      health_manager:
+        bind_ip: ${_param:octavia_hm_bind_ip}
+        heartbeat_key: 'insecure'
+      house_keeping:
+        spare_amphora_pool_size: 0
+  _param:
+    octavia_private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEAwDoIpJTi6SBw8PDtcPkALsI8h6aqQIAgi3zH5cjOca5Ok1cT
+      90HOkFmLX06OJIiFnEFUOI4gRUfCMTvdHd5Ioj3Np0Imibi0t8mmHhGaBTmabeIy
+      GvFMN4HMqZQ6wyqUIUV4mpbY51MW0wFOYHKJGGd2l43CraCd1KP+3WOMAw5wEqAg
+      HTwswGs5VuYTuyLWFylLVdc3PH9MygKUw1A7wOlGIxH1UUABpBRCUivHx2eoUjkQ
+      LoM0SgCK5mSA6vl+FlvJrQj/OpATffdt4QjCEEtCOK0ijSkHoD3ih3BldJa0fDMc
+      sbLO9j0DcmDnKDh/bzdyBvtzXIjO7nRZ4ASMjwIDAQABAoIBAQCREXsCUgZo732s
+      p/ZZguE7aITrzsC/yrJE8pedd40tR+Gu2lGMEVLFp35CH/Ov6IQE51ybDc+W2U/Z
+      fhciemWQY1n3tzmESCvCY+EE4j29YbqE4Ob1ZFMjtMZy2BX8wf5mmZop+FubQB6C
+      gYLX0Lhb/YEHYQmhpQxXtKgcBgtdJdE2PrCjmPaB900mKfR2AvRj70jNPeCYB/S5
+      e7osAOc2Et440YCi71mj18t46/LBa4qhJMXdhSO81JoiH1Dou7V5py3Oq46020xz
+      LYDYTXg3RIWMrkMHv4LVfeu9gEMdcU8UyNYxhCH4asKL1AbS4QwVRtKaUu7ZYm21
+      REJi6ZLRAoGBAPFC2B9V0Pck4rKZ7/wB3yflfxBAgM52nR1pXz/UJxGc7sq5wLxw
+      EXWZELNtoyaXH0hi6lyy3JpnH4W4gmkzsGlQesZjwVJ28LZ01a2e3M/P34EBljRj
+      RFrItt0mT2qglkANLp3DZ5d0bkant+HhOHxwvhuxpZ3Vtbz3LFTaW4JpAoGBAMv4
+      U04x6sl52/UuaeG/nPmL/jvI2SP1XtsG7NfaL+8H21d53HhJ4H6+r7CTDlkkUxlj
+      MjJhsBusudKR1wATry6SzyHt0W6pCd0BNnnB02nJo13fAAh+chdH/4MTlPiKt7wD
+      G9BXplKEjWAE4dQ9iKc6G3H0+IkkiTFNlL16fkg3AoGBAJJ+ViDgyNvoh8aO9kt9
+      D3V4QqkpoYy8NTaQrwdg2MA3HD/4fnFtUwym/p8UqYZbKOGZPlk/Ofh/OYLGwFkE
+      y8+G0KX6GH7sPclsM/sShV2iCUKaJgx1YiIF0hOCmaJTFCicWHvvFM3AIt3AJUWA
+      rf3Rr329ZqTqCUpOg5qaZApRAoGAD5VOUAgSRwhPXMEKB9xK0un2J30l0dB6ScOS
+      rr8VsG5qPJmr1WjXhPduls/1ZawXyTXB7QV3nfWpUMQhp/jZBnbi6lWwDYNOpJrm
+      HZFIZKmqGI7kAsIeV1cB13LUi9SVSwD1zAoWQ/Gql25oDn4RBa2z0RYFMv0emiyy
+      M3O7WCsCgYBNXIT0k9w43GP/zTxBNfNl6mAaNGyPKhFa9x5nwcvNwU5xQv1Miz29
+      IRnJOqYk4e8cNOqaweo+p2H7eJ7kYEtU/RCEPRFjOXV6/u/sSRnrRzaX2aPeOOrh
+      +TYtOPYrieqk14MS4Bmmyo7DgjZUHCfVYxlT/dwsDI36S3YPSTTI5g==
+      -----END RSA PRIVATE KEY-----

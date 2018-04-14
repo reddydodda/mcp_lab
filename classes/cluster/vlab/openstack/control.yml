@@ -6,6 +6,8 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.glusterfs
 - system.memcached.server.single
 - system.neutron.control.openvswitch.cluster
+- system.neutron.control.openvswitch.octavia
+- system.octavia.api.cluster
 - system.keystone.server.cluster
 - system.keystone.server.wsgi
 - system.keystone.server.notification.messagingv2

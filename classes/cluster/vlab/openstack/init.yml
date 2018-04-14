@@ -1,5 +1,14 @@
 parameters:
   _param:
+# Ocativa
+    octavia_version: ${_param:openstack_version}
+    octavia_service_host: ${_param:openstack_control_address}
+    mysql_octavia_password: admin123
+    keystone_octavia_password: admin123
+    amp_flavor_id: 100
+    octavia_hm_bind_ip: 192.168.0.12
+    octavia_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAOgiklOLpIHDw8O1w+QAuwjyHpqpAgCCLfMflyM5xrk6TVxP3Qc6QWYtfTo4kiIWcQVQ4jiBFR8IxO90d3kiiPc2nQiaJuLS3yaYeEZoFOZpt4jIa8Uw3gcyplDrDKpQhRXialtjnUxbTAU5gcokYZ3aXjcKtoJ3Uo/7dY4wDDnASoCAdPCzAazlW5hO7ItYXKUtV1zc8f0zKApTDUDvA6UYjEfVRQAGkFEJSK8fHZ6hSORAugzRKAIrmZIDq+X4WW8mtCP86kBN9923hCMIQS0I4rSKNKQegPeKHcGV0lrR8Mxyxss72PQNyYOcoOH9vN3IG+3NciM7udFngBIyP
+# Common 
     openstack_region: RegionOne
     admin_email: root@localhost
     openstack_version: ocata
