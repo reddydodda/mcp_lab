@@ -47,6 +47,7 @@ classes:
 
 parameters:
   _param:
+    apt_mk_version: 2018.3.1
     docker_image_devops_portal: docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:${_param:apt_mk_version}
     docker_image_elasticsearch: docker-prod-local.artifactory.mirantis.com/mirantis/external/elasticsearch:${_param:apt_mk_version}
     docker_image_janitor_monkey: docker-prod-local.artifactory.mirantis.com/mirantis/oss/janitor-monkey:${_param:apt_mk_version}
@@ -56,8 +57,12 @@ parameters:
     docker_image_rundeck: docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:${_param:apt_mk_version}
     docker_image_security_monkey_api: docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-api:${_param:apt_mk_version}
     docker_image_security_monkey_scheduler: docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-scheduler:${_param:apt_mk_version}
-    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:${_param:apt_mk_version}
-    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:${_param:apt_mk_version}
+#    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:${_param:apt_mk_version}
+    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:latest
+
+
+#    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:${_param:apt_mk_version}
+    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest
     # PostgreSQL
     postgresql_admin_user_password: ${_param:oss_postgresql_admin_user_password_generated}
     postgresql_client_user: ${_param:postgresql_admin_user}
@@ -74,7 +79,7 @@ parameters:
     pushkin_db_user: pushkin
     pushkin_db_user_password: ${_param:pushkin_db_user_password_generated}
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
-    pushkin_smtp_host: 127.0.0.1
+    pushkin_smtp_host: smtp.gmail.com
     pushkin_smtp_port: 587
     pushkin_email_sender_password: password
     #..WebHook notification senders

@@ -52,3 +52,5 @@ parameters:
           enabled: true
         helm:
           enabled: false
+        dashboard:
+          enabled: true

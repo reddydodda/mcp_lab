@@ -1,4 +1,5 @@
 classes:
+- cluster.vlab.openstack.octavia_manager
 - cluster.vlab.openstack.gateway
 parameters:
   _param:
