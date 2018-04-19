@@ -35,6 +35,7 @@ classes:
 - system.ceilometer.server.cluster
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
+- cluster.vlab.openstack.ldap
 - cluster.vlab.openstack.networking.virtual
 parameters:
   _param:

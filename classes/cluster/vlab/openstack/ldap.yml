@@ -1,35 +1,37 @@
 parameters:
   keystone:
     server:
-    service_name: apache2
-    domain:
+      service_name: apache2
+      domain:
         miranits:
-        description: "Local LDAP"
-        backend: ldap
-        identity:
+          description: "Local LDAP"
+          backend: ldap
+          identity:
             backend: ldap
-        assignment:
+            driver: ldap
+          assignment:
             backend: sql
-        ldap:
+            driver: sql
+          ldap:
             url: ldap://10.101.0.90
-            bind_user: CN=ldapbind user,OU=Service Account,DC=miranits,DC=net
+            bind_user: CN=admin,DC=miranits,DC=net
             query_scope: sub
-            page_size: 1000
+            page_size: 10000
             password: hlY0zvFTwpT8Z1vu
             suffix: DC=miranits,DC=net
-            user_tree_dn: DC=miranits,DC=net
-            group_tree_dn: DC=miranits,DC=net
-            user_objectclass: person
-            user_id_attribute: sAMAccountName
-            user_name_attribute: sAMAccountName
+            user_tree_dn: OU=Users,DC=miranits,DC=net
+            group_tree_dn: OU=Groups,DC=miranits,DC=net
+            user_objectclass: posixAccount
+            user_id_attribute: uidNumber
+            user_name_attribute: uid
             user_pass_attribute: userPassword
             user_enabled_attribute: userAccountControl
             user_mail_attribute: mail
-            group_objectclass: ""
-            group_id_attribute: sAMAccountName
+            group_objectclass: posixGroup
+            group_id_attribute: gidNumber
             group_name_attribute: cn
-            group_member_attribute: member
+            group_member_attribute: uid
             group_desc_attribute: cn
             filter:
-            user: "(&(&(objectClass=person)(uidNumber=*))(unixHomeDirectory=*))"
-            group: ""
+              user: '"(&(&(objectClass=posixAccount)(uidNumber=*))(unixHomeDirectory=*))"'
+              group: '"(objectClass=posixGroup)"'

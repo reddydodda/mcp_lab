@@ -3,26 +3,26 @@ classes:
 - system.salt.minion.ca.octavia_ca
 - system.salt.minion.cert.octavia.amphora_client
 parameters:
-  octavia:
-    manager:
-      certificates:
-        ca_private_key: '/etc/octavia/certs/private/cakey.pem'
-        ca_certificate: '/etc/octavia/certs/ca_01.pem'
-      controller_worker:
-        amp_flavor_id: ${_param:amp_flavor_id}
-        amp_image_tag: amphora
-        amp_ssh_key_name: octavia_ssh_key
-        loadbalancer_topology: 'SINGLE'
-      haproxy_amphora:
-        client_cert: '/etc/octavia/certs/client.pem'
-        client_cert_key: '/etc/octavia/certs/client.key'
-        client_cert_all: '/etc/octavia/certs/client_all.pem'
-        server_ca: '/etc/octavia/certs/ca_01.pem'
-      health_manager:
-        bind_ip: ${_param:octavia_hm_bind_ip}
-        heartbeat_key: 'insecure'
-      house_keeping:
-        spare_amphora_pool_size: 0
+#  octavia:
+#    manager:
+#      certificates:
+#        ca_private_key: '/etc/octavia/certs/private/cakey.pem'
+#        ca_certificate: '/etc/octavia/certs/ca_01.pem'
+#      controller_worker:
+#        amp_flavor_id: ${_param:amp_flavor_id}
+#        amp_image_tag: amphora
+#        amp_ssh_key_name: octavia_ssh_key
+#        loadbalancer_topology: 'SINGLE'
+#      haproxy_amphora:
+#        client_cert: '/etc/octavia/certs/client.pem'
+#        client_cert_key: '/etc/octavia/certs/client.key'
+#        client_cert_all: '/etc/octavia/certs/client_all.pem'
+#        server_ca: '/etc/octavia/certs/ca_01.pem'
+#      health_manager:
+#        bind_ip: ${_param:octavia_hm_bind_ip}
+#        heartbeat_key: 'insecure'
+#      house_keeping:
+#        spare_amphora_pool_size: 0
   _param:
     octavia_private_key: |
       -----BEGIN RSA PRIVATE KEY-----
