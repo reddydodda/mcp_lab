@@ -13,8 +13,8 @@ classes:
   - system.glusterfs.client.volume.registry
   - system.glusterfs.client.volume.salt_pki
   - system.glusterfs.client.volume.mysql
-#  - system.glusterfs.client.volume.kqueen
-#  - system.glusterfs.client.volume.etcd
+  - system.glusterfs.client.volume.kqueen
+  - system.glusterfs.client.volume.etcd
   - system.glusterfs.client.volume.openldap
  #- system.glusterfs.client.volume.salt
   # Docker
@@ -36,8 +36,8 @@ classes:
   - system.haproxy.proxy.listen.docker.visualizer
   - system.haproxy.proxy.listen.openldap
   - system.haproxy.proxy.listen.phpldapadmin
-#  - system.haproxy.proxy.listen.cicd.kqueen
-#  - system.haproxy.proxy.listen.cicd.etcd
+  - system.haproxy.proxy.listen.cicd.kqueen
+  - system.haproxy.proxy.listen.cicd.etcd
   - system.haproxy.proxy.listen.mysql
   - system.haproxy.proxy.listen.stats
 parameters:

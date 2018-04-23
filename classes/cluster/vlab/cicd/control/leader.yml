@@ -5,8 +5,8 @@ classes:
   - system.docker.swarm.stack.docker
   - system.docker.swarm.stack.gerrit
   - system.docker.swarm.stack.jenkins
-#  - system.docker.swarm.stack.kqueen
-#  - system.docker.swarm.network.kqueen_backend
+  - system.docker.swarm.stack.kqueen
+  - system.docker.swarm.network.kqueen_backend
   - system.docker.swarm.stack.ldap
 
   # Jenkins
@@ -47,10 +47,10 @@ classes:
 parameters:
   _param:
     # Kqueen
-#    kqueen_api_bind_port: ${_param:haproxy_kqueen_api_bind_port}
+    kqueen_api_bind_port: ${_param:haproxy_kqueen_api_bind_port}
     kqueen_api_debug: False
     kqueen_api_prometheus_whitelist: 172.16.238.0/24
-#    kqueen_ui_bind_port: ${_param:haproxy_kqueen_ui_bind_port}
+    kqueen_ui_bind_port: ${_param:haproxy_kqueen_ui_bind_port}
     kqueen_ui_debug: False
     kqueen_ui_enable_public_registration: False
     kqueen_ui_local_auth_notify: True

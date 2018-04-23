@@ -31,9 +31,9 @@ classes:
 - cluster.vlab.stacklight.networking.virtual
 
 # Kqueen metrics support
-#- system.prometheus.server.alert.etcd
-#- system.prometheus.server.target.static.etcd
-#- system.prometheus.server.target.static.kqueen
+- system.prometheus.server.alert.etcd
+- system.prometheus.server.target.static.etcd
+- system.prometheus.server.target.static.kqueen
 
 parameters:
   _param:
