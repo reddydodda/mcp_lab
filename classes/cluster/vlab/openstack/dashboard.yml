@@ -5,4 +5,4 @@ classes:
 parameters:
   _param:
     horizon_site_branding: OpenStack Dashboard
-    # horizon_dashboard_theme: mirantis
+    horizon_dashboard_theme: mirantis
