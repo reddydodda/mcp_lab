@@ -3,9 +3,9 @@ classes:
 # PostgreSQL
 - system.postgresql.client.pushkin
 - system.postgresql.client.rundeck
-- system.postgresql.client.alertmanager
-- system.postgresql.client.security_monkey
-- system.postgresql.client.janitor_monkey
+- system.postgresql.client.pushkin.alertmanager
+- system.postgresql.client.pushkin.security_monkey
+- system.postgresql.client.pushkin.janitor_monkey
 
 # Elasticsearch
 - system.elasticsearch.client
@@ -81,6 +81,7 @@ parameters:
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
     pushkin_smtp_host: smtp.gmail.com
     pushkin_smtp_port: 587
+    pushkin_smtp_use_tls: False
     pushkin_email_sender_password: password
     #..WebHook notification senders
     webhook_from: cdodda@mirantis.com
