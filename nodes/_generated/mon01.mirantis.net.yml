@@ -1,10 +1,10 @@
 classes:
 - system.docker.swarm.master
-- cluster.vlab.stacklight.client
-- cluster.vlab.stacklight.server
-- system.docker.swarm.master
 - cluster.vlab.oss.client
 - cluster.vlab.oss.server
+- system.docker.swarm.master
+- cluster.vlab.stacklight.client
+- cluster.vlab.stacklight.server
 parameters:
   _param:
     keepalived_vip_priority: 103

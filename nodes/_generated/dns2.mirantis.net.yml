@@ -1,0 +1,14 @@
+classes:
+- cluster.vlab.openstack.dns
+parameters:
+  _param:
+    keepalived_vip_priority: 111
+    linux_system_codename: xenial
+    salt_master_host: 10.100.0.15
+    single_address: 10.100.0.3
+  linux:
+    system:
+      name: dns2
+      domain: mirantis.net
+      cluster: default
+      environment: prd

@@ -1,0 +1,42 @@
+classes:
+- system.bind.server.single
+- cluster.cluster_name.infra
+parameters:
+  linux:
+    network:
+      interface:
+        ens2: ${_parm:linux_dhcp_interface}
+        ens3: ${_param:linux_single_interface}
+  bind:
+    server:
+      key:
+        designate:
+          secret: "${_param:designate_bind9_rndc_key}"
+          algorithm: "${_param:designate_bind9_rndc_algorithm}"
+      allow_new_zones: true
+      query: true
+      control:
+        mgmt:
+          enabled: true
+          bind:
+            address: ${_param:single_address}
+            port: 953
+          allow:
+            - ${_param:openstack_control_node01_address}
+            - ${_param:openstack_control_node02_address}
+            - ${_param:openstack_control_node03_address}
+            - ${_param:single_address}
+            - 127.0.0.1
+          keys:
+            - designate
+    client:
+      enabled: true
+      option:
+        default:
+          server: 127.0.0.1
+          port: 953
+          key: designate
+      key:
+        designate:
+          secret: "${_param:designate_bind9_rndc_key}"
+          algorithm: "${_param:designate_bind9_rndc_algorithm}"

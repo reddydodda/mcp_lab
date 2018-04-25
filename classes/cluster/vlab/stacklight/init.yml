@@ -49,7 +49,7 @@ parameters:
     stacklight_monitor_node01_address: 10.101.0.71
     stacklight_monitor_node02_address: 10.101.0.72
     stacklight_monitor_node03_address: 10.101.0.73
-    grafana_admin_password: ${_param:grafana_password}
+    grafana_admin_password: ${_param:grafana_password_generated}
     grafana_database_type: mysql
     grafana_database_host: ${_param:openstack_database_address}
     grafana_database_password: ${_param:mysql_grafana_password}

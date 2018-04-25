@@ -27,6 +27,7 @@ classes:
 - system.reclass.storage.system.cicd_control_cluster
 - system.reclass.storage.system.ceph_mon_cluster
 - system.reclass.storage.system.ceph_rgw_cluster
+- system.reclass.storage.system.openstack_dns_cluster
 # Octavia
 - system.glance.client.image.octavia
 - system.nova.client.service.octavia
@@ -234,5 +235,13 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             ceph_crush_parent: rack01
+            linux_system_codename: xenial
+
+# DNS Nodes
+        openstack_dns_node01:
+          params:
+            linux_system_codename: xenial
+        openstack_dns_node02:
+          params:
             linux_system_codename: xenial
 

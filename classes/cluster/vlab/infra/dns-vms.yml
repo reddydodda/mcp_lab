@@ -1,0 +1,19 @@
+classes:
+- system.salt.control.cluster.openstack_dns_cluster
+parameters:
+  salt:
+    control:
+      size:
+        openstack.dns:
+          cpu: 2
+          ram: 2048
+          disk_profile: small
+          net_profile: default
+      cluster:
+        internal:
+          node:
+            dns01:
+              provider: kvm04.${_param:cluster_domain}
+            dns02:
+              provider: kvm04.${_param:cluster_domain}
+

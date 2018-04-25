@@ -167,6 +167,43 @@ parameters:
     #billometer_identity_password: ${_param:keystone_billometer_password}
     #billometer_identity_host: ${_param:openstack_control_address}
     #billometer_identity_token: ${_param:keystone_service_token}
+## Designate 
+
+    openstack_dns_node01_address: 10.100.0.2
+    openstack_dns_node01_hostname: dns1
+    openstack_dns_node02_hostname: dns2
+    openstack_dns_node02_address: 10.100.0.3
+    mysql_designate_password: password
+    keystone_designate_password: password
+    designate_service_host: ${_param:openstack_control_address}
+    designate_bind9_rndc_key: '4pc+X4PDqb2q+5o72dISm72LM1Ds9X2EYZjqg+nmsS7F/C8H+z0fLLBunoitw=='
+    designate_bind9_rndc_algorithm: hmac-sha512
+    designate_domain_id: 5186883b-91fb-4891-bd49-e6769234a8fc
+    designate_pool_ns_records:
+      - hostname: 'ns1.mirantis.net'
+        priority: 10
+    designate_pool_nameservers:
+      - host: ${_param:openstack_dns_node01_address}
+        port: 53
+      - host: ${_param:openstack_dns_node02_address}
+        port: 53
+    designate_pool_target_type: bind9
+    designate_pool_target_masters:
+      - host: ${_param:openstack_control_node01_address}
+        port: 5354
+      - host: ${_param:openstack_control_node02_address}
+        port: 5354
+      - host: ${_param:openstack_control_node03_address}
+        port: 5354
+    designate_pool_target_options:
+      host: ${_param:openstack_dns_node01_address}
+      port: 53
+      rndc_host: ${_param:openstack_dns_node01_address}
+      rndc_port: 953
+      rndc_key_file: /etc/designate/rndc.key
+    designate_version: ${_param:openstack_version}
+
+## Linux networks
   linux:
     network:
       host:

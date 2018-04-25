@@ -51,3 +51,9 @@ parameters:
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     nova_cpu_allocation_ratio: 8.0
+  designate:
+  server:
+    backend:
+      bind9:
+        rndc_key: ${_param:designate_bind9_rndc_key}
+        rndc_algorithm: ${_param:designate_bind9_rndc_algorithm}

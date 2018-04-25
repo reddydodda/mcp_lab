@@ -10,6 +10,7 @@ classes:
 - cluster.vlab.infra.ceph-vms
 - cluster.vlab.infra.cmp-vms
 - cluster.vlab.infra.gtw-vms
+- cluster.vlab.infra.dns-vms
 - cluster.vlab.infra
 parameters:
   _param:
