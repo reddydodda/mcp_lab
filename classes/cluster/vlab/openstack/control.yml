@@ -33,6 +33,7 @@ classes:
 - system.heka.ceilometer_collector.single
 - system.aodh.server.cluster
 - system.ceilometer.server.cluster
+- system.designate.server.cluster
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
 - cluster.vlab.openstack.ldap
@@ -51,9 +52,28 @@ parameters:
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     nova_cpu_allocation_ratio: 8.0
+
+
   designate:
-  server:
-    backend:
-      bind9:
-        rndc_key: ${_param:designate_bind9_rndc_key}
-        rndc_algorithm: ${_param:designate_bind9_rndc_algorithm}
+    server:
+      backend:
+        bind9:
+          rndc_key: "${_param:designate_bind9_rndc_key}"
+          rndc_algorithm: "${_param:designate_bind9_rndc_algorithm}"
+    pools:
+      default:
+        description: 'test pool'
+        targets:
+          default:
+            description: 'test target1'
+          default1:
+            type: ${_param:designate_pool_target_type}
+            description: 'test target2'
+            masters: ${_param:designate_pool_target_masters}
+            options:
+              host: ${_param:openstack_dns_node02_address}
+              port: 53
+              rndc_host: ${_param:openstack_dns_node02_address}
+              rndc_port: 953
+              rndc_key_file: /etc/designate/rndc.key
+      

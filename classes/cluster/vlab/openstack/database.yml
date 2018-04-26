@@ -14,6 +14,7 @@ classes:
 - system.galera.server.database.nova
 - system.galera.server.database.neutron
 - system.galera.server.database.octavia
+- system.galera.server.database.designate
 #- haproxy.proxy.listen.openstack.galera.clustercheck
 - cluster.vlab.infra
 - cluster.vlab.openstack.networking.virtual

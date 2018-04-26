@@ -15,6 +15,7 @@ classes:
 - system.keystone.client.service.aodh
 - system.keystone.client.service.ceilometer
 - system.keystone.client.service.radosgw-swift
+- system.keystone.client.service.designate
 parameters:
   _param:
     radosgw_swift_cluster_port: 8080

@@ -1,11 +1,14 @@
 classes:
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 - system.bind.server.single
-- cluster.cluster_name.infra
+- cluster.vlab.infra
 parameters:
   linux:
     network:
       interface:
-        ens2: ${_parm:linux_dhcp_interface}
+        ens2: ${_param:linux_dhcp_interface}
         ens3: ${_param:linux_single_interface}
   bind:
     server:

@@ -1,5 +1,6 @@
-classes:
-- system.salt.control.cluster.openstack_dns_cluster
+#classes:
+#- system.salt.control.cluster.openstack_dns_cluster
+#- cluster.vlab.infra
 parameters:
   salt:
     control:
@@ -8,12 +9,16 @@ parameters:
           cpu: 2
           ram: 2048
           disk_profile: small
-          net_profile: default
+          net_profile: newdefault
       cluster:
         internal:
           node:
             dns01:
               provider: kvm04.${_param:cluster_domain}
+              size: openstack.dns
+              image: ${_param:salt_control_xenial_image}
             dns02:
               provider: kvm04.${_param:cluster_domain}
+              image: ${_param:salt_control_xenial_image}
+              size: openstack.dns
 
