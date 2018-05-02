@@ -1,6 +1,7 @@
 classes:
 - system.horizon.server.single
 #- system.horizon.server.plugin.theme
+- system.horizon.server.plugin.lbaasv2
 - cluster.vlab.infra
 parameters:
   _param:

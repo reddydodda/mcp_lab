@@ -6,7 +6,7 @@ parameters:
     mysql_octavia_password: admin123
     keystone_octavia_password: admin123
     amp_flavor_id: 100
-    octavia_hm_bind_ip: 192.168.0.12
+    octavia_hm_bind_ip: 192.168.1.12
     octavia_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAOgiklOLpIHDw8O1w+QAuwjyHpqpAgCCLfMflyM5xrk6TVxP3Qc6QWYtfTo4kiIWcQVQ4jiBFR8IxO90d3kiiPc2nQiaJuLS3yaYeEZoFOZpt4jIa8Uw3gcyplDrDKpQhRXialtjnUxbTAU5gcokYZ3aXjcKtoJ3Uo/7dY4wDDnASoCAdPCzAazlW5hO7ItYXKUtV1zc8f0zKApTDUDvA6UYjEfVRQAGkFEJSK8fHZ6hSORAugzRKAIrmZIDq+X4WW8mtCP86kBN9923hCMIQS0I4rSKNKQegPeKHcGV0lrR8Mxyxss72PQNyYOcoOH9vN3IG+3NciM7udFngBIyP
 # Common 
     openstack_region: RegionOne
@@ -176,11 +176,11 @@ parameters:
     mysql_designate_password: password
     keystone_designate_password: password
     designate_service_host: ${_param:openstack_control_address}
-    designate_bind9_rndc_key: 4pc+X4PDqb2q+5o72dISm72LM1Ds9X2EYZjqg+nmsS7F/C8H+z0fLLBunoitw==
-    designate_bind9_rndc_algorithm: hmac-sha512
+    designate_bind9_rndc_key: JA/E1WoFcPHeb7yoBnuOlw==
+    designate_bind9_rndc_algorithm: hmac-md5
     designate_domain_id: 5186883b-91fb-4891-bd49-e6769234a8fc
     designate_pool_ns_records:
-      - hostname: 'ns1.mirantis.net'
+      - hostname: 'dns01.mirantis.net'
         priority: 10
     designate_pool_nameservers:
       - host: ${_param:openstack_dns_node01_address}

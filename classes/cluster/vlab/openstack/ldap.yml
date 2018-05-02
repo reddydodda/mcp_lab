@@ -16,11 +16,11 @@ parameters:
             url: ldap://10.101.0.90
             bind_user: CN=admin,DC=miranits,DC=net
             query_scope: sub
-            page_size: 10000
+            page_size: 65536
             password: hlY0zvFTwpT8Z1vu
             suffix: DC=miranits,DC=net
-            user_tree_dn: OU=Users,DC=miranits,DC=net
-            group_tree_dn: OU=Groups,DC=miranits,DC=net
+            user_tree_dn: OU=users,DC=miranits,DC=net
+            group_tree_dn: OU=groups,DC=miranits,DC=net
             user_objectclass: posixAccount
             user_id_attribute: uidNumber
             user_name_attribute: uid
@@ -33,5 +33,5 @@ parameters:
             group_member_attribute: uid
             group_desc_attribute: cn
             filter:
-              user: '"(&(&(objectClass=posixAccount)(uidNumber=*))(unixHomeDirectory=*))"'
-              group: '"(objectClass=posixGroup)"'
+              user: '"(&(&(objectClass=*)(uidNumber=*))(unixHomeDirectory=*))"'
+              group: '"(objectClass=*)"'
