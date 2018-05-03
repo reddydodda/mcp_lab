@@ -1,0 +1,54 @@
+classes:
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.openstack
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+- system.ironic.api.cluster # deploy only api (heartbeat and lookup endpoints are open)
+- system.ironic.conductor.cluster
+- system.ironic.tftpd_hpa
+- system.nova.compute_ironic.cluster
+- system.apache.server.single
+- system.apache.server.site.ironic
+- system.keystone.client.core
+- system.neutron.client.service.ironic
+- cluster.vlab.infra
+parameters:
+  _param:
+    primary_interface: ens3
+    baremetal_interface: ens4
+    linux_system_codename: xenial
+    interface_mtu: 1450
+    cluster_vip_address: ${_param:openstack_control_address}
+    cluster_baremetal_vip_address: ${_param:single_baremetal_address}
+    cluster_baremetal_local_address: ${_param:single_baremetal_address}
+    linux_system_codename: xenial
+  linux:
+    network:
+      concat_iface_files:
+      - src: '/etc/network/interfaces.d/50-cloud-init.cfg'
+        dst: '/etc/network/interfaces'
+      bridge: openvswitch
+      interface:
+        dhcp_int:
+          enabled: true
+          name: ens2
+          proto: dhcp
+          type: eth
+          mtu: ${_param:interface_mtu}
+        primary_interface:
+          enabled: true
+          name: ${_param:primary_interface}
+          proto: static
+          address: ${_param:single_address}
+          netmask: 255.255.255.0
+          mtu: ${_param:interface_mtu}
+          type: eth
+        baremetal_interface:
+          enabled: true
+          name: ${_param:baremetal_interface}
+          mtu: ${_param:interface_mtu}
+          proto: static
+          address: ${_param:cluster_baremetal_local_address}
+          netmask: 255.255.255.0
+          type: eth
+          mtu: ${_param:interface_mtu}

@@ -82,6 +82,15 @@ parameters:
     glusterfs_node01_address: ${_param:infra_kvm_node01_address}
     glusterfs_node02_address: ${_param:infra_kvm_node02_address}
     glusterfs_node03_address: ${_param:infra_kvm_node03_address}
+# Ironic Configs
+    openstack_baremetal_node01_address: 10.101.0.150
+    openstack_baremetal_address: 10.104.0.10
+    openstack_baremetal_node01_baremetal_address: 10.104.0.11
+    openstack_baremetal_neutron_subnet_cidr: 10.104.0.0/24
+    openstack_baremetal_neutron_subnet_allocation_start: 10.104.0.100
+    openstack_baremetal_neutron_subnet_allocation_end: 10.104.0.150
+    openstack_baremetal_node01_hostname: bmt01
+
     linux_dhcp_interface:
       enabled: true
       type: eth
@@ -165,3 +174,5 @@ parameters:
       service:
         apt-daily.timer:
           status: dead
+
+

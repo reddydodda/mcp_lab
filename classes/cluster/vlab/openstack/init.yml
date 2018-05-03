@@ -8,6 +8,15 @@ parameters:
     amp_flavor_id: 100
     octavia_hm_bind_ip: 192.168.1.12
     octavia_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAOgiklOLpIHDw8O1w+QAuwjyHpqpAgCCLfMflyM5xrk6TVxP3Qc6QWYtfTo4kiIWcQVQ4jiBFR8IxO90d3kiiPc2nQiaJuLS3yaYeEZoFOZpt4jIa8Uw3gcyplDrDKpQhRXialtjnUxbTAU5gcokYZ3aXjcKtoJ3Uo/7dY4wDDnASoCAdPCzAazlW5hO7ItYXKUtV1zc8f0zKApTDUDvA6UYjEfVRQAGkFEJSK8fHZ6hSORAugzRKAIrmZIDq+X4WW8mtCP86kBN9923hCMIQS0I4rSKNKQegPeKHcGV0lrR8Mxyxss72PQNyYOcoOH9vN3IG+3NciM7udFngBIyP
+
+# Ironic
+    ironic_version: ${_param:openstack_version}
+    ironic_api_type: 'public'
+    ironic_service_host: ${_param:cluster_vip_address}
+    cluster_baremetal_local_address: ${_param:cluster_local_address}
+    mysql_ironic_password: workshop
+    keystone_ironic_password: workshop
+
 # Common 
     openstack_region: RegionOne
     admin_email: root@localhost
@@ -302,3 +311,9 @@ parameters:
           names:
           - ${_param:openstack_gateway_node03_hostname}
           - ${_param:openstack_gateway_node03_hostname}.${_param:cluster_domain}
+        bmt01:
+          address: ${_param:openstack_baremetal_node01_address}
+          names:
+          - bmt01
+          - bmt01.${_param:cluster_domain}
+

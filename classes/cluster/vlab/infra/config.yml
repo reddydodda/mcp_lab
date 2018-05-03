@@ -29,10 +29,15 @@ classes:
 - system.reclass.storage.system.ceph_rgw_cluster
 - system.reclass.storage.system.openstack_dns_cluster
 # Octavia
+- system.keystone.client.single
 - system.keystone.client.service.octavia
 - system.glance.client.image.octavia
 - system.nova.client.service.octavia
 - system.neutron.client.service.octavia
+# Ironic
+- system.salt.master.formula.pkg.baremetal
+#- system.keystone.client.service.ironic
+- system.reclass.storage.system.openstack_baremetal_single
 
 - service.jenkins.client
 - system.jenkins.client.credential.salt
@@ -161,6 +166,20 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             linux_system_codename: xenial
+# Ironic 
+
+        openstack_baremetal_node01:
+          domain: ${_param:cluster_domain}
+          name: ${_param:openstack_baremetal_node01_hostname}
+          params:
+            linux_system_codename: xenial
+            single_baremetal_address: ${_param:openstack_baremetal_node01_baremetal_address}
+            keepalived_openstack_baremetal_vip_priority: 100
+            ironic_api_type: 'deploy'
+            tenant_address: 10.1.0.110
+            external_address: 10.102.0.110
+            single_address: ${_param:openstack_baremetal_node01_address}
+
 
 # K8S Nodes	
 

@@ -35,6 +35,12 @@ classes:
 - system.ceilometer.server.cluster
 - system.designate.server.cluster
 - system.octavia.api.cluster
+#Ironic
+- system.haproxy.proxy.listen.openstack.ironic
+#- system.galera.server.database.ironic
+- service.ironic.client
+- system.ironic.api.cluster
+# common
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
 - cluster.vlab.openstack.ldap

@@ -1,0 +1,19 @@
+classes:
+- cluster.vlab.openstack.baremetal
+parameters:
+  _param:
+    baremetal_address: 10.104.0.11
+    external_address: 10.102.0.110
+    ironic_api_type: deploy
+    keepalived_openstack_baremetal_vip_priority: 100
+    linux_system_codename: xenial
+    salt_master_host: 10.100.0.15
+    single_address: 10.101.0.150
+    single_baremetal_address: 10.104.0.11
+    tenant_address: 10.1.0.110
+  linux:
+    system:
+      name: bmt01
+      domain: mirantis.net
+      cluster: default
+      environment: prd

@@ -119,10 +119,12 @@ parameters:
   virt:
     nic:
       default:
-        eth1:
-          bridge: br_mgm
         eth0:
+          bridge: br_mgm
+        eth1:
           bridge: br_ctl
+        eth2:
+          bridge: br_prx
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:

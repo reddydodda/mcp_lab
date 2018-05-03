@@ -11,6 +11,7 @@ classes:
 - cluster.vlab.infra.cmp-vms
 - cluster.vlab.infra.gtw-vms
 - cluster.vlab.infra.dns-vms
+- cluster.vlab.infra.bmt-vms
 - cluster.vlab.infra
 parameters:
   _param:
@@ -69,6 +70,16 @@ parameters:
           bridge: br_private
           model: virtio
       cephnet:
+        - name: eth0
+          bridge: br_mgm
+          model: virtio
+        - name: eth1
+          bridge: br_ctl
+          model: virtio
+        - name: eth2
+          bridge: br_proxy
+          model: virtio
+      bmtnet:
         - name: eth0
           bridge: br_mgm
           model: virtio

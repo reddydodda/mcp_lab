@@ -1,0 +1,20 @@
+parameters:
+  salt:
+    control:
+      size:
+        bmt:
+          cpu: 4
+          ram: 16384
+          disk_profile: small
+          net_profile: bmtnet
+      cluster:
+        internal:
+          domain: ${_param:cluster_domain}
+          engine: virt
+          node:
+            bmt01:
+              name: ${_param:openstack_baremetal_node01_hostname}
+              provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+              image: ${_param:salt_control_xenial_image}
+              size: bmt
+
