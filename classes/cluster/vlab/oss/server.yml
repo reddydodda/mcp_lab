@@ -48,7 +48,7 @@ classes:
 
 parameters:
   _param:
-    apt_mk_version: 2018.3.1
+
     glusterfs_service_host: ${_param:stacklight_monitor_address}
     glusterfs_node01_address: ${_param:oss_node01_address}
     glusterfs_node02_address: ${_param:oss_node02_address}

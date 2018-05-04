@@ -6,63 +6,45 @@ parameters:
     network:
       bridge: openvswitch
       interface:
-        ens2: ${_param:linux_dhcp_interface}
-        ens3:
+        eth1:
           enabled: true
           type: slave
           proto: manual
           name: ${_param:primary_first_nic}
           master: bond0
-        ens4:
+        eth2:
           enabled: true
           type: slave
           proto: manual
           name: ${_param:primary_second_nic}
-          master: bond1
+          master: bond0
         bond0:
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          slaves: ${_param:primary_first_nic}
-          mode: active-backup
-        bond1:
           enabled: true
           proto: manual
           ovs_bridge: br-floating
           ovs_type: OVSPort
           type: bond
           use_interfaces:
+          - ${_param:primary_first_nic}
           - ${_param:primary_second_nic}
-          slaves: ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
           mode: active-backup
         br-floating:
           enabled: true
           type: ovs_bridge
-        br_ctl:
-          enabled: true
-          type: bridge
-          proto: static
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-          use_interfaces:
-          - bond0
-        br_mesh:
+        br-ctl:
           enabled: true
           type: ovs_port
           bridge: br-floating
           proto: static
+          ovs_options: tag=${_param:control_vlan}
+          address: ${_param:single_address}
+          netmask: ${_param:control_network_netmask}
+        br-mesh:
+          enabled: true
+          type: ovs_port
+          bridge: br-floating
+          proto: static
+          ovs_options: tag=${_param:tenant_vlan}
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
-# Ironic 
-        ens7:
-          enabled: true
-          proto: manual
-          type: eth
-          ovs_bridge: br-baremetal
-          ovs_type: OVSPort
-        br-baremetal:
-          enabled: true
-          type: ovs_bridge
-

@@ -26,7 +26,7 @@ parameters:
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: ens3
-    primary_second_nic: ens4
+    primary_second_nic: eth3
 ## Best practice configure high speed interface for live migrations
 #  nova:
 #    libvirt:

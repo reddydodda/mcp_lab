@@ -1,31 +1,12 @@
 parameters:
   _param:
-# Ocativa
-    octavia_version: ${_param:openstack_version}
-    octavia_service_host: ${_param:openstack_control_address}
-    mysql_octavia_password: admin123
-    keystone_octavia_password: admin123
-    amp_flavor_id: 100
-    octavia_hm_bind_ip: 192.168.1.12
-    octavia_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAOgiklOLpIHDw8O1w+QAuwjyHpqpAgCCLfMflyM5xrk6TVxP3Qc6QWYtfTo4kiIWcQVQ4jiBFR8IxO90d3kiiPc2nQiaJuLS3yaYeEZoFOZpt4jIa8Uw3gcyplDrDKpQhRXialtjnUxbTAU5gcokYZ3aXjcKtoJ3Uo/7dY4wDDnASoCAdPCzAazlW5hO7ItYXKUtV1zc8f0zKApTDUDvA6UYjEfVRQAGkFEJSK8fHZ6hSORAugzRKAIrmZIDq+X4WW8mtCP86kBN9923hCMIQS0I4rSKNKQegPeKHcGV0lrR8Mxyxss72PQNyYOcoOH9vN3IG+3NciM7udFngBIyP
-
-# Ironic
-    ironic_version: ${_param:openstack_version}
-    ironic_api_type: 'public'
-    ironic_service_host: ${_param:cluster_vip_address}
-    cluster_baremetal_local_address: ${_param:cluster_local_address}
-    mysql_ironic_password: workshop
-    keystone_ironic_password: workshop
-
-# Common 
     openstack_region: RegionOne
     admin_email: root@localhost
-    openstack_version: ocata
     ##Neutron osv/nodvr + dpdk
     neutron_global_physnet_mtu: 1500
     neutron_external_mtu: 1500
 
-    neutron_enable_qos: True
+    neutron_enable_qos: False
     neutron_enable_vlan_aware_vms: False
     neutron_enable_bgp_vpn: False
     neutron_bgp_vpn_driver: bagpipe
@@ -100,8 +81,6 @@ parameters:
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
     stacklight_notification_topic: stacklight_notifications
     openstack_notification_topics: "notifications,${_param:stacklight_notification_topic}"
-    openstack_log_appender: true
-    openstack_fluentd_handler_enabled: true
 
     # openstack service addresses
     openstack_proxy_address: 10.101.0.80
@@ -132,8 +111,6 @@ parameters:
     openstack_compute_rack01_single_subnet: 10.101.0
     openstack_compute_rack01_tenant_subnet: 10.102.0
     openstack_compute_rack01_hostname: cmp
-    cmp_node01_hostname: cmp001
-    cmp_node02_hostname: cmp002
 
     # openstack service hostnames
     openstack_proxy_hostname: prx
@@ -167,6 +144,8 @@ parameters:
     glance_storage_pool: images
     glance_storage_user: glance
     nginx_proxy_gerrit_server_site_port: 8070
+    openstack_log_appender: true
+    openstack_fluentd_handler_enabled: true
     # Billing
     #keystone_billometer_password: ${_param:keystone_billometer_password_generated}
     #keystone_billometer_address: ${_param:billometer_service_host}
@@ -176,43 +155,6 @@ parameters:
     #billometer_identity_password: ${_param:keystone_billometer_password}
     #billometer_identity_host: ${_param:openstack_control_address}
     #billometer_identity_token: ${_param:keystone_service_token}
-## Designate 
-
-    openstack_dns_node01_address: 10.101.0.3
-    openstack_dns_node01_hostname: dns01
-    openstack_dns_node02_hostname: dns02
-    openstack_dns_node02_address: 10.101.0.4
-    mysql_designate_password: password
-    keystone_designate_password: password
-    designate_service_host: ${_param:openstack_control_address}
-    designate_bind9_rndc_key: JA/E1WoFcPHeb7yoBnuOlw==
-    designate_bind9_rndc_algorithm: hmac-md5
-    designate_domain_id: 5186883b-91fb-4891-bd49-e6769234a8fc
-    designate_pool_ns_records:
-      - hostname: 'dns01.mirantis.net'
-        priority: 10
-    designate_pool_nameservers:
-      - host: ${_param:openstack_dns_node01_address}
-        port: 53
-      - host: ${_param:openstack_dns_node02_address}
-        port: 53
-    designate_pool_target_type: bind9
-    designate_pool_target_masters:
-      - host: ${_param:openstack_control_node01_address}
-        port: 5354
-      - host: ${_param:openstack_control_node02_address}
-        port: 5354
-      - host: ${_param:openstack_control_node03_address}
-        port: 5354
-    designate_pool_target_options:
-      host: ${_param:openstack_dns_node01_address}
-      port: 53
-      rndc_host: ${_param:openstack_dns_node01_address}
-      rndc_port: 953
-      rndc_key_file: /etc/designate/rndc.key
-    designate_version: ${_param:openstack_version}
-
-## Linux networks
   linux:
     network:
       host:
@@ -311,9 +253,3 @@ parameters:
           names:
           - ${_param:openstack_gateway_node03_hostname}
           - ${_param:openstack_gateway_node03_hostname}.${_param:cluster_domain}
-        bmt01:
-          address: ${_param:openstack_baremetal_node01_address}
-          names:
-          - bmt01
-          - bmt01.${_param:cluster_domain}
-

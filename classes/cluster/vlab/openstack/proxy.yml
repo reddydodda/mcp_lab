@@ -10,7 +10,6 @@ classes:
 - system.nginx.server.proxy.cicd.gerrit
 - system.nginx.server.proxy.cicd.jenkins
 - system.nginx.server.proxy.openstack_api
-- system.nginx.server.proxy.openstack.glare
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 - system.nginx.server.proxy.ceph_radosgw
@@ -27,9 +26,6 @@ classes:
 - system.nginx.server.proxy.oss.rundeck
 - cluster.vlab.openstack.networking.virtual
 parameters:
-  horizon:
-    server:
-      multidomain: true
   _param:
     keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 240
