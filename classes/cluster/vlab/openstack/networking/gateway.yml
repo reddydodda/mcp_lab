@@ -30,14 +30,14 @@ parameters:
         bond1:
           enabled: true
           proto: manual
-          ovs_bridge: br_floating
+          ovs_bridge: br-floating
           ovs_type: OVSPort
           type: bond
           use_interfaces:
           - ${_param:primary_second_nic}
           slaves: ${_param:primary_second_nic}
           mode: active-backup
-        br_floating:
+        br-floating:
           enabled: true
           type: ovs_bridge
         br_ctl:
@@ -51,7 +51,18 @@ parameters:
         br_mesh:
           enabled: true
           type: ovs_port
-          bridge: br_floating
+          bridge: br-floating
           proto: static
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
+# Ironic 
+        ens7:
+          enabled: true
+          proto: manual
+          type: eth
+          ovs_bridge: br-baremetal
+          ovs_type: OVSPort
+        br-baremetal:
+          enabled: true
+          type: ovs_bridge
+

@@ -22,6 +22,7 @@ parameters:
     deploy_nic: ens3
     primary_first_nic: ens4
     primary_second_nic: eth2
+    baremetal_nic: ens5
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
@@ -68,6 +69,9 @@ parameters:
           model: virtio
         - name: eth2
           bridge: br_private
+          model: virtio
+        - name: eth3
+          bridge: br_proxy
           model: virtio
       cephnet:
         - name: eth0
