@@ -26,6 +26,9 @@ classes:
 - system.nginx.server.proxy.oss.rundeck
 - cluster.vlab.openstack.networking.virtual
 parameters:
+  horizon:	
+    server:	
+      multidomain: true
   _param:
     keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 240

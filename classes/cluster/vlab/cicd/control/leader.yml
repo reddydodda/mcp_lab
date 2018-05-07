@@ -37,28 +37,32 @@ classes:
   - cluster.vlab.infra
   - cluster.vlab.cicd.control
 
+
 parameters:
   _param:
     # Kqueen
+    haproxy_kqueen_api_exposed_port: 15002
     kqueen_api_bind_port: ${_param:haproxy_kqueen_api_bind_port}
-    kqueen_api_debug: False
+    kqueen_api_debug: "false"
     kqueen_api_prometheus_whitelist: 172.16.238.0/24
     kqueen_ui_bind_port: ${_param:haproxy_kqueen_ui_bind_port}
-    kqueen_ui_debug: False
-    kqueen_ui_enable_public_registration: False
-    kqueen_ui_local_auth_notify: True
+    kqueen_ui_debug: "false"
+    kqueen_ui_enable_public_registration: "false"
+    kqueen_ui_local_auth_notify: "True"
     kqueen_credentials:
-      kqueen_api_secret_key: hfA8deSKbHGWZUWp8fDickQ8phxkeBcb
-      kqueen_ui_secret_key: SuaXBBz4Znetvcb2FRWv0hXxSiqRfcTK
-      kqueen_api_bootstrap_admin: True
+      kqueen_api_secret_key: cbagECu1jGmJveTXA83lfKfhLY0EIb3T
+      kqueen_ui_secret_key: 5rhwi988GvFnu3kLdtK4XaPHAHNB9sBr
+      kqueen_api_bootstrap_admin: "True"
       kqueen_api_admin_username: admin
-      kqueen_api_admin_password: N8uvkgqb4jXMEkPZ2tYGUMcgSAEepZG1
+      kqueen_api_admin_password: Png9D8K7tnfeIhUEW4bxqieyC7sMBMLI
       kqueen_api_admin_organization: MirantisCloudPlatform
       kqueen_api_admin_namespace: mcp
     kqueen_ui_mail_host: mail
     kqueen_ui_mail_port: 10025
-    kqueen_ui_ldap_auth_notify: False
+    kqueen_ui_ldap_auth_notify: "false"
     kqueen_api_ldap_uri: "ldap://${_param:cluster_vip_address}"
+    kqueen_api_ldap_dn: "cn=admin,${_param:openldap_dn}"
+    kqueen_api_ldap_password: ${_param:openldap_admin_password}
     kqueen_api_auth_modules: local,ldap
     # Jenkins
     jenkins_slave_user: admin
@@ -84,6 +88,7 @@ parameters:
     gerrit_ldap_bind_password: ${_param:openldap_admin_password}
     gerrit_ldap_account_base: ou=people,${_param:openldap_dn}
     gerrit_ldap_group_base: ou=groups,${_param:openldap_dn}
+
   jenkins:
     client:
       lib:

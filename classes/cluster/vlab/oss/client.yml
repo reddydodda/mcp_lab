@@ -56,8 +56,11 @@ parameters:
     docker_image_rundeck: docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:${_param:apt_mk_version}
     docker_image_security_monkey_api: docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-api:${_param:apt_mk_version}
     docker_image_security_monkey_scheduler: docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-scheduler:${_param:apt_mk_version}
-    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:${_param:apt_mk_version}
-    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:${_param:apt_mk_version}
+#    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:${_param:apt_mk_version}
+    docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:latest
+
+#    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:${_param:apt_mk_version}
+    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest
     # PostgreSQL
     postgresql_admin_user_password: ${_param:oss_postgresql_admin_user_password_generated}
     postgresql_client_user: ${_param:postgresql_admin_user}

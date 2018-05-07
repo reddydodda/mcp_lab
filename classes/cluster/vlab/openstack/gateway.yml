@@ -5,6 +5,7 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 - system.neutron.gateway.cluster
+- system.neutron.gateway.ironic
 - system.neutron.gateway.notification.messagingv2
 - cluster.vlab.infra
 - cluster.vlab.openstack.networking.gateway
@@ -16,4 +17,4 @@ parameters:
     keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
     primary_first_nic: ens3
-    primary_second_nic: eth3
+    primary_second_nic: ens4
