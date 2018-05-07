@@ -27,8 +27,8 @@ parameters:
     keepalived_stacklight_monitor_vip_password: ${_param:keepalived_stacklight_monitor_vip_password_generated}
     keepalived_prometheus_vip_password: ${_param:keepalived_prometheus_vip_password_generated}
     stacklight_environment: ${_param:cluster_domain}
-#Kqueen 	
-    haproxy_etcd_exposed_port: 4001	
+#Kqueen
+    haproxy_etcd_exposed_port: 4001
     haproxy_kqueen_api_exposed_port: 5000
 
     stacklight_log_address: 10.101.0.60
