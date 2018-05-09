@@ -15,6 +15,8 @@ parameters:
   xtrabackup:
     server:
       backup_dir: /srv/volumes/backup/xtrabackup
+      cron: false
   ceph:
     backup:
       backup_dir: /srv/volumes/backup/ceph
+      cron: false

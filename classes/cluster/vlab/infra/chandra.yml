@@ -25,6 +25,27 @@ parameters:
           full_name: vkhalin
           home: /home/vkhalin
           email: vkhalin@mirantis.com
+        dkruglov:
+          enabled: true
+          name: dkruglov
+          sudo: true
+          full_name: dkruglov
+          home: /home/dkruglov
+          email: dkruglov@mirantis.com
+        vshakirova:
+          enabled: true
+          name: vshakirova
+          sudo: true
+          full_name: vshakirova
+          home: /home/vshakirova
+          email: vshakirova@mirantis.com
+        izadorozhna:
+          enabled: true
+          name: izadorozhna
+          sudo: true
+          full_name: izadorozhna
+          home: /home/izadorozhna
+          email: izadorozhna@mirantis.com
   openssh: 
     server:
       enabled: true
@@ -44,8 +65,21 @@ parameters:
           public_keys:
           - ${public_keys:vkhalin}
           user: ${linux:system:user:vkhalin}
-
-
+        dkruglov:
+          enabled: true
+          public_keys:
+          - ${public_keys:dkruglov}
+          user: ${linux:system:user:dkruglov}
+        vshakirova:
+          enabled: true
+          public_keys:
+          - ${public_keys:vshakirova}
+          user: ${linux:system:user:vshakirova}
+        izadorozhna:
+          enabled: true
+          public_keys:
+          - ${public_keys:izadorozhna}
+          user: ${linux:system:user:izadorozhna}
   public_keys:
     vkhalin:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFv4D6guOZjHAgPiAiPqKfbA9z2oCYohWRJrXPERRoG5BCsxjjmNSU8Dg/ygJw/diaNIGve+qPUMWMbwTLp6Dhty7sMLu3VbzrR05JX59Y/OMaEeUTPkQgPKdkCOUGopjV1CbQAxJGnyiSysWQxQU/LW4N9B08tcyZX/z10/I4+RQ0A7setQyWqQMxNlwuCUF5cCPoDbbfbHEYIS/yKeFewdwjq01/sbpJcYt2wHV2WJJaiMYA5YqQLQHG4dNlx1kOWMLICkx9eP7j8k8AznAmHrJ/GvyRgUuqGBPgyPeKj2cvGPahnGRpIzv+T8ivV8ZaULK2MbWc20LmSfQBUAdb vkhalin@vkhalin.local
@@ -53,3 +87,9 @@ parameters:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUwubPT8GWUeuPCdPeYlIuN8OaD0umc0JuyKWf5ViVhX3VqB6CwS6/ddm9fpbAedV/8J5l/Sl/usK/WuCPVBgKEuGtidRcrABxRt49q+aum5WRd6bsYv4UxFZmaDHKgg6g8LR7Ii26GPM/HdM1CdqnxpVicz7QRj3pgLDYLippg7RAktKkp4Jw7gkBFNR7UXGHr/5qX08VoUadbgWQP7OdHdgSxysqkSiN1Rr9URWEpwZ5wfblkbEzR1JBg6kYJAP3sTJvOQguFvFCVu6++/UX2wbrrc0+0eAO31lFUAIjboYLpWDj5Sj/ER3uwTX0dJw0wpSsa9lHn/LSZrJhrA5v ozhurba@zhurba-mac
     cdodda:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbU3LETmZst5dcLl7iPdAeVTtSQoJZoQ3Nza6DHlpv3wtHHvoh8Fd0QFhIkR81a+5563qBcUiFfI9n3vufyJWzc9x+8G2/WJXkKg6D3tnvPqmlT+3Cqj1vNZbjVvXFdVb24pR9jdAa8CEHInWLVNCdL/WShKDSHBQ/cloymzzGhpJOYMXjPzEBxDbiodKMD0TAvw7IKQSY9trlxOXBtQLcHWYxrdxG1ir7TjD6PXdXae8PRxOwh35leot9kWo27icxGIKdJunrvQZI3VB7FSf6hhWajgnmD4yREF9sCLaknl5Xx1J3c/6P0JDeX3DDT4Nv3Bl1cLIdMa0+iDeCPvGz creddy@space
+    izadorozhna:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5qks9NQ96ks6j17I/3lq6RGX0w55xWYl9zhAeBzUtBOtsjnSbjeaeqfAh+yltGpex9+Z7MyzF3ozZtPofVeRirQRSYGNiN+azcL3+TP4zoOw4xCe+yzQ38YOi6AQXkidUCalx7sqyDSVEH14eARx92KNYaKiJUBi9375NdewtSAJSTOndCoqSSP0dY84fTVZDGXPEjTImvIP1w/Cg+hoewglzbCScd0N4RPKDcpAdjcMl9QKOCLaHWoftt+Vjg8IjiHFBkjEHvzbO60GhbcFGLO08GPlhd6hGtj0msRd6hSPVhQ2h4VsGaPcXzYuCGVhmgW5/0Je7qrk8TsxSeKsL izadorozhna@izadorozhna-pc
+    vshakirova:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjh0pc0cY5hXw6hD8xuwFQdoFXiZnlQoSqKSk+YRqqtFulCo8Jc0YMswMd/Hz3sn10xIrbOX0ebDnS95LaylLYJbPST5DWz6zYT0mjelodZASoPKFGpl4scwufDnxAKpg3SpvUYKf3is2dQoovs85x8ff6WPltM8ENXMsLJPSBRiu0R8nuB/OC4Gl+MAhA8bUGyZ6YTiYCyrCZHd+djEipxmVRmwvMP6OXVOPngmJ4gle7nf4koOFntIOjt2MNOnR7oiv9Aqu/C0h8PogPFVnOYB6Cjr8FaBnaZgbq0NVowshv1yTzHlSdl01cwMerYT0ZOYNk5Udm3utWZv7tWIHptSC1KnLllTPtBwuz12KtHR+LAYZD8lUC1A2e0MuMn34nDQmv1hpXnjncMMOcbl2EGCvJvEnZqsDKibaQxHbCSvgMZU+tSf6d1kK7l1V9AplWOjSRa36RQZqpGyG8OEBLd43Y8j8QWnIG5JqNW4w+kC+zSLbZLereqypDb72Z/TZgrA0DexwzG0+fswEbTgqT8i2F/WVE75tGsdnvTGwIQAea/kbkbS0qEJWaxDsjxwUmGbIDoBk/flw9gOXWFd3/aKggxskHQ4tHNHOCWgbyczOIZp5XTY1+ZTQeZI8c7mKNHKL6nbd22/7BjKBJMfRUmF69CNAW/vjH2uHl3K/lcQ== vshakirova@vshakirova
+    dkruglov:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDd0peqhFCRgFhxsAV23TJ6la96FH7CFd/XYW67vaxWrlWSZsba9+aMMpNFPjNfrcAqZsKNlRk3EOEAHyS4JQHcOzQAxYU5kCnqg2YnIY3bp4ihDwF/V+4xMRvt8avdlo9qBFQGqiX7iPleMM089wiATi6NYsacooqNEhrjf3NvqeJBK2NLS82aSdOFF7reC58hyomArD1dJE1usF28l5+i8d8ALlzOlMLLaIRPFmbJeT43S+VXNycREektwVbXvF+Lmt2FST1oQD2KMd+aWltLsGg2KlXwlzMIod1UuYx0ZcIk7o1GYY7duNP+gmldj+TTqAgqlOChusw8iAdOUPff dkruglov@mirantis.com

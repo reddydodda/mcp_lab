@@ -32,6 +32,9 @@ classes:
   - system.gerrit.client
   - system.gerrit.client.project.ci
 
+  # Upgrade 
+  - system.jenkins.client.job.deploy.update
+
   - system.docker.swarm.master
 
   - cluster.vlab.infra

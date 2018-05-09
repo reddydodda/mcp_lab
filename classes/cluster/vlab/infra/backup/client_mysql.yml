@@ -35,3 +35,5 @@ parameters:
     server:
       enabled: false
       backup_dir: /srv/volumes/backup/xtrabackup
+    client:
+      cron: false

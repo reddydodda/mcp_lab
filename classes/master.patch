@@ -1,0 +1,171 @@
+diff --git a/elasticsearch/server/curator.yml b/elasticsearch/server/curator.yml
+index e4e5ace..2f78f3e 100644
+--- a/elasticsearch/server/curator.yml
++++ b/elasticsearch/server/curator.yml
+@@ -22,14 +22,14 @@ parameters:
+             - filtertype: pattern
+               kind: regex
+               value: "${_param:elasticsearch_curator_indices_pattern}"
+-              exclude:
++              exclude: False
+             - filtertype: age
+               source: name
+               direction: older
+               timestring: '%Y.%m.%d'
+               unit: days
+               unit_count: ${_param:elasticsearch_curator_retention_period}
+-              exclude:
++              exclude: True
+           - action: delete_indices
+             description: >-
+                 Delete indices older than ${_param:elasticsearch_curator_retention_period} days (based on index name).
+@@ -42,11 +42,11 @@ parameters:
+             - filtertype: pattern
+               kind: regex
+               value: "^events_.*$"
+-              exclude:
++              exclude: True
+             - filtertype: age
+               source: name
+               direction: older
+               timestring: '%Y-%m-%d'
+               unit: days
+               unit_count: ${_param:elasticsearch_curator_retention_period}
+-              exclude:
+\ No newline at end of file
++              exclude: True
+diff --git a/keystone/client/service/octavia.yml b/keystone/client/service/octavia.yml
+index c08312e..19450e6 100644
+--- a/keystone/client/service/octavia.yml
++++ b/keystone/client/service/octavia.yml
+@@ -7,6 +7,8 @@ parameters:
+     client:
+       server:
+         identity:
++#          admin:
++#            protocol: ${_param:keystone_service_protocol}
+           project:
+             service:
+               user:
+@@ -32,6 +34,16 @@ parameters:
+                 admin_address: ${_param:octavia_service_host}
+                 admin_port: 9876
+                 admin_path: '/'
++#        admin_identity:
++#          admin:
++#            user: admin
++#            password: ${_param:keystone_admin_password}
++#            project: admin
++#            host: ${_param:keystone_service_host}
++#            port: 5000
++#            region_name: ${_param:openstack_region}
++#            use_keystoneauth: true
++#            protocol: ${_param:keystone_service_protocol}
+         octavia_identity:
+           admin:
+             user: octavia
+diff --git a/keystone/client/single.yml b/keystone/client/single.yml
+index ad2d55a..c0eedc1 100644
+--- a/keystone/client/single.yml
++++ b/keystone/client/single.yml
+@@ -7,6 +7,7 @@ classes:
+ - system.keystone.client.service.heat-cfn
+ - system.keystone.client.service.keystone
+ - system.keystone.client.service.neutron
++#- system.keystone.client.service.octavia
+ parameters:
+   _param:
+     keystone_service_protocol: http
+@@ -51,3 +52,4 @@ parameters:
+             region_name: ${_param:openstack_region}
+             use_keystoneauth: true
+             protocol: ${_param:keystone_service_protocol}
++
+diff --git a/neutron/client/service/ironic.yml b/neutron/client/service/ironic.yml
+index 17d3e6f..e0814cd 100644
+--- a/neutron/client/service/ironic.yml
++++ b/neutron/client/service/ironic.yml
+@@ -16,8 +16,8 @@ parameters:
+               port_security_enabled: false
+               subnet:
+                 baremetal-subnet:
+-                  cidr: ${_param:openstack_baremeta_neutron_subnet_cidr}
++                  cidr: ${_param:openstack_baremetal_neutron_subnet_cidr}
+                   allocation_pools:
+-                    - start: ${_param:openstack_baremeta_neutron_subnet_allocation_start}
+-                      end: ${_param:openstack_baremeta_neutron_subnet_allocation_end}
++                    - start: ${_param:openstack_baremetal_neutron_subnet_allocation_start}
++                      end: ${_param:openstack_baremetal_neutron_subnet_allocation_end}
+                   enable_dhcp: true
+diff --git a/octavia/api/cluster.yml b/octavia/api/cluster.yml
+index 75a4c19..0a2b359 100644
+--- a/octavia/api/cluster.yml
++++ b/octavia/api/cluster.yml
+@@ -2,8 +2,20 @@ classes:
+ - service.octavia.api.cluster
+ - system.haproxy.proxy.listen.openstack.octavia
+ parameters:
++  _param:
++    cluster_internal_protocol: 'http'
+   octavia:
+     api:
+       enabled: true
+       bind:
+         address: ${_param:cluster_local_address}
++      database:
++        host: ${_param:openstack_database_address}
++      identity:
++        region: ${_param:openstack_region}
++        protocol: ${_param:cluster_internal_protocol}
++      message_queue:
++        members:
++          - host: ${_param:openstack_message_queue_node01_address}
++          - host: ${_param:openstack_message_queue_node02_address}
++          - host: ${_param:openstack_message_queue_node03_address}
+diff --git a/octavia/api/single.yml b/octavia/api/single.yml
+index 685c4b4..a9d30a5 100644
+--- a/octavia/api/single.yml
++++ b/octavia/api/single.yml
+@@ -1,8 +1,17 @@
+ classes:
+ - service.octavia.api.single
+ parameters:
++  _param:
++    internal_protocol: 'http'
+   octavia:
+     api:
+       enabled: true
+       bind:
+         address: ${_param:single_address}
++      database:
++        host: ${_param:openstack_database_address}
++      identity:
++        region: ${_param:openstack_region}
++        protocol: ${_param:internal_protocol}
++      message_queue:
++        host: ${_param:openstack_message_queue_address}
+diff --git a/octavia/manager/single.yml b/octavia/manager/single.yml
+index acab136..411ad41 100644
+--- a/octavia/manager/single.yml
++++ b/octavia/manager/single.yml
+@@ -1,6 +1,8 @@
+ classes:
+ - service.octavia.manager.single
+ parameters:
++  _param:
++    internal_protocol: 'http'
+   octavia:
+     manager:
+       enabled: true
+@@ -9,3 +11,11 @@ parameters:
+         private_key: ${_param:octavia_private_key}
+         user: octavia
+         group: octavia
++      database:
++        host: ${_param:openstack_database_address}
++      identity:
++        region: ${_param:openstack_region}
++        protocol: ${_param:internal_protocol}
++      message_queue:
++        host: ${_param:openstack_message_queue_address}
++
