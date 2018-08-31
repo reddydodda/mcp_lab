@@ -1,0 +1,92 @@
+
+classes:
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.apt_mirantis.openstack
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
+- system.linux.system.repo.mcp.apt_mirantis.glusterfs
+- system.salt.control.virt
+- system.salt.control.cluster.openstack_control_cluster
+- system.salt.control.cluster.openstack_proxy_cluster
+- system.salt.control.cluster.openstack_database_cluster
+- system.salt.control.cluster.openstack_message_queue_cluster
+#- system.salt.control.cluster.openstack_upgrade_single
+- system.salt.control.sizes.openstack.minimal
+- system.salt.control.placement.openstack.minimal
+- system.salt.control.sizes.ovs.minimal
+- system.salt.control.placement.ovs.minimal
+- system.salt.control.cluster.stacklight_server_cluster
+- system.salt.control.cluster.stacklight_log_cluster
+- system.salt.control.cluster.stacklight_telemetry_cluster
+- system.salt.control.sizes.stacklight.minimal
+- system.salt.control.placement.stacklight.minimal
+- system.salt.control.cluster.cicd_control_cluster
+- system.salt.control.sizes.cicd.minimal
+- system.salt.control.placement.cicd.minimal
+- system.salt.control.cluster.ceph_mon_cluster
+- system.salt.control.cluster.ceph_rgw_cluster
+- system.salt.control.sizes.ceph
+- cluster.vlab.infra
+- cluster.vlab.infra.networking.kvm
+parameters:
+  _param:
+    cluster_vip_address: ${_param:infra_kvm_address}
+    cluster_node01_address: ${_param:infra_kvm_node01_address}
+    cluster_node02_address: ${_param:infra_kvm_node02_address}
+    cluster_node03_address: ${_param:infra_kvm_node03_address}
+    deploy_nic: eth0
+    primary_first_nic: ten1
+    primary_second_nic: ten2
+  salt:
+    control:
+      cluster:
+        internal:
+          node:
+            ctl01:
+              image: ${_param:salt_control_xenial_image}
+            ctl02:
+              image: ${_param:salt_control_xenial_image}
+            ctl03:
+              image: ${_param:salt_control_xenial_image}
+            dbs01:
+              image: ${_param:salt_control_xenial_image}
+            dbs02:
+              image: ${_param:salt_control_xenial_image}
+            dbs03:
+              image: ${_param:salt_control_xenial_image}
+            msg01:
+              image: ${_param:salt_control_xenial_image}
+            msg02:
+              image: ${_param:salt_control_xenial_image}
+            msg03:
+              image: ${_param:salt_control_xenial_image}
+            prx01:
+              image: ${_param:salt_control_xenial_image}
+            prx02:
+              image: ${_param:salt_control_xenial_image}
+  virt:
+    nic:
+      default:
+        eth1:
+          bridge: br-mgm
+        eth0:
+          bridge: br-ctl
+  #   system:
+  #     package:
+  #       linux-image-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39-generic:
+  #         version: latest
+  #       linux-image-extra-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39:
+  #         version: latest
+  #     user:
+  #       root:
+  #         enabled: true
+  #         name: root
+  #         home: /root
+  #         # Password is cloudlab, comment out, configure your SSH key bellow
+  #         # and disable password auth
+  #         password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./
+

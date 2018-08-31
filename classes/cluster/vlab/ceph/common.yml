@@ -1,0 +1,30 @@
+classes:
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
+- system.linux.system.repo.mcp.apt_mirantis.ceph
+- cluster.vlab.infra
+parameters:
+  _param:
+    linux_system_repo_mcp_ceph_codename: ${_param:ceph_version}
+  ceph:
+    common:
+      public_network: 192.168.2.0/24
+      cluster_network: 192.168.1.0/24
+      keyring:
+        glance:
+          name: ${_param:glance_storage_user}
+          caps:
+            mon: "profile rbd"
+            osd: "profile rbd pool=images"
+        cinder:
+          name: ${_param:cinder_storage_user}
+          caps:
+            mon: "profile rbd"
+            osd: "profile rbd pool=volumes, profile rbd-read-only pool=images"
+        nova:
+          name: ${_param:nova_storage_user}
+          caps:
+            mon: "profile rbd"
+            osd: "profile rbd pool=vms, profile rbd-read-only pool=images"
+

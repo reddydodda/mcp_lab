@@ -1,0 +1,20 @@
+classes:
+- system.backupninja.server.single
+- system.xtrabackup.server.single
+- system.ceph.backup.server.single
+- system.glusterfs.client.cluster
+- system.glusterfs.client.volume.backup
+parameters:
+  _param:
+    backupninja_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6/MsJ2VVQb5nsUhFzPiajh4OoI4GE7luIdPk2gEV1npfEfLC3aqGHNMYTkDx+t+tX/Uyfz3v0EkvKKHFo5cO+3EyxPZ0Q5rVoCgqxqspjIf4b0X4z4YAAP+vmkuCqBbIpiI2iCVEHjXKxQSISsLk/qQb+0ccte6HCdYypl6+l/8f1manWO/uCsFl3dQStPFRLmij8Tf/ZmBXGHsVwGOvyOcOVErJKxbWPO52iw7VXli3MHhev7CsnVb/0zecj5fUI40jUohPFIRXV4pDWOxhnR5dHVVw/GHtf0gObGlYbE+378My9yaB6y5lEQxO27bnO3JfeZ75EAD3lU2Yw3Ul
+    xtrabackup_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6/MsJ2VVQb5nsUhFzPiajh4OoI4GE7luIdPk2gEV1npfEfLC3aqGHNMYTkDx+t+tX/Uyfz3v0EkvKKHFo5cO+3EyxPZ0Q5rVoCgqxqspjIf4b0X4z4YAAP+vmkuCqBbIpiI2iCVEHjXKxQSISsLk/qQb+0ccte6HCdYypl6+l/8f1manWO/uCsFl3dQStPFRLmij8Tf/ZmBXGHsVwGOvyOcOVErJKxbWPO52iw7VXli3MHhev7CsnVb/0zecj5fUI40jUohPFIRXV4pDWOxhnR5dHVVw/GHtf0gObGlYbE+378My9yaB6y5lEQxO27bnO3JfeZ75EAD3lU2Yw3Ul
+    ceph_backup_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6/MsJ2VVQb5nsUhFzPiajh4OoI4GE7luIdPk2gEV1npfEfLC3aqGHNMYTkDx+t+tX/Uyfz3v0EkvKKHFo5cO+3EyxPZ0Q5rVoCgqxqspjIf4b0X4z4YAAP+vmkuCqBbIpiI2iCVEHjXKxQSISsLk/qQb+0ccte6HCdYypl6+l/8f1manWO/uCsFl3dQStPFRLmij8Tf/ZmBXGHsVwGOvyOcOVErJKxbWPO52iw7VXli3MHhev7CsnVb/0zecj5fUI40jUohPFIRXV4pDWOxhnR5dHVVw/GHtf0gObGlYbE+378My9yaB6y5lEQxO27bnO3JfeZ75EAD3lU2Yw3Ul
+  backupninja:
+    server:
+      home_dir: /srv/volumes/backup/backupninja
+  xtrabackup:
+    server:
+      backup_dir: /srv/volumes/backup/xtrabackup
+  ceph:
+    backup:
+      backup_dir: /srv/volumes/backup/ceph

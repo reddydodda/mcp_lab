@@ -1,0 +1,64 @@
+
+classes:
+- system.linux.system.repo.mcp.apt_mirantis.maas
+- system.maas.region.single
+- system.maas.region.boot_sources.maas_ephemeral_v3.bss_xenial
+- system.maas.region.boot_sources.maas_ephemeral_v3
+parameters:
+  _param:
+    maas_region_port: 5240
+    maas_name: ${_param:infra_config_hostname}
+    maas_gateway: 192.168.0.1
+  maas:
+    region:
+      commissioning_scripts:
+        00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
+      bind:
+        host: ${_param:deploy_address}
+        port: ${_param:maas_region_port}
+      maas_config:
+        maas_name: ${_param:maas_name}
+      subnets:
+        deploy_network:
+          name: deploy_network
+          cidr: 192.168.0.0/24
+          fabric: ${maas:region:fabrics:deploy_fabric:name}
+          gateway_ip: ${_param:maas_gateway}
+          ipranges:
+            1:
+              end: 192.168.0.200
+              start: 192.168.0.170
+              type: dynamic
+              subnet: ${maas:region:subnets:deploy_network:name}
+      fabrics:
+        deploy_fabric:
+          name: deploy_fabric
+          description: 'Fabric for deploy_network'
+          vlans:
+            0:
+              name: 'vlan 0'
+              description: "Deploy VLAN"
+              dhcp: True
+              # FXIME: after refactoring domain module, it should
+              # be fixed to exactly use FQDN, not only hostname
+              primary_rack: "${linux:network:hostname}"
+      machines:
+        <<LOAD_FROM_FILE>>
+    cluster:
+      region:
+        host: ${_param:deploy_address}
+        port: ${_param:maas_region_port}
+# linux:
+#   network:
+#     interface:
+#       primary_interface:
+#         enabled: true
+#         name: ens2
+#         type: eth
+#         proto: static
+#         netmask: ${_param:deploy_network_netmask}
+#         address: ${_param:single_address}
+#         gateway: ${_param:deploy_network_gateway}
+#         name_servers:
+#         - ${_param:dns_server01}
+#         - ${_param:dns_server02}

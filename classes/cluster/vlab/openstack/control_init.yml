@@ -1,0 +1,29 @@
+classes:
+- system.keystone.client.core
+- system.keystone.client.service.cinder
+- system.keystone.client.service.cinder2
+- system.keystone.client.service.glance
+- system.keystone.client.service.heat
+- system.keystone.client.service.heat-cfn
+- system.keystone.client.service.neutron
+- system.keystone.client.service.nova21
+- system.keystone.client.service.nova-placement
+- system.keystone.client.service.cinder3
+- system.keystone.client.service.keystone
+- system.keystone.client.service.radosgw-swift
+parameters:
+  _param:
+    openstack_region: RegionOne
+    radosgw_swift_cluster_port: 8080
+    radosgw_service_host: ${_param:ceph_rgw_address}
+    keystone_swift_password: ${_param:keystone_swift_password_generated}
+    # Unversioned endpoint for pike, queens
+    keystone_public_path: "/"
+    keystone_internal_path: "/"
+    keystone_admin_path: "/"
+  #TODO Need to research, implement and test moving keystone fernet repository from GlusterFS and use secured rsync to ship rotated keys across ctl nodes. PROD-18539
+  linux:
+    system:
+      job:
+        keystone_job_rotate:
+          enabled: False
