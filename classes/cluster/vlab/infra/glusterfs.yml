@@ -5,6 +5,7 @@ classes:
 - system.glusterfs.server.volume.backup
 - system.glusterfs.server.volume.keystone
 - cluster.vlab.cicd.gluster
+- cluster.vlab.oss.gluster
 parameters:
   _param:
     keepalived_vip_interface: br-ctl

@@ -1,8 +1,15 @@
+# KVM nodes default networking template
+#
 parameters:
   linux:
     network:
       bridge: linux
       interface:
+        eth0:
+          enabled: true
+          type: eth
+          proto: manual
+          name: ${_param:deploy_nic}
         eth1:
           enabled: true
           type: slave
@@ -26,7 +33,7 @@ parameters:
           - ${_param:dns_server01}
           - ${_param:dns_server02}
           use_interfaces:
-          - bond0
+          - ${_param:deploy_nic}
         bond0:
           enabled: true
           proto: manual
@@ -43,27 +50,6 @@ parameters:
           type: vlan
           use_interfaces:
           - bond0
-        bond0.2:
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
-        bond0.3:
-          name: bond0.${_param:proxy_vlan}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
-        bond0.4:
-          name: bond0.${_param:backend_vlan}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
         br-ctl:
           enabled: true
           type: bridge
@@ -72,28 +58,3 @@ parameters:
           netmask: ${_param:control_network_netmask}
           use_interfaces:
           - bond0.${_param:control_vlan}
-        br-ext:
-          enabled: true
-          type: bridge
-          proto: manual
-#          address: ${_param:tenant_address}
-#          netmask: ${_param:tenant_network_netmask}
-          use_interfaces:
-          - bond0.${_param:tenant_vlan}
-        br-prx:
-          enabled: true
-          type: bridge
-          proto: manual
-#          proto: static
-##          address: ${_param:proxy_address}
-#          netmask: ${_param:proxy_network_netmask}
-          use_interfaces:
-          - bond0.${_param:proxy_vlan}
-        br-dat:
-          enabled: true
-          type: bridge
-          proto: static
-          address: ${_param:backend_address}
-          netmask: ${_param:proxy_network_netmask}
-          use_interfaces:
-          - bond0.${_param:proxy_vlan}

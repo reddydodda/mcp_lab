@@ -5,22 +5,20 @@ classes:
 - cluster.vlab.ceph.networking.osd
 parameters:
   _param:
-    ceph_osd_primary_first_nic: eth1
-    ceph_osd_primary_second_nic: eth2
-    linux_backend_interface:
-      enabled: true
-      type: eth
-      proto: static
-      address: ${_param:backend_address}
-      netmask: ${_param:backend_network_netmask}
+    ceph_osd_primary_first_nic: ens4
+    ceph_osd_primary_second_nic: ens5
   ceph:
     osd:
       enabled: true
       crush_parent: ${_param:ceph_crush_parent}
-      bluestore_block_db_size: 1000000000
+      bluestore_block_db_size: 21474836480
       backend:
         bluestore:
           disks:
+            - dev: /dev/vdc
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
             - dev: /dev/vdd
               block_db: /dev/vdb
 #              class: hdd
@@ -29,7 +27,27 @@ parameters:
               block_db: /dev/vdb
 #              class: hdd
 #              weight: 1.5
+            - dev: 
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
             - dev: /dev/vdf
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
+            - dev: 
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
+            - dev: /dev/vdg
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
+            - dev: 
+              block_db: /dev/vdb
+#              class: hdd
+#              weight: 1.5
+            - dev: /dev/vdh
               block_db: /dev/vdb
 #              class: hdd
 #              weight: 1.5

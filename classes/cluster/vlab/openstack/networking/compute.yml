@@ -1,7 +1,10 @@
+# Openstack compute node networking template
+#
 parameters:
   linux:
     network:
       interface:
+        eno1: ${_param:linux_deploy_interface}
         eth1:
           mtu: 9000
           enabled: true
@@ -19,51 +22,31 @@ parameters:
         bond0:
           enabled: true
           proto: manual
+          ovs_bridge: br-floating
+          ovs_type: OVSPort
           type: bond
           use_interfaces:
-          - ${_param:primary_second_nic}
           - ${_param:primary_first_nic}
-          slaves: ${_param:primary_second_nic} ${_param:primary_first_nic}
+          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
           mode: active-backup
-        bond0.1:
-          name: bond0.${_param:control_vlan}
+        br-floating:
           enabled: true
-          type: vlan
-          proto: static
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-          use_interfaces:
-          - bond0
-        bond0.2:
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          type: vlan
-          proto: manual
-          use_interfaces:
-          - bond0
-        br-mesh:
-          enabled: true
-          type: bridge
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-          use_interfaces:
-          - bond0.${_param:tenant_vlan}
-        br-ctl:
-          enabled: true
-          type: bridge
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-          use_interfaces:
-          - bond0.${_param:control_vlan}
+          type: ovs_bridge
         br-mgmt:
           enabled: true
-          type: bridge
-          address: ${_param:deploy_address}
-          netmask: ${_param:deploy_network_netmask}
-          gateway: ${_param:deploy_network_gateway}
-          use_interfaces:
-          - bond0
-          name_servers:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
+          type: ovs_port
+          bridge: br-floating
+          proto: static
+          ovs_options: tag=${_param:control_vlan}
+          address: ${_param:single_address}
+          netmask: ${_param:control_network_netmask}
+        br-mesh:
+          enabled: true
+          type: ovs_port
+          bridge: br-floating
+          proto: static
+          ovs_options: tag=${_param:tenant_vlan}
+          address: ${_param:tenant_address}
+          netmask: ${_param:tenant_network_netmask}
       bridge: openvswitch

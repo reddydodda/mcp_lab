@@ -30,32 +30,32 @@ parameters:
     keepalived_stacklight_monitor_vip_password: ${_param:keepalived_stacklight_monitor_vip_password_generated}
     keepalived_prometheus_vip_password: ${_param:keepalived_prometheus_vip_password_generated}
     stacklight_environment: ${_param:cluster_domain}
-    stacklight_log_address: 192.168.2.60
-    stacklight_log_node01_address: 192.168.2.61
-    stacklight_log_node02_address: 192.168.2.62
-    stacklight_log_node03_address: 192.168.2.63
-    stacklight_telemetry_address: 192.168.2.85
-    stacklight_telemetry_node01_address: 192.168.2.86
-    stacklight_telemetry_node02_address: 192.168.2.87
-    stacklight_telemetry_node03_address: 192.168.2.88
+    stacklight_log_address: 192.168.1.45
+    stacklight_log_node01_address: 192.168.1.46
+    stacklight_log_node02_address: 192.168.1.47
+    stacklight_log_node03_address: 192.168.1.48
+    stacklight_telemetry_address: 192.168.1.40
+    stacklight_telemetry_node01_address: 192.168.1.41
+    stacklight_telemetry_node02_address: 192.168.1.42
+    stacklight_telemetry_node03_address: 192.168.1.43
 
-    stacklight_monitor_address: 192.168.2.70
+    stacklight_monitor_address: 192.168.1.35
     stacklight_monitor_hostname: mon
     stacklight_monitor_node01_hostname: mon01
     stacklight_monitor_node02_hostname: mon02
     stacklight_monitor_node03_hostname: mon03
-    stacklight_monitor_node01_address: 192.168.2.71
-    stacklight_monitor_node02_address: 192.168.2.72
-    stacklight_monitor_node03_address: 192.168.2.73
-    stacklight_log_node01_deploy_address: 192.168.0.61
-    stacklight_log_node02_deploy_address: 192.168.0.62
-    stacklight_log_node03_deploy_address: 192.168.0.63
-    stacklight_telemetry_node01_deploy_address: 192.168.0.86
-    stacklight_telemetry_node02_deploy_address: 192.168.0.87
-    stacklight_telemetry_node03_deploy_address: 192.168.0.88
-    stacklight_monitor_node01_deploy_address: 192.168.0.71
-    stacklight_monitor_node02_deploy_address: 192.168.0.72
-    stacklight_monitor_node03_deploy_address: 192.168.0.73
+    stacklight_monitor_node01_address: 192.168.1.36
+    stacklight_monitor_node02_address: 192.168.1.37
+    stacklight_monitor_node03_address: 192.168.1.38
+    stacklight_log_node01_deploy_address: 192.168.0.46
+    stacklight_log_node02_deploy_address: 192.168.0.47
+    stacklight_log_node03_deploy_address: 192.168.0.48
+    stacklight_telemetry_node01_deploy_address: 192.168.0.41
+    stacklight_telemetry_node02_deploy_address: 192.168.0.42
+    stacklight_telemetry_node03_deploy_address: 192.168.0.43
+    stacklight_monitor_node01_deploy_address: 192.168.0.36
+    stacklight_monitor_node02_deploy_address: 192.168.0.37
+    stacklight_monitor_node03_deploy_address: 192.168.0.38
     grafana_database_type: mysql
     grafana_database_host: ${_param:openstack_database_address}
     grafana_database_password: ${_param:mysql_grafana_password}

@@ -6,19 +6,19 @@ parameters:
     neutron_global_physnet_mtu: 1500
     neutron_external_mtu: 1500
 
-    neutron_enable_qos: False
+    neutron_enable_qos: True
     neutron_enable_vlan_aware_vms: False
     neutron_enable_bgp_vpn: False
     neutron_bgp_vpn_driver: bagpipe
-    neutron_compute_external_access: False
-    neutron_control_dvr: False
-    neutron_gateway_dvr: False
-    neutron_compute_dvr: False
+    neutron_compute_external_access: True
+    neutron_control_dvr: True
+    neutron_gateway_dvr: True
+    neutron_compute_dvr: True
 
-    neutron_gateway_agent_mode: legacy
-    neutron_compute_agent_mode: legacy
+    neutron_gateway_agent_mode: dvr_snat
+    neutron_compute_agent_mode: dvr
 
-    neutron_l3_ha: True
+    neutron_l3_ha: False
     neutron_tenant_network_types: "flat,vxlan"
 
     cluster_internal_protocol: http
@@ -86,58 +86,52 @@ parameters:
     openstack_notification_topics: "notifications,${_param:stacklight_notification_topic}"
 
     # openstack service addresses
-    openstack_proxy_address: 172.17.18.5
-    openstack_proxy_node01_address: 192.168.2.81
-    openstack_proxy_node02_address: 192.168.2.82
-    openstack_proxy_proxy_address: 172.17.18.5
-    openstack_proxy_node01_proxy_address: 172.17.18.6
-    openstack_proxy_node02_proxy_address: 192.168.2.7
-    openstack_control_address: 192.168.2.10
-    openstack_control_node01_address: 192.168.2.11
-    openstack_control_node02_address: 192.168.2.12
-    openstack_control_node03_address: 192.168.2.13
-    openstack_database_address: 192.168.2.50
-    openstack_database_node01_address: 192.168.2.51
-    openstack_database_node02_address: 192.168.2.52
-    openstack_database_node03_address: 192.168.2.53
-    openstack_message_queue_address: 192.168.2.40
-    openstack_message_queue_node01_address: 192.168.2.41
-    openstack_message_queue_node02_address: 192.168.2.42
-    openstack_message_queue_node03_address: 192.168.2.43
+    openstack_proxy_address: 192.168.1.80
+    openstack_proxy_node01_address: 192.168.1.81
+    openstack_proxy_node02_address: 192.168.1.82
+    openstack_control_address: 192.168.1.15
+    openstack_control_node01_address: 192.168.1.16
+    openstack_control_node02_address: 192.168.1.17
+    openstack_control_node03_address: 192.168.1.18
+    openstack_database_address: 192.168.1.25
+    openstack_database_node01_address: 192.168.1.26
+    openstack_database_node02_address: 192.168.1.27
+    openstack_database_node03_address: 192.168.1.28
+    openstack_message_queue_address: 192.168.1.20
+    openstack_message_queue_node01_address: 192.168.1.21
+    openstack_message_queue_node02_address: 192.168.1.22
+    openstack_message_queue_node03_address: 192.168.1.23
     openstack_upgrade_node01_hostname: upg01
-    openstack_upgrade_node01_address: 192.168.2.19
+    openstack_upgrade_node01_address: 192.168.1.33
     openstack_proxy_node01_deploy_address: 192.168.0.81
     openstack_proxy_node02_deploy_address: 192.168.0.82
-    openstack_control_node01_deploy_address: 192.168.0.11
-    openstack_control_node02_deploy_address: 192.168.0.12
-    openstack_control_node03_deploy_address: 192.168.0.13
-    openstack_database_node01_deploy_address: 192.168.0.51
-    openstack_database_node02_deploy_address: 192.168.0.52
-    openstack_database_node03_deploy_address: 192.168.0.53
-    openstack_message_queue_node01_deploy_address: 192.168.0.41
-    openstack_message_queue_node02_deploy_address: 192.168.0.42
-    openstack_message_queue_node03_deploy_address: 192.168.0.43
-    openstack_upgrade_node01_deploy_address: 192.168.0.19
-    openstack_gateway_node01_address: 192.168.2.224
-    openstack_gateway_node02_address: 192.168.2.225
-    openstack_gateway_node03_address: 192.168.2.226
-    openstack_gateway_node01_deploy_address: 192.168.0.224
-    openstack_gateway_node02_deploy_address: 192.168.0.225
-    openstack_gateway_node03_deploy_address: 192.168.0.226
-    openstack_gateway_node01_tenant_address: 172.17.18.38
-    openstack_gateway_node02_tenant_address: 172.17.18.39
-    openstack_gateway_node03_tenant_address: 172.17.18.40
+    openstack_control_node01_deploy_address: 192.168.0.16
+    openstack_control_node02_deploy_address: 192.168.0.17
+    openstack_control_node03_deploy_address: 192.168.0.18
+    openstack_database_node01_deploy_address: 192.168.0.26
+    openstack_database_node02_deploy_address: 192.168.0.27
+    openstack_database_node03_deploy_address: 192.168.0.28
+    openstack_message_queue_node01_deploy_address: 192.168.0.21
+    openstack_message_queue_node02_deploy_address: 192.168.0.22
+    openstack_message_queue_node03_deploy_address: 192.168.0.23
+    openstack_upgrade_node01_deploy_address: 192.168.0.33
+    openstack_gateway_node01_address: 192.168.1.61
+    openstack_gateway_node02_address: 192.168.1.62
+    openstack_gateway_node03_address: 192.168.1.63
+    openstack_gateway_node01_deploy_address: 192.168.0.61
+    openstack_gateway_node02_deploy_address: 192.168.0.62
+    openstack_gateway_node03_deploy_address: 192.168.0.63
+    openstack_gateway_node01_tenant_address: 192.168.2.61
+    openstack_gateway_node02_tenant_address: 192.168.2.62
+    openstack_gateway_node03_tenant_address: 192.168.2.63
 
     # OpenStack Compute
-    openstack_compute_rack01_single_subnet: 192.168.2
-    openstack_compute_rack01_tenant_subnet: 172.17.18
+    openstack_compute_rack01_single_subnet: 192.168.1
+    openstack_compute_rack01_tenant_subnet: 192.168.2
     openstack_compute_rack01_hostname: cmp
     openstack_compute_rack01_deploy_subnet: 192.168.0
     openstack_compute_node001_deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.101
     openstack_compute_node002_deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.102
-    openstack_compute_node003_deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.103
-    openstack_compute_node004_deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.104
-    openstack_compute_node005_deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.105
 
     # openstack service hostnames
     openstack_proxy_hostname: prx
@@ -160,8 +154,8 @@ parameters:
     openstack_gateway_node03_hostname: gtw03
 
     openstack_benchmark_node01_hostname: bmk01
-    openstack_benchmark_node01_address: 192.168.2.95
-    openstack_benchmark_node01_deploy_address: 192.168.0.95
+    openstack_benchmark_node01_address: 192.168.1.34
+    openstack_benchmark_node01_deploy_address: 192.168.0.34
     # Ceph
     cinder_storage_secret_uuid: ${_param:cinder_storage_secret_uuid_generated}
     nova_storage_secret_uuid: ${_param:nova_storage_secret_uuid_generated}

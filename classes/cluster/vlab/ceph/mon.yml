@@ -4,9 +4,3 @@ classes:
 - cluster.vlab.infra.backup.client_ceph
 - cluster.vlab.ceph.networking.virtual
 - cluster.vlab.ceph.common
-#parameters:
-#  ceph:
-#    common:
-#      config:
-#        mon:
-#          mon allow pool delete: true

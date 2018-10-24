@@ -15,5 +15,5 @@ parameters:
     linux_system_codename: xenial
     keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
-    primary_first_nic: eth1
-    primary_second_nic: eth2
+    primary_first_nic: ens4
+    primary_second_nic: ens5

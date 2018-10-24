@@ -1,0 +1,9 @@
+classes:
+  - system.glusterfs.server.cluster
+  - system.glusterfs.server.volume.devops_portal
+  - system.glusterfs.server.volume.postgresql
+  - system.glusterfs.server.volume.pushkin
+  - system.glusterfs.server.volume.rundeck
+  - system.glusterfs.server.volume.security_monkey
+  - system.glusterfs.server.volume.mongodb
+

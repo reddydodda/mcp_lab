@@ -17,17 +17,13 @@ classes:
 - system.prometheus.collector
 - service.grafana.collector
 - cluster.vlab.stacklight
+- cluster.vlab.oss
 - cluster.vlab.ceph
 - cluster.vlab.cicd
 #- cluster.vlab.infra.proxy
-- cluster.vlab.infra.ssh
-- cluster.vlab.infra.ssh_password
 - cluster.vlab.infra.secrets
 parameters:
   _param:
-    ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDClSFQ6r22z/WACx/8gNZGdDyuRdHBQFm4cYukxysGx0XuoefZ1C2NnBYJl/fcdvgDwnqmt6uVAhSdaRla9MTaKlBKRrRLIj+Swei24iEZ6+IL6BD5ZQYvUPYvDj0DyxTzztgNclXg9357eA8kcxKxp1J5oXn11h8X4uM5T9WivUZS6dqnZQwPxV5lrNuoNkkebprRn9Vea3rxYRAgDRsaiqiPlrYexvfISr5xyYtZIbcdvENNySsWUh9DyNoQPROGLP9PwQnePWYRPH2er8WJjMvUDNg6J7ZewglT+gaXds13R/VvowAFAovDg36u0hv3lxvfcVxYETx2yw7sxfEh
-    ssh_banner_company_name: Mirantis
-    banner_company_name: Mirantis
     # Don't set it "false" before you configure sudo policies and enable power users.
     linux_system_user_sudo: true
 
@@ -36,57 +32,37 @@ parameters:
     openstack_version: pike
     jenkins_pipelines_branch: '${_param:apt_mk_version}' 
     salt_control_trusty_image: http://images.mirantis.com//ubuntu-14-04-x64-mcp${_param:apt_mk_version}.qcow2
-    salt_control_xenial_image: salt://images/ubuntu-16-04-x64-mcp${_param:apt_mk_version}.qcow2
+    salt_control_xenial_image: http://images.mirantis.com//ubuntu-16-04-x64-mcp${_param:apt_mk_version}.qcow2 
     infra_config_hostname: cfg01
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
     # infra service addresses
-    infra_config_address: 192.168.2.15
-    infra_config_deploy_address: 192.168.0.15
+    infra_config_address: 192.168.1.11
+    infra_config_deploy_address: 192.168.0.11
 
     cluster_domain: mirantis.net
     cluster_name: vlab
     cluster_public_host: ${_param:openstack_proxy_address}
     control_network_netmask: 255.255.255.0
-    tenant_network_netmask: 255.255.255.224
+    tenant_network_netmask: 255.255.255.0
 
     dns_server01: 8.8.8.8
     dns_server02: 8.8.4.4
     control_vlan: 101
-    proxy_vlan: 103
-    tenant_vlan: 104
+    tenant_vlan: 102
 
     deploy_network_netmask: 255.255.255.0
     deploy_network_gateway: 192.168.0.1
 
-    proxy_network_netmask: 255.255.255.224
-    proxy_network_gateway: 172.17.18.1
-
-    tenant_network_netmask: 255.255.255.224
-    tenant_network_gateway: 172.17.18.33
-
     # MaaS parameters
     infra_maas_node01_deploy_address: ${_param:infra_config_deploy_address}
     infra_maas_node01_hostname: ${_param:infra_config_hostname}
-    infra_kvm_address: 192.168.2.239
-    infra_kvm_node01_address: 192.168.2.240
-    infra_kvm_node02_address: 192.168.2.241
-    infra_kvm_node03_address: 192.168.2.242
-    infra_kvm_node01_deploy_address: 192.168.0.240
-    infra_kvm_node02_deploy_address: 192.168.0.241
-    infra_kvm_node03_deploy_address: 192.168.0.242
-    infra_kvm_node01_tenant_address: 172.17.18.38
-    infra_kvm_node02_tenant_address: 172.17.18.39
-    infra_kvm_node03_tenant_address: 172.17.18.40
-    infra_kvm_node01_tenant_address: 172.17.18.5
-    infra_kvm_node02_tenant_address: 172.17.18.6
-    infra_kvm_node03_tenant_address: 172.17.18.7
-    infra_kvm_proxy_address: 172.17.18.5
-    infra_kvm_node01_proxy_address: 172.17.18.6
-    infra_kvm_node02_proxy_address: 172.17.18.7
-    infra_kvm_node03_proxy_address: 172.17.18.8
-    infra_kvm_node01_backend_address: 192.168.0.240
-    infra_kvm_node02_backend_address: 192.168.0.241
-    infra_kvm_node03_backend_address: 192.168.0.242
+    infra_kvm_address: 192.168.1.70
+    infra_kvm_node01_address: 192.168.1.71
+    infra_kvm_node02_address: 192.168.1.72
+    infra_kvm_node03_address: 192.168.1.73
+    infra_kvm_node01_deploy_address: 192.168.0.71
+    infra_kvm_node02_deploy_address: 192.168.0.72
+    infra_kvm_node03_deploy_address: 192.168.0.73
     infra_kvm_node01_hostname: kvm01
     infra_kvm_node02_hostname: kvm02
     infra_kvm_node03_hostname: kvm03
@@ -173,41 +149,6 @@ parameters:
           names:
           - ${_param:infra_kvm_node03_hostname}
           - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
-        cmp001:
-          address: 192.168.2.101
-          names:
-          - cmp001
-          - cmp001.${_param:cluster_domain}
-#        osd01:
-#          address: ${_param:ceph_osd_node01_address}
-#          names:
-#          - osd1
-#          - osd1.${_param:cluster_domain}
-#        osd02:
-#          address: ${_param:ceph_osd_node02_address}
-#          names:
-#          - osd2
-#          - osd2.${_param:cluster_domain}
-#        osd03:
-#          address: ${_param:ceph_osd_node03_address}
-#          names:
-#          - osd3
-#          - osd3.${_param:cluster_domain}
-#        osd04:
-#          address: ${_param:ceph_osd_node04_address}
-#          names:
-#          - osd4
-#          - osd4.${_param:cluster_domain}
-#        osd05:
-#          address: ${_param:ceph_osd_node05_address}
-#          names:
-#          - osd5
-#          - osd5.${_param:cluster_domain}
-#        osd06:
-#          address: ${_param:ceph_osd_node06_address}
-#          names:
-#          - osd6
-#          - osd6.${_param:cluster_domain}
     system:
       name: ${_param:infra_config_hostname}
       domain: ${_param:cluster_domain}
@@ -223,13 +164,3 @@ parameters:
           version: latest
         python-tornado:
           version: latest
-  openssh:
-    server:
-      password_auth: true
-      permit_root_login: true
-      user:
-        root:
-          enabled: true
-          user: ${linux:system:user:root}
-          public_keys:
-          - key: ${_param:ssh_public_key}

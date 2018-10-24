@@ -22,10 +22,12 @@ classes:
 - cluster.vlab.infra
 - cluster.vlab.openstack.dashboard
 - cluster.vlab.stacklight.proxy
-- cluster.vlab.openstack.networking.proxy
+- system.nginx.server.proxy.oss.devops_portal
+- system.nginx.server.proxy.oss.rundeck
+- cluster.vlab.openstack.networking.virtual
 parameters:
   _param:
-    keepalived_vip_interface: ens4
+    keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
@@ -35,7 +37,7 @@ parameters:
       key_file:  /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.key
       cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
       chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
-    cluster_vip_address: ${_param:openstack_proxy_proxy_address}
+    cluster_vip_address: ${_param:openstack_proxy_address}
   # wait for Gluster /srv/salt/pki mount before starting
   nginx:
     server:
