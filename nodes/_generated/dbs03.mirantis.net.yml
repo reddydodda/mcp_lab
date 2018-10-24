@@ -1,0 +1,17 @@
+classes:
+- service.galera.slave.cluster
+- cluster.vlab.openstack.database
+parameters:
+  _param:
+    deploy_address: 192.168.0.53
+    keepalived_vip_priority: 101
+    linux_system_codename: xenial
+    mysql_cluster_role: slave
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.53
+  linux:
+    system:
+      name: dbs03
+      domain: mirantis.net
+      cluster: default
+      environment: prd

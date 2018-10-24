@@ -1,0 +1,16 @@
+classes:
+- cluster.vlab.openstack.proxy
+parameters:
+  _param:
+    deploy_address: 192.168.0.81
+    keepalived_vip_priority: 102
+    linux_system_codename: xenial
+    proxy_address: 172.17.18.6
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.81
+  linux:
+    system:
+      name: prx01
+      domain: mirantis.net
+      cluster: default
+      environment: prd

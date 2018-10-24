@@ -1,0 +1,15 @@
+classes:
+- cluster.vlab.openstack.gateway
+parameters:
+  _param:
+    deploy_address: 192.168.0.226
+    linux_system_codename: xenial
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.226
+    tenant_address: 172.17.18.40
+  linux:
+    system:
+      name: gtw03
+      domain: mirantis.net
+      cluster: default
+      environment: prd

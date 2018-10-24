@@ -74,16 +74,16 @@ parameters:
       backup: true
 # FIXME: This WA should be removed, after qemu\kvm\stacklight\etc system
 # packages will be splitted from openstack repo. PROD-21270
-  linux:
-    system:
-      repo:
-        mcp_maas:
-          pin:
+#  linux:
+#    system:
+#      repo:
+#        mcp_maas:
+#          pin:
           # Explicity pin python3-django to Ubuntu-upstream repo, instead one
           # from openstack repo. PROD-19812
-          - pin: 'release o=Ubuntu'
-            priority: 1110
-            package: 'python3-django'
+#          - pin: 'release o=Ubuntu'
+#            priority: 1110
+#            package: 'python3-django'
   reclass:
     storage:
       data_source:
@@ -95,12 +95,18 @@ parameters:
           params:
             keepalived_vip_priority: 100
             linux_system_codename: xenial
+            tenant_address: ${_param:infra_kvm_node01_tenant_address}
+            proxy_address: ${_param:infra_kvm_node01_proxy_address}
+            backend_address: ${_param:infra_kvm_node01_backend_address}
         infra_kvm_node02:
           classes:
           - cluster.vlab.infra.glusterfs
           params:
             keepalived_vip_priority: 101
             linux_system_codename: xenial
+            tenant_address: ${_param:infra_kvm_node02_tenant_address}
+            proxy_address: ${_param:infra_kvm_node02_proxy_address}
+            backend_address: ${_param:infra_kvm_node02_backend_address}
         infra_kvm_node03:
           classes:
           - cluster.${_param:cluster_name}.infra.backup.server
@@ -108,6 +114,9 @@ parameters:
           params:
             keepalived_vip_priority: 102
             linux_system_codename: xenial
+            tenant_address: ${_param:infra_kvm_node03_tenant_address}
+            proxy_address: ${_param:infra_kvm_node03_proxy_address}
+            backend_address: ${_param:infra_kvm_node03_backend_address}
         stacklight_telemetry_node01:
           params:
             deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
@@ -182,10 +191,12 @@ parameters:
           params:
             linux_system_codename: xenial
             deploy_address: ${_param:openstack_proxy_node01_deploy_address}
+            proxy_address: ${_param:openstack_proxy_node01_proxy_address}
         openstack_proxy_node02:
           params:
             linux_system_codename: xenial
             deploy_address: ${_param:openstack_proxy_node02_deploy_address}
+            proxy_address: ${_param:openstack_proxy_node02_proxy_address}
  #       openstack_control_upgrade_node01:
  #         params:
  #           deploy_address: ${_param:openstack_upgrade_node01_deploy_address}
@@ -280,6 +291,17 @@ parameters:
             single_address: ${_param:openstack_compute_rack01_single_subnet}.105
             deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.105
             tenant_address: ${_param:openstack_compute_rack01_tenant_subnet}.105
+        openstack_compute_node005:
+          name: ${_param:openstack_compute_rack01_hostname}006
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.openstack.compute
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:openstack_compute_rack01_single_subnet}.106
+            deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.106
+            tenant_address: ${_param:openstack_compute_rack01_tenant_subnet}.106
         ceph_osd_node001:
           name: ${_param:ceph_osd_rack01_hostname}001
           domain: ${_param:cluster_domain}
@@ -316,3 +338,39 @@ parameters:
             single_address: ${_param:ceph_osd_rack01_single_subnet}.203
             deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.203
             backend_address: ${_param:ceph_osd_rack01_backend_subnet}.203
+        ceph_osd_node004:
+          name: ${_param:ceph_osd_rack01_hostname}004
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.ceph.osd
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            ceph_crush_parent: rack01
+            linux_system_codename: xenial
+            single_address: ${_param:ceph_osd_rack01_single_subnet}.204
+            deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.204
+            backend_address: ${_param:ceph_osd_rack01_backend_subnet}.204
+        ceph_osd_node005:
+          name: ${_param:ceph_osd_rack01_hostname}005
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.ceph.osd
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            ceph_crush_parent: rack01
+            linux_system_codename: xenial
+            single_address: ${_param:ceph_osd_rack01_single_subnet}.205
+            deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.205
+            backend_address: ${_param:ceph_osd_rack01_backend_subnet}.205
+        ceph_osd_node006:
+          name: ${_param:ceph_osd_rack01_hostname}006
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.ceph.osd
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            ceph_crush_parent: rack01
+            linux_system_codename: xenial
+            single_address: ${_param:ceph_osd_rack01_single_subnet}.206
+            deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.206
+            backend_address: ${_param:ceph_osd_rack01_backend_subnet}.206

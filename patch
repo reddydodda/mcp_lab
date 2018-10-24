@@ -1,0 +1,672 @@
+diff --git a/classes/cluster/vlab/infra/config.yml b/classes/cluster/vlab/infra/config.yml
+old mode 100755
+new mode 100644
+index 80136c8..a6936d3
+--- a/classes/cluster/vlab/infra/config.yml
++++ b/classes/cluster/vlab/infra/config.yml
+@@ -93,12 +93,14 @@ parameters:
+           params:
+             keepalived_vip_priority: 100
+             linux_system_codename: xenial
++            tenant_address: ${_param:infra_kvm_node01_tenant_address}
+         infra_kvm_node02:
+           classes:
+           - cluster.vlab.infra.glusterfs
+           params:
+             keepalived_vip_priority: 101
+             linux_system_codename: xenial
++            tenant_address: ${_param:infra_kvm_node02_tenant_address}
+         infra_kvm_node03:
+           classes:
+           - cluster.${_param:cluster_name}.infra.backup.server
+@@ -106,6 +108,7 @@ parameters:
+           params:
+             keepalived_vip_priority: 102
+             linux_system_codename: xenial
++            tenant_address: ${_param:infra_kvm_node03_tenant_address}
+         stacklight_telemetry_node01:
+           params:
+             deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
+diff --git a/classes/cluster/vlab/infra/init.yml b/classes/cluster/vlab/infra/init.yml
+index 394703c..67753ab 100644
+--- a/classes/cluster/vlab/infra/init.yml
++++ b/classes/cluster/vlab/infra/init.yml
+@@ -18,10 +18,41 @@ classes:
+ - service.grafana.collector
+ - cluster.vlab.stacklight
+ - cluster.vlab.cicd
+-#- cluster.vlab.infra.proxy
++- cluster.vlab.infra.ssh
++- cluster.vlab.infra.ssh_password
+ - cluster.vlab.infra.secrets
+ parameters:
+   _param:
++    ssh_private_key: |
++      -----BEGIN RSA PRIVATE KEY-----
++      MIIEpQIBAAKCAQEAwpUhUOq9ts/1gAsf/IDWRnQ8rkXRwUBZuHGLpMcrBsdF7qHn
++      2dQtjZwWCZf33Hb4A8J6prerlQIUnWkZWvTE2ipQSka0SyI/ksHotuIhGeviC+gQ
++      +WUGL1D2Lw49A8sU887YDXJV4Pd+e3gPJHMSsadSeaF59dYfF+LjOU/Vor1GUuna
++      p2UMD8VeZazbqDZJHm6a0Z/VXmt68WEQIA0bGoqoj5a2Hsb3yEq+ccmLWSG3HbxD
++      TckrFlIfQ8jaED0Thiz/T8EJ3j1mETx9nq/FiYzL1AzYOie2XsIJU/oGl3bNd0f1
++      b6MABQKLw4N+rtIb95cb33FcWBE8dssO7MXxIQIDAQABAoIBAQCE2+afpWhcBqqN
++      /wqcEiw8duln5OxPk2yvb3f1zrgmLLInOg1gwmtIIac6bbUjp2e4yXWNmCNj3sPM
++      pxJU9IPkorenv5cjJgNaZWRMWyJW3KS/lHjikIQkkpdFkec/S87GmhkTNVpF/Tcz
++      fsp4DMpa2vCJdCQeI1GfsZ+MZmJsdrdK5To+icpIoJRMSMXeOc3zVhQU1dMAZbkb
++      iJWJjjUlfrO+XqlmhzHfcoW9dnaryvx0ziLOwi07k4xAl07ajsEe9g04aDePWZQT
++      ROl4fIfWIZc0A6pSCgklOXudeLa2hC1gu8A3jplU0JE9oTJLM74YPV8jib0qvddF
++      aIYPJeoxAoGBAOR8Iv9eTCwqyj65WdAOzr3kds11QlAlKvks4I8/DPA3wY616UAB
++      JLgVGdseoRA2rdt+wh1uv6Ig6hzgoG1+reWps3u2omhBYr78SLaUtdbMC3KkT0hc
++      845DOsqIl0nv3Mw8KmcujYIDGXt/fLVP5OrcXoLoLOF0M3zgE1WSMaTPAoGBANoD
++      1PJI9ay8TNvo2H2ibCpUjwVi5i7NVAp9k2BZUxsBnFszNS+asJg4zoEP8pDz5ctf
++      8MpsPzhgBFoN07wUK5dSiVNeO04FYV9QTpNnw+Eh0bswLoaEjNvLa5jTL+lCaotr
++      n1i7s50QYoqW5bhX0iijs9pLLVFUnrE42ZJ0EmcPAoGBAKYhrMDJq9Ehe9SHqMoj
++      OifQiqFxdToZDFoJS25chefUYqSFmIe1TSGcFiTA7JOBboB+dl44PJaCIDfHDF8R
++      ERhAgASgEw6DHG2JusUm8+CulFRTLGKNU3pJX+IL1xUnlv/Zb2t+6d1yq4CkfeTH
++      pscuXHoKnzd+6kEOHIDHv9j5AoGBAL0GEX24UHniEWmh6wKS7uGMyyxKYXU2xaUK
++      19rz16BUtzJDpduObYqtxi4Um6WeMiExH98CF5ZTebJyxqANhPYAs9w6mYS+GXzA
++      bkBT+XubDPMVhWFQT6jKKJIqmSHPWf1j5JbUt5h4elfbGXXJfweJWAjuoW4gxi62
++      Mb5PMR11AoGAI5zUzOxvSzMpQrUmcoV6/VSXWvxIG8eq+RnLb/iWSHdIFzr4Kp1L
++      z7XLE+HmIS7txOeshMKfHv0j7YrrR6f/3C2NTBv5tF3/9rIvl1RJp/4KEsQgVCu7
++      9NEX2BvIy6huRcOwdGN9xST38kQIVEs9U+w9MKJjbz7Bfpvji0G4wR8=
++      -----END RSA PRIVATE KEY-----
++    ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDClSFQ6r22z/WACx/8gNZGdDyuRdHBQFm4cYukxysGx0XuoefZ1C2NnBYJl/fcdvgDwnqmt6uVAhSdaRla9MTaKlBKRrRLIj+Swei24iEZ6+IL6BD5ZQYvUPYvDj0DyxTzztgNclXg9357eA8kcxKxp1J5oXn11h8X4uM5T9WivUZS6dqnZQwPxV5lrNuoNkkebprRn9Vea3rxYRAgDRsaiqiPlrYexvfISr5xyYtZIbcdvENNySsWUh9DyNoQPROGLP9PwQnePWYRPH2er8WJjMvUDNg6J7ZewglT+gaXds13R/VvowAFAovDg36u0hv3lxvfcVxYETx2yw7sxfEh
++    banner_company_name: Mirantis
+     # Don't set it "false" before you configure sudo policies and enable power users.
+     linux_system_user_sudo: true
+ 
+@@ -29,8 +60,8 @@ parameters:
+     # TODO: Revert openstack repo part after refactoring here: https://mirantis.jira.com/browse/PROD-17500
+     openstack_version: pike
+     jenkins_pipelines_branch: '${_param:apt_mk_version}' 
+-    salt_control_trusty_image: http://images.mirantis.com//ubuntu-14-04-x64-mcp${_param:apt_mk_version}.qcow2
+-    salt_control_xenial_image: http://images.mirantis.com//ubuntu-16-04-x64-mcp${_param:apt_mk_version}.qcow2 
++    salt_control_trusty_image: http://images.mirantis.com/ubuntu-14-04-x64-mcp${_param:apt_mk_version}.qcow2
++    salt_control_xenial_image: salt://images/ubuntu-16-04-x64-mcp${_param:apt_mk_version}.qcow2
+     infra_config_hostname: cfg01
+     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
+     # infra service addresses
+@@ -46,11 +77,18 @@ parameters:
+     dns_server01: 8.8.8.8
+     dns_server02: 8.8.4.4
+     control_vlan: 101
+-    tenant_vlan: 102
++    proxy_vlan: 103
++    tenant_vlan: 104
+ 
+     deploy_network_netmask: 255.255.255.0
+     deploy_network_gateway: 192.168.0.1
+ 
++    proxy_network_netmask: 255.255.255.224
++    proxy_network_gateway: 172.17.18.1
++    
++    tenant_network_netmask: 255.255.255.224
++    tenant_network_gateway: 172.17.18.33
++
+     # MaaS parameters
+     infra_maas_node01_deploy_address: ${_param:infra_config_deploy_address}
+     infra_maas_node01_hostname: ${_param:infra_config_hostname}
+@@ -61,6 +99,9 @@ parameters:
+     infra_kvm_node01_deploy_address: 192.168.0.240
+     infra_kvm_node02_deploy_address: 192.168.0.241
+     infra_kvm_node03_deploy_address: 192.168.0.242
++    infra_kvm_node01_tenant_address: 192.168.50.3
++    infra_kvm_node02_tenant_address: 192.168.50.4
++    infra_kvm_node03_tenant_address: 192.168.50.5
+     infra_kvm_node01_hostname: kvm01
+     infra_kvm_node02_hostname: kvm02
+     infra_kvm_node03_hostname: kvm03
+@@ -107,7 +148,7 @@ parameters:
+       name_servers:
+         - ${_param:dns_server01}
+         - ${_param:dns_server02}
+-
++  
+   salt:
+     minion:
+       trusted_ca_minions:
+@@ -147,6 +188,11 @@ parameters:
+           names:
+           - ${_param:infra_kvm_node03_hostname}
+           - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
++        cmp001:
++          address: 192.168.2.101
++          names:
++          - cmp001
++          - cmp001.${_param:cluster_domain}
+     system:
+       name: ${_param:infra_config_hostname}
+       domain: ${_param:cluster_domain}
+@@ -162,3 +208,13 @@ parameters:
+           version: latest
+         python-tornado:
+           version: latest
++  openssh:
++    server:
++      password_auth: true
++      permit_root_login: true
++      user:
++        root:
++          enabled: true
++          user: ${linux:system:user:root}
++          public_keys:
++          - key: ${_param:ssh_public_key}
+diff --git a/classes/cluster/vlab/infra/kvm.yml b/classes/cluster/vlab/infra/kvm.yml
+index db277e4..b00bd4e 100644
+--- a/classes/cluster/vlab/infra/kvm.yml
++++ b/classes/cluster/vlab/infra/kvm.yml
+@@ -32,10 +32,13 @@ parameters:
+     cluster_node02_address: ${_param:infra_kvm_node02_address}
+     cluster_node03_address: ${_param:infra_kvm_node03_address}
+     deploy_nic: eth0
+-    primary_first_nic: eth1
+-    primary_second_nic: eth2
++    primary_first_nic: ten1
++    primary_second_nic: ten2
+   salt:
+     control:
++      size:
++        openstack.gateway:
++          net_profile: gateway
+       cluster:
+         internal:
+           node:
+@@ -68,6 +71,20 @@ parameters:
+           bridge: br-mgm
+         eth0:
+           bridge: br-ctl
++      gateway:
++        eth2:
++          bridge: br-mgm
++        eth1:
++          bridge: br-ctl
++        eth0:
++          bridge: br-ext
++      proxy:
++        eth2:
++          bridge: br-mgm
++        eth1:
++          bridge: br-ctl
++        eth0:
++          bridge: br-proxy
+   #   system:
+   #     package:
+   #       linux-image-4.8.0-39-generic:
+diff --git a/classes/cluster/vlab/infra/maas.yml b/classes/cluster/vlab/infra/maas.yml
+index d556011..4855fbc 100644
+--- a/classes/cluster/vlab/infra/maas.yml
++++ b/classes/cluster/vlab/infra/maas.yml
+@@ -4,11 +4,114 @@ classes:
+ - system.maas.region.single
+ - system.maas.region.boot_sources.maas_ephemeral_v3.bss_xenial
+ - system.maas.region.boot_sources.maas_ephemeral_v3
++
++disk_layouts:
++  software_raid: &software_raid
++    sda:
++      type: physical
++    sdb:
++      type: physical
++    md0:
++      type: raid
++      level: 1
++      devices:
++        - sda
++        - sdb
++  double_disk: &double_disk
++    sda:
++      type: physical
++      partition_schema:
++        part1:
++          size: 5G
++          type: fat32
++          mount: "/boot/efi/"
++        part2:
++          size: 750G
++    sdb:
++      type: physical
++      partition_schema:
++        part1:
++          size: 750G
++  single_disk: &single_disk
++    sda:
++      type: physical
++      partition_schema:
++        part1:
++          size: 5G
++          type: fat32
++          mount: "/boot/efi/"
++        part2:
++          size: 750G
++  volume_root: &volume_root
++    root:
++      size: 300G
++      type: ext4
++      mount: '/'
++  volume_glusterfs: &volume_glusterfs
++    glusterfs:
++      size: 300G
++      type: ext4
++      mount: '/srv/glusterfs/'
++  volume_images: &volume_images_small
++    images:
++      size: 700G
++      type: ext4
++      mount: '/var/lib/libvirt/images/'
++  volume_images_large: &volume_images_large
++    images:
++      size: 150G
++      type: ext4
++      mount: '/var/lib/libvirt/images/'
++  lvm_kvm: &lvm_kvm
++    type: lvm
++    devices:
++      - md0
++    volume:
++      <<:
++      - *volume_root
++      - *volume_glusterfs
++      - *volume_images_small
++  new_lvm_kvm: &new_lvm_kvm
++    vg0:
++      type: lvm
++      partitions:
++        - sda-part2
++      volume:
++        <<:
++        - *volume_root
++        - *volume_glusterfs
++    vg1:
++      type: lvm
++      partitions:
++        - sdb-part1
++      volume:
++        <<:
++        - *volume_images_small
++  lvm_kvm_extra: &lvm_kvm_extra
++    type: lvm
++    devices:
++      - md0
++    volume:
++      <<:
++      - *volume_root
++      - *volume_images_large
++  lvm_compute: &lvm_compute
++    vg0:
++      type: lvm
++      partitions:
++        - sda-part2
++      volume:
++        root:
++          size: 700G
++          type: ext4
++          mount: '/'
++
+ parameters:
+   _param:
+     maas_region_port: 5240
+     maas_name: ${_param:infra_config_hostname}
+     maas_gateway: 192.168.0.1
++
+   maas:
+     region:
+       commissioning_scripts:
+@@ -43,22 +146,72 @@ parameters:
+               # be fixed to exactly use FQDN, not only hostname
+               primary_rack: "${linux:network:hostname}"
+       machines:
+-        <<LOAD_FROM_FILE>>
++        kvm01: #cz8098
++          interface:
++            mac: 0c:c4:7a:88:fe:6e
++            subnet: deploy_network
++            mode: static
++            ip: ${_param:infra_kvm_node01_deploy_address}
++            gateway: ${_param:deploy_network_gateway}
++          power_parameters:
++            power_address: 172.19.16.72
++            power_password: password1
++            power_type: ipmi
++            power_user: engineer
++          disk_layout: &disk_layout_kvm
++            type: flat
++            bootable_device: sda
++            disk:
++              <<:
++              - *double_disk
++              - *new_lvm_kvm
++        kvm02: #cz8101
++          interface:
++            mac: 0c:c4:7a:89:00:b2
++            subnet: deploy_network
++            mode: static
++            ip: ${_param:infra_kvm_node02_deploy_address}
++            gateway: ${_param:deploy_network_gateway}
++          power_parameters:
++            power_address: 172.19.16.73
++            power_password: password1
++            power_type: ipmi
++            power_user: engineer
++          disk_layout: *disk_layout_kvm
++        kvm03: #cz8102
++          interface:
++            mac: 0c:c4:7a:89:00:c8
++            subnet: deploy_network
++            mode: static
++            ip: ${_param:infra_kvm_node03_deploy_address}
++            gateway: ${_param:deploy_network_gateway}
++          power_parameters:
++            power_address: 172.19.16.74
++            power_password: password1
++            power_type: ipmi
++            power_user: engineer
++          disk_layout: *disk_layout_kvm
++
++        cmp001: # cz7306
++          interface:
++            mac: 0c:c4:7a:89:00:28
++            subnet: deploy_network
++            mode: static
++            ip: ${_param:openstack_compute_node001_deploy_address}
++            gateway: ${_param:deploy_network_gateway}
++          power_parameters:
++            power_address: 172.19.16.96
++            power_password: password1
++            power_type: ipmi
++            power_user: engineer
++          disk_layout: &disk_layout_compute
++            type: flat
++            bootable_device: sda
++            disk:
++              <<:
++              - *single_disk
++              - *lvm_compute
+     cluster:
+       region:
+         host: ${_param:deploy_address}
+         port: ${_param:maas_region_port}
+-# linux:
+-#   network:
+-#     interface:
+-#       primary_interface:
+-#         enabled: true
+-#         name: ens2
+-#         type: eth
+-#         proto: static
+-#         netmask: ${_param:deploy_network_netmask}
+-#         address: ${_param:single_address}
+-#         gateway: ${_param:deploy_network_gateway}
+-#         name_servers:
+-#         - ${_param:dns_server01}
+-#         - ${_param:dns_server02}
+diff --git a/classes/cluster/vlab/infra/networking/kvm.yml b/classes/cluster/vlab/infra/networking/kvm.yml
+index 6be5c95..0137190 100644
+--- a/classes/cluster/vlab/infra/networking/kvm.yml
++++ b/classes/cluster/vlab/infra/networking/kvm.yml
+@@ -5,11 +5,11 @@ parameters:
+     network:
+       bridge: linux
+       interface:
+-        eth0:
+-          enabled: true
+-          type: eth
+-          proto: manual
+-          name: ${_param:deploy_nic}
++#        eth0:
++#          enabled: true
++#          type: eth
++#          proto: manual
++#          name: ${_param:deploy_nic}
+         eth1:
+           enabled: true
+           type: slave
+@@ -33,7 +33,7 @@ parameters:
+           - ${_param:dns_server01}
+           - ${_param:dns_server02}
+           use_interfaces:
+-          - ${_param:deploy_nic}
++          - bond0
+         bond0:
+           enabled: true
+           proto: manual
+@@ -50,6 +50,13 @@ parameters:
+           type: vlan
+           use_interfaces:
+           - bond0
++        bond0.2:
++          name: bond0.${_param:tenant_vlan}
++          enabled: true
++          proto: manual
++          type: vlan
++          use_interfaces:
++          - bond0
+         br-ctl:
+           enabled: true
+           type: bridge
+@@ -58,3 +65,11 @@ parameters:
+           netmask: ${_param:control_network_netmask}
+           use_interfaces:
+           - bond0.${_param:control_vlan}
++        br-ext:
++          enabled: true
++          type: bridge
++          proto: static
++          address: ${_param:tenant_address}
++          netmask: ${_param:tenant_network_netmask}
++          use_interfaces:
++          - bond0.${_param:tenant_vlan}
+diff --git a/classes/cluster/vlab/openstack/compute/init.yml b/classes/cluster/vlab/openstack/compute/init.yml
+index 307fddc..a5cb1f5 100644
+--- a/classes/cluster/vlab/openstack/compute/init.yml
++++ b/classes/cluster/vlab/openstack/compute/init.yml
+@@ -22,8 +22,8 @@ parameters:
+     cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
+     cluster_node03_address: ${_param:openstack_control_node03_address}
+     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
+-    primary_first_nic: eth1
+-    primary_second_nic: eth2
++    primary_first_nic: ten1
++    primary_second_nic: ten2
+   nova:
+     compute:
+       reserved_host_memory_mb: 1100
+diff --git a/classes/cluster/vlab/openstack/control.yml b/classes/cluster/vlab/openstack/control.yml
+index fdd1472..5a86491 100644
+--- a/classes/cluster/vlab/openstack/control.yml
++++ b/classes/cluster/vlab/openstack/control.yml
+@@ -23,6 +23,7 @@ classes:
+ - system.glusterfs.client.cluster
+ - system.glusterfs.client.volume.keystone
+ - system.glusterfs.client.volume.glance
++- system.cinder.volume.backend.nfs
+ - cluster.vlab.infra
+ - cluster.vlab.openstack.networking.virtual
+ parameters:
+diff --git a/classes/cluster/vlab/openstack/control_init.yml b/classes/cluster/vlab/openstack/control_init.yml
+index 1a70728..8faf572 100644
+--- a/classes/cluster/vlab/openstack/control_init.yml
++++ b/classes/cluster/vlab/openstack/control_init.yml
+@@ -17,6 +17,93 @@ parameters:
+     keystone_public_path: "/"
+     keystone_internal_path: "/"
+     keystone_admin_path: "/"
++  nova:
++    client:
++      enabled: true
++      server:
++        admin_identity:
++          flavor:
++            small:
++              flavor_id: auto
++              ram: 512
++              disk: 1
++              vcpus: 1
++            medium:
++              flavor_id: auto
++              ram: 1024
++              disk: 2
++              vcpus: 2
++            large:
++              flavor_id: auto
++              ram: 4096
++              disk: 20
++              vcpus: 2
++  glance:
++    client:
++      enabled: true
++      identity:
++        admin_identity:
++          image:
++            cirros:
++              visibility: public
++              protected: false
++              location: http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
++  neutron:
++    enabled: true
++    client:
++      enabled: true
++      server:
++        admin_identity:
++          endpoint_type: internalURL
++          security_group:
++            default:
++              tenant: admin
++              rules:
++                - direction: ingress
++                  ethertype: IPv4
++                  protocol: TCP
++                  port_range_min: 22
++                  port_range_max: 22
++                  remote_ip_prefix: 0.0.0.0/0
++                - direction: ingress
++                  ethertype: IPv4
++                  protocol: ICMP
++                  remote_ip_prefix: 0.0.0.0/0
++          router:
++            router:
++              gateway_network: external
++              tenant: admin
++              interfaces:
++              - internal
++              admin_state_up: True
++          network:
++            external:
++              tenant: admin
++              shared: True
++              admin_state_up: True
++              router_external: True
++              provider_physical_network: physnet1
++              provider_network_type: flat
++              subnet:
++                external:
++                  cidr: 172.17.18.32/27
++                  enable_dhcp: True
++                  allocation_pools:
++                  - start: 172.17.18.40
++                    end: 172.17.18.62
++                  gateway_ip: 172.17.18.33
++                  dns_nameservers:
++                  - 8.8.8.8
++            internal:
++              tenant: admin
++              admin_state_up: True
++              subnet:
++                internal:
++                  cidr: 10.0.0.0/24
++                  enable_dhcp: True
++                  dns_nameservers:
++                  - 8.8.8.8
++
+   #TODO Need to research, implement and test moving keystone fernet repository from GlusterFS and use secured rsync to ship rotated keys across ctl nodes. PROD-18539
+   linux:
+     system:
+diff --git a/classes/cluster/vlab/openstack/networking/compute.yml b/classes/cluster/vlab/openstack/networking/compute.yml
+index b4570f6..f43d110 100644
+--- a/classes/cluster/vlab/openstack/networking/compute.yml
++++ b/classes/cluster/vlab/openstack/networking/compute.yml
+@@ -4,7 +4,7 @@ parameters:
+   linux:
+     network:
+       interface:
+-        eth0: ${_param:linux_deploy_interface}
++#        eth0: ${_param:linux_deploy_interface}
+         eth1:
+           mtu: 9000
+           enabled: true
+@@ -51,4 +51,22 @@ parameters:
+           netmask: ${_param:tenant_network_netmask}
+           use_interfaces:
+           - bond0.${_param:tenant_vlan}
++        br-ctl:
++          enabled: true
++          type: bridge
++          address: ${_param:single_address}
++          netmask: ${_param:control_network_netmask}
++          use_interfaces:
++          - bond0.${_param:control_vlan}
++        br-mgmt:
++          enabled: true
++          type: bridge
++          address: ${_param:deploy_address}
++          netmask: ${_param:deploy_network_netmask}
++          gateway: ${_param:deploy_network_gateway}
++          use_interfaces:
++          - bond0
++          name_servers:
++          - ${_param:dns_server01}
++          - ${_param:dns_server02}
+       bridge: openvswitch
+diff --git a/classes/cluster/vlab/openstack/networking/gateway.yml b/classes/cluster/vlab/openstack/networking/gateway.yml
+index 2e178cf..0dbd776 100644
+--- a/classes/cluster/vlab/openstack/networking/gateway.yml
++++ b/classes/cluster/vlab/openstack/networking/gateway.yml
+@@ -6,46 +6,21 @@ parameters:
+     network:
+       bridge: openvswitch
+       interface:
+-        eth0: ${_param:linux_deploy_interface}
+-        eth1:
+-          enabled: true
+-          type: slave
+-          proto: manual
+-          name: ${_param:primary_first_nic}
+-          master: bond0
+-        eth2:
+-          enabled: true
+-          type: slave
+-          proto: manual
+-          name: ${_param:primary_second_nic}
+-          master: bond0
+-        bond0:
++        ens2: ${_param:linux_deploy_interface}
++        ens3: ${_param:linux_single_interface}
++        ens4:
+           enabled: true
+           proto: manual
+           ovs_bridge: br-floating
+           ovs_type: OVSPort
+-          type: bond
+-          use_interfaces:
+-          - ${_param:primary_first_nic}
+-          - ${_param:primary_second_nic}
+-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
+-          mode: active-backup
++          type: eth
+         br-floating:
+           enabled: true
+           type: ovs_bridge
+-        br-ctl:
+-          enabled: true
+-          type: ovs_port
+-          bridge: br-floating
+-          proto: static
+-          ovs_options: tag=${_param:control_vlan}
+-          address: ${_param:single_address}
+-          netmask: ${_param:control_network_netmask}
+         br-mesh:
+           enabled: true
+           type: ovs_port
+           bridge: br-floating
+           proto: static
+-          ovs_options: tag=${_param:tenant_vlan}
+           address: ${_param:tenant_address}
+           netmask: ${_param:tenant_network_netmask}

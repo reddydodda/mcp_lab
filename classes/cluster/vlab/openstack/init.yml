@@ -86,9 +86,12 @@ parameters:
     openstack_notification_topics: "notifications,${_param:stacklight_notification_topic}"
 
     # openstack service addresses
-    openstack_proxy_address: 192.168.2.80
+    openstack_proxy_address: 172.17.18.5
     openstack_proxy_node01_address: 192.168.2.81
     openstack_proxy_node02_address: 192.168.2.82
+    openstack_proxy_proxy_address: 172.17.18.5
+    openstack_proxy_node01_proxy_address: 172.17.18.6
+    openstack_proxy_node02_proxy_address: 192.168.2.7
     openstack_control_address: 192.168.2.10
     openstack_control_node01_address: 192.168.2.11
     openstack_control_node02_address: 192.168.2.12

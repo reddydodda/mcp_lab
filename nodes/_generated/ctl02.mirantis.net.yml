@@ -1,0 +1,18 @@
+classes:
+- cluster.vlab.openstack.control
+parameters:
+  _param:
+    deploy_address: 192.168.0.12
+    keepalived_vip_priority: 102
+    linux_system_codename: xenial
+    opencontrail_database_id: 2
+    openstack_node_role: secondary
+    rabbitmq_cluster_role: slave
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.12
+  linux:
+    system:
+      name: ctl02
+      domain: mirantis.net
+      cluster: default
+      environment: prd

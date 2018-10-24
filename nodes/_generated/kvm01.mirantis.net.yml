@@ -1,0 +1,21 @@
+classes:
+- cluster.vlab.infra.kvm
+- cluster.vlab.infra.glusterfs
+parameters:
+  _param:
+    backend_address: 192.168.0.240
+    deploy_address: 192.168.0.240
+    keepalived_vip_priority: 100
+    linux_system_codename: xenial
+    proxy_address: 172.17.18.6
+    public_address: 192.168.2.240
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.240
+    storage_address: 192.168.2.240
+    tenant_address: 172.17.18.5
+  linux:
+    system:
+      name: kvm01
+      domain: mirantis.net
+      cluster: default
+      environment: prd

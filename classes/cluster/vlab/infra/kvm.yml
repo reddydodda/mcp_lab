@@ -39,6 +39,16 @@ parameters:
     primary_second_nic: ten2
   salt:
     control:
+      size:
+        openstack.gateway:
+          net_profile: gateway
+        openstack.proxy:
+          net_profile: proxy
+        ceph.osd:
+          cpu: 2
+          ram: 4096
+          disk_profile: osd
+          net_profile: osd
       cluster:
         internal:
           node:
@@ -64,13 +74,78 @@ parameters:
               image: ${_param:salt_control_xenial_image}
             prx02:
               image: ${_param:salt_control_xenial_image}
+            osd001:
+              image: ${_param:salt_control_xenial_image}
+              name: osd001
+              provider: ${_param:infra_kvm_node01_hostname}.${_param:cluster_domain}
+              size: ceph.osd
+            osd002:
+              image: ${_param:salt_control_xenial_image}
+              name: osd002
+              provider: ${_param:infra_kvm_node02_hostname}.${_param:cluster_domain}
+              size: ceph.osd
+            osd003:
+              image: ${_param:salt_control_xenial_image}
+              name: osd003
+              provider: ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+              size: ceph.osd
+            osd004:
+              image: ${_param:salt_control_xenial_image}
+              name: osd004
+              provider: ${_param:infra_kvm_node01_hostname}.${_param:cluster_domain}
+              size: ceph.osd
+            osd005:
+              image: ${_param:salt_control_xenial_image}
+              name: osd005
+              provider: ${_param:infra_kvm_node02_hostname}.${_param:cluster_domain}
+              size: ceph.osd
+            osd006:
+              image: ${_param:salt_control_xenial_image}
+              name: osd006
+              provider: ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+              size: ceph.osd
   virt:
+    disk:
+      osd:
+      - system:
+          size: 50000        
+      - osd1:
+          size: 10000
+      - osd2:
+          size: 10000        
+      - osd3:
+          size: 10000        
+      - osd4:
+          size: 10000        
+      - osd5:
+          size: 10000        
     nic:
       default:
         eth1:
           bridge: br-mgm
         eth0:
           bridge: br-ctl
+      gateway:
+        eth2:
+          bridge: br-mgm
+        eth1:
+          bridge: br-ctl
+        eth0:
+          bridge: br-ext
+      proxy:
+        eth2:
+          bridge: br-mgm
+        eth1:
+          bridge: br-ctl
+        eth0:
+          bridge: br-prx
+      osd:
+        eth2:
+          bridge: br-mgm
+        eth1:
+          bridge: br-ctl
+        eth0:
+          bridge: br-dat
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:

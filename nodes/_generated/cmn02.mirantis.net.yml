@@ -1,0 +1,15 @@
+classes:
+- cluster.vlab.ceph.mon
+parameters:
+  _param:
+    deploy_address: 192.168.0.67
+    keepalived_vip_priority: 102
+    linux_system_codename: xenial
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.67
+  linux:
+    system:
+      name: cmn02
+      domain: mirantis.net
+      cluster: default
+      environment: prd

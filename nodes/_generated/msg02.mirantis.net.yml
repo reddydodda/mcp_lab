@@ -1,0 +1,16 @@
+classes:
+- cluster.vlab.openstack.message_queue
+parameters:
+  _param:
+    deploy_address: 192.168.0.42
+    keepalived_vip_priority: 102
+    linux_system_codename: xenial
+    rabbitmq_cluster_role: slave
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.42
+  linux:
+    system:
+      name: msg02
+      domain: mirantis.net
+      cluster: default
+      environment: prd

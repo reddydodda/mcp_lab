@@ -1,0 +1,16 @@
+classes:
+- system.docker.swarm.manager
+- cluster.vlab.stacklight.server
+parameters:
+  _param:
+    deploy_address: 192.168.0.72
+    keepalived_vip_priority: 102
+    linux_system_codename: xenial
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.72
+  linux:
+    system:
+      name: mon02
+      domain: mirantis.net
+      cluster: default
+      environment: prd

@@ -7,11 +7,17 @@ parameters:
   _param:
     ceph_osd_primary_first_nic: eth1
     ceph_osd_primary_second_nic: eth2
+    linux_backend_interface:
+      enabled: true
+      type: eth
+      proto: static
+      address: ${_param:backend_address}
+      netmask: ${_param:backend_network_netmask}
   ceph:
     osd:
       enabled: true
       crush_parent: ${_param:ceph_crush_parent}
-      bluestore_block_db_size: 21474836480
+      bluestore_block_db_size: 1000000000
       backend:
         bluestore:
           disks:

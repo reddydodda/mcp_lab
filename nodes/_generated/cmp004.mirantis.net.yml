@@ -1,0 +1,15 @@
+classes:
+- cluster.vlab.openstack.compute
+parameters:
+  _param:
+    deploy_address: 192.168.0.104
+    linux_system_codename: xenial
+    salt_master_host: 192.168.0.15
+    single_address: 192.168.2.104
+    tenant_address: 172.17.18.104
+  linux:
+    system:
+      name: cmp004
+      domain: mirantis.net
+      cluster: default
+      environment: prd

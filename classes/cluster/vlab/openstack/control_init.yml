@@ -27,3 +27,89 @@ parameters:
       job:
         keystone_job_rotate:
           enabled: False
+#  nova:
+#    client:
+#      enabled: true
+#      server:
+#        admin_identity:
+#          flavor:
+#            small:
+#              flavor_id: auto
+#              ram: 512
+#              disk: 1
+#              vcpus: 1
+#            medium:
+#              flavor_id: auto
+#              ram: 1024
+#              disk: 2
+#              vcpus: 2
+##            large:
+#              flavor_id: auto
+#              ram: 4096
+#              disk: 20
+#              vcpus: 2
+#  glance:
+#    client:
+#      enabled: true
+#      identity:
+#        admin_identity:
+#          image:
+#            cirros:
+#              visibility: public
+#              protected: false
+#              location: http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img
+#  neutron:
+#    enabled: true
+##    client:
+#      enabled: true
+#      server:
+#        admin_identity:
+#          endpoint_type: internalURL
+#          security_group:
+#            default:
+#              tenant: admin
+#              rules:
+#                - direction: ingress
+#                  ethertype: IPv4
+#                  protocol: TCP
+#                  port_range_min: 22
+#                  port_range_max: 22
+#                  remote_ip_prefix: 0.0.0.0/0
+#                - direction: ingress
+#                  ethertype: IPv4
+#                  protocol: ICMP
+#                  remote_ip_prefix: 0.0.0.0/0
+#          router:
+#            router:
+#              gateway_network: external
+#              tenant: admin
+#              interfaces:
+#              - internal
+#              admin_state_up: True
+#          network:
+#            external:
+#              tenant: admin
+#              shared: True
+#              admin_state_up: True
+#              router_external: True
+#              provider_physical_network: physnet1
+#              provider_network_type: flat
+#              subnet:
+#                external:
+#                  cidr: 172.17.18.32/27
+#                  enable_dhcp: True
+#                  allocation_pools:
+#                  - start: 172.17.18.42
+#                    end: 172.17.18.62
+#                  gateway_ip: 172.17.18.33
+#                  dns_nameservers:
+#                  - 8.8.8.8
+#            internal:
+#              tenant: admin
+#              admin_state_up: True
+#              subnet:
+#                internal:
+#                  cidr: 10.0.0.0/24
+#                  enable_dhcp: True
+#                  dns_nameservers:
+#                  - 8.8.8.8

@@ -1,14 +1,116 @@
-
 classes:
 - system.linux.system.repo.mcp.apt_mirantis.maas
 - system.maas.region.single
 - system.maas.region.boot_sources.maas_ephemeral_v3.bss_xenial
 - system.maas.region.boot_sources.maas_ephemeral_v3
+
+disk_layouts:
+  software_raid: &software_raid
+    sda:
+      type: physical
+    sdb:
+      type: physical
+    md0:
+      type: raid
+      level: 1
+      devices:
+        - sda
+        - sdb
+  double_disk: &double_disk
+    sda:
+      type: physical
+      partition_schema:
+        part1:
+          size: 5G
+          type: fat32
+          mount: "/boot/efi/"
+        part2:
+          size: 750G
+    sdb:
+      type: physical
+      partition_schema:
+        part1:
+          size: 750G
+  single_disk: &single_disk
+    sda:
+      type: physical
+      partition_schema:
+        part1:
+          size: 5G
+          type: fat32
+          mount: "/boot/efi/"
+        part2:
+          size: 750G
+  volume_root: &volume_root
+    root:
+      size: 300G
+      type: ext4
+      mount: '/'
+  volume_glusterfs: &volume_glusterfs
+    glusterfs:
+      size: 300G
+      type: ext4
+      mount: '/srv/glusterfs/'
+  volume_images: &volume_images_small
+    images:
+      size: 700G
+      type: ext4
+      mount: '/var/lib/libvirt/images/'
+  volume_images_large: &volume_images_large
+    images:
+      size: 150G
+      type: ext4
+      mount: '/var/lib/libvirt/images/'
+  lvm_kvm: &lvm_kvm
+    type: lvm
+    devices:
+      - md0
+    volume:
+      <<:
+      - *volume_root
+      - *volume_glusterfs
+      - *volume_images_small
+  new_lvm_kvm: &new_lvm_kvm
+    vg0:
+      type: lvm
+      partitions:
+        - sda-part2
+      volume:
+        <<:
+        - *volume_root
+        - *volume_glusterfs
+    vg1:
+      type: lvm
+      partitions:
+        - sdb-part1
+      volume:
+        <<:
+        - *volume_images_small
+  lvm_kvm_extra: &lvm_kvm_extra
+    type: lvm
+    devices:
+      - md0
+    volume:
+      <<:
+      - *volume_root
+      - *volume_images_large
+  lvm_compute: &lvm_compute
+    vg0:
+      type: lvm
+      partitions:
+        - sda-part2
+      volume:
+        root:
+          size: 700G
+          type: ext4
+          mount: '/'
+
 parameters:
   _param:
     maas_region_port: 5240
     maas_name: ${_param:infra_config_hostname}
     maas_gateway: 192.168.0.1
+
   maas:
     region:
       commissioning_scripts:
@@ -27,7 +129,7 @@ parameters:
           ipranges:
             1:
               end: 192.168.0.200
-              start: 192.168.0.170
+              start: 192.168.0.150
               type: dynamic
               subnet: ${maas:region:subnets:deploy_network:name}
       fabrics:
@@ -43,22 +145,72 @@ parameters:
               # be fixed to exactly use FQDN, not only hostname
               primary_rack: "${linux:network:hostname}"
       machines:
-        <<LOAD_FROM_FILE>>
+        kvm01: #cz8098
+          interface:
+            mac: 0c:c4:7a:88:fe:6e
+            subnet: deploy_network
+            mode: static
+            ip: ${_param:infra_kvm_node01_deploy_address}
+            gateway: ${_param:deploy_network_gateway}
+          power_parameters:
+            power_address: 172.19.16.72
+            power_password: password1
+            power_type: ipmi
+            power_user: engineer
+          disk_layout: &disk_layout_kvm
+            type: flat
+            bootable_device: sda
+            disk:
+              <<:
+              - *double_disk
+              - *new_lvm_kvm
+        kvm02: #cz8101
+          interface:
+            mac: 0c:c4:7a:89:00:b2
+            subnet: deploy_network
+            mode: static
+            ip: ${_param:infra_kvm_node02_deploy_address}
+            gateway: ${_param:deploy_network_gateway}
+          power_parameters:
+            power_address: 172.19.16.73
+            power_password: password1
+            power_type: ipmi
+            power_user: engineer
+          disk_layout: *disk_layout_kvm
+        kvm03: #cz8102
+          interface:
+            mac: 0c:c4:7a:89:00:c8
+            subnet: deploy_network
+            mode: static
+            ip: ${_param:infra_kvm_node03_deploy_address}
+            gateway: ${_param:deploy_network_gateway}
+          power_parameters:
+            power_address: 172.19.16.74
+            power_password: password1
+            power_type: ipmi
+            power_user: engineer
+          disk_layout: *disk_layout_kvm
+
+        cmp001: # cz7306
+          interface:
+            mac: 0c:c4:7a:89:00:28
+            subnet: deploy_network
+            mode: static
+            ip: ${_param:openstack_compute_node001_deploy_address}
+            gateway: ${_param:deploy_network_gateway}
+          power_parameters:
+            power_address: 172.19.16.96
+            power_password: password1
+            power_type: ipmi
+            power_user: engineer
+          disk_layout: &disk_layout_compute
+            type: flat
+            bootable_device: sda
+            disk:
+              <<:
+              - *single_disk
+              - *lvm_compute
     cluster:
       region:
         host: ${_param:deploy_address}
         port: ${_param:maas_region_port}
-# linux:
-#   network:
-#     interface:
-#       primary_interface:
-#         enabled: true
-#         name: ens2
-#         type: eth
-#         proto: static
-#         netmask: ${_param:deploy_network_netmask}
-#         address: ${_param:single_address}
-#         gateway: ${_param:deploy_network_gateway}
-#         name_servers:
-#         - ${_param:dns_server01}
-#         - ${_param:dns_server02}
