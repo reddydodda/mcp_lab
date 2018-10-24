@@ -55,7 +55,7 @@ parameters:
     keepalived_vip_interface: ens3
     cluster_vip_address: ${_param:control_vip_address}
     control_vip_address: ${_param:cicd_control_address}
-    salt_api_password: 74AdWbSfDxbHhH6I5feRxqD7d8y9h2dw
+    salt_api_password: pWEgGYTfcvfmY1eTdzkPe43sAznn24Aw
     jenkins_slave_user_id: 10000
     jenkins_slave_group_id: ${_param:jenkins_slave_user_id}
     # Docker images and versions

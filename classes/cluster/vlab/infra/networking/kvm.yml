@@ -5,11 +5,6 @@ parameters:
     network:
       bridge: linux
       interface:
-        eth0:
-          enabled: true
-          type: eth
-          proto: manual
-          name: ${_param:deploy_nic}
         eth1:
           enabled: true
           type: slave
@@ -22,18 +17,6 @@ parameters:
           proto: manual
           name: ${_param:primary_second_nic}
           master: bond0
-        br-mgm:
-          enabled: true
-          proto: static
-          type: bridge
-          address: ${_param:deploy_address}
-          netmask: ${_param:deploy_network_netmask}
-          gateway: ${_param:deploy_network_gateway}
-          name_servers:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
-          use_interfaces:
-          - ${_param:deploy_nic}
         bond0:
           enabled: true
           proto: manual
@@ -50,6 +33,39 @@ parameters:
           type: vlan
           use_interfaces:
           - bond0
+        bond0.2:
+          name: bond0.${_param:tenant_vlan}
+          enabled: true
+          proto: manual
+          type: vlan
+          use_interfaces:
+          - bond0
+        bond0.3:
+          name: bond0.${_param:proxy_vlan}
+          enabled: true
+          proto: manual
+          type: vlan
+          use_interfaces:
+          - bond0
+        bond0.4:
+          name: bond0.${_param:public_vlan}
+          enabled: true
+          proto: manual
+          type: vlan
+          use_interfaces:
+          - bond0
+        br-mgm:
+          enabled: true
+          proto: static
+          type: bridge
+          address: ${_param:deploy_address}
+          netmask: ${_param:deploy_network_netmask}
+          gateway: ${_param:deploy_network_gateway}
+          name_servers:
+          - ${_param:dns_server01}
+          - ${_param:dns_server02}
+          use_interfaces:
+          - bond0            
         br-ctl:
           enabled: true
           type: bridge
@@ -58,3 +74,21 @@ parameters:
           netmask: ${_param:control_network_netmask}
           use_interfaces:
           - bond0.${_param:control_vlan}
+        br-mesh:
+          enabled: true
+          type: bridge
+          proto: manual
+          use_interfaces:
+          - bond0.${_param:tenant_vlan}
+        br-prx:
+          enabled: true
+          type: bridge
+          proto: manual
+          use_interfaces:
+          - bond0.${_param:proxy_vlan}
+        br-ext:
+          enabled: true
+          type: bridge
+          proto: manual
+          use_interfaces:
+          - bond0.${_param:public_vlan}            

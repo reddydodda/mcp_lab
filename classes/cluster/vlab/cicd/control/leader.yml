@@ -18,14 +18,6 @@ classes:
   - system.jenkins.client.job.deploy.update
   - system.jenkins.client.job.validate
   - system.jenkins.client.job.ceph
-  - system.jenkins.client.job.vnf-onboarding
-  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding
-  - system.jenkins.client.job.vnf-onboarding.test_avi_loadbalancer
-  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding.avi_loadbalancer
-  - system.jenkins.client.job.vnf-onboarding.test_metaswitch_vsbc
-  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding.metaswitch_vsbc
-  - system.jenkins.client.job.vnf-onboarding.test_nginx_vnf
-  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding.nginx_vnf
   # Security
   - system.jenkins.client.security.ldap
   - system.jenkins.client.security.matrix
@@ -38,10 +30,6 @@ classes:
   # Gerrit
   - system.gerrit.client
   - system.gerrit.client.project.ci
-  - system.gerrit.client.project.vnf_onboarding
-  - system.gerrit.client.project.vnf_onboarding.avi_loadbalancer
-  - system.gerrit.client.project.vnf_onboarding.metaswitch_vsbc
-  - system.gerrit.client.project.vnf_onboarding.nginx_vnf
 
   - system.docker.swarm.master
 

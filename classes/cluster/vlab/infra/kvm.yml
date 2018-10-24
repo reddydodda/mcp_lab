@@ -15,7 +15,7 @@ classes:
 - system.salt.control.placement.openstack.minimal
 - system.salt.control.sizes.ovs.minimal
 - system.salt.control.placement.ovs.minimal
-- system.salt.control.cluster.openstack_benchmark_single
+#- system.salt.control.cluster.openstack_benchmark_single
 - system.salt.control.cluster.stacklight_server_cluster
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
@@ -28,6 +28,7 @@ classes:
 - system.salt.control.cluster.ceph_rgw_cluster
 - system.salt.control.sizes.ceph
 - cluster.vlab.infra
+- cluster.vlab.infra.virtual_osd
 - cluster.vlab.infra.networking.kvm
 parameters:
   _param:
@@ -38,6 +39,14 @@ parameters:
     deploy_nic: eno1
     primary_first_nic: eno2
     primary_second_nic: eno3
+    salt_control_size_cpu_openstack_proxy: 4
+    salt_control_size_ram_openstack_proxy: 8192
+    salt_control_size_disk_profile_openstack_proxy: small
+    salt_control_size_net_profile_openstack_proxy: proxy
+    salt_control_size_cpu_openstack_gateway: 4
+    salt_control_size_ram_openstack_gateway: 8192
+    salt_control_size_disk_profile_openstack_gateway: small
+    salt_control_size_net_profile_openstack_gateway: gateway
   salt:
     control:
       cluster:
@@ -74,6 +83,25 @@ parameters:
           bridge: br-mgm
         eth0:
           bridge: br-ctl
+      gateway:	
+        eth2:	
+          bridge: br-mgm	
+        eth1:	
+          bridge: br-ctl	
+        eth0:	
+          bridge: br-ext	
+      proxy:	
+        eth2:	
+          bridge: br-mgm	
+        eth1:	
+          bridge: br-ctl	
+        eth0:	
+          bridge: br-prx	
+      osd:	
+        eth1:	
+          bridge: br-mgm	
+        eth0:	
+          bridge: br-ctl	
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:

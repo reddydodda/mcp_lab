@@ -11,7 +11,7 @@ parameters:
     osd:
       enabled: true
       crush_parent: ${_param:ceph_crush_parent}
-      bluestore_block_db_size: 21474836480
+      bluestore_block_db_size: 10737418240
       backend:
         bluestore:
           disks:

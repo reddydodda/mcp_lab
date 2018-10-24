@@ -30,10 +30,10 @@ parameters:
     ceph_osd_node002_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.202
     ceph_osd_node003_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.203
 
-    backend_vlan: 105
+    backend_vlan: 100
     ceph_cluster_fsid: ${_param:ceph_cluster_fsid_generated}
     ceph_osd_rack01_single_subnet: 192.168.1
-    ceph_osd_rack01_backend_subnet: 192.168.5
+    ceph_osd_rack01_backend_subnet: 192.168.0
     backend_network_netmask: 255.255.255.0
   linux:
     network:

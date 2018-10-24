@@ -22,12 +22,10 @@ classes:
 - cluster.vlab.infra
 - cluster.vlab.openstack.dashboard
 - cluster.vlab.stacklight.proxy
-- system.nginx.server.proxy.oss.devops_portal
-- system.nginx.server.proxy.oss.rundeck
-- cluster.vlab.openstack.networking.virtual
+- cluster.vlab.openstack.networking.proxy
 parameters:
   _param:
-    keepalived_vip_interface: ens3
+    keepalived_vip_interface: ens4
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
