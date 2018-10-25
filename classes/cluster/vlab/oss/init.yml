@@ -1,8 +1,0 @@
-parameters:
-  _param:
-    oss_node01_address: ${_param:stacklight_monitor_node01_address}
-    oss_node02_address: ${_param:stacklight_monitor_node02_address}
-    oss_node03_address: ${_param:stacklight_monitor_node03_address}
-    oss_node01_deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
-    oss_node02_deploy_address: ${_param:stacklight_monitor_node02_deploy_address}
-    oss_node03_deploy_address: ${_param:stacklight_monitor_node03_deploy_address}

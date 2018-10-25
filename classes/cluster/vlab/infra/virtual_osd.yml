@@ -5,7 +5,7 @@ parameters:
         ceph.osd:
           cpu: 4
           ram: 16384
-          disk_profile: large
+          disk_profile: osd
           net_profile: osd
       cluster:
         internal:

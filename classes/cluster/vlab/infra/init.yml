@@ -20,7 +20,7 @@ classes:
 - cluster.vlab.ceph
 - cluster.vlab.cicd
 #- cluster.vlab.infra.proxy
-- cluster.vlab.infra.ssh	
+- cluster.vlab.infra.ssh
 - cluster.vlab.infra.ssh_password
 - cluster.vlab.infra.secrets
 parameters:

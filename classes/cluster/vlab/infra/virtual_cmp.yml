@@ -1,0 +1,29 @@
+parameters:
+  salt:
+    control:
+      size:
+        cmp:
+          cpu: 4
+          ram: 16384
+          disk_profile: cmp
+          net_profile: cmp
+      cluster:
+        internal:
+          domain: ${_param:cluster_domain}
+          engine: virt
+          node:
+            cmp001:
+              name: ${_param:openstack_compute_rack01_hostname}001
+              provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+              image: ${_param:salt_control_xenial_image}
+              size: cmp
+              rng:
+                backend: /dev/urandom
+            cmp002:
+              name: ${_param:openstack_compute_rack01_hostname}002
+              provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+              image: ${_param:salt_control_xenial_image}
+              size: cmp
+              rng:
+                backend: /dev/urandom
+

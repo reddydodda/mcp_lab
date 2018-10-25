@@ -83,25 +83,57 @@ parameters:
           bridge: br-mgm
         eth0:
           bridge: br-ctl
-      gateway:	
-        eth2:	
-          bridge: br-mgm	
-        eth1:	
-          bridge: br-ctl	
-        eth0:	
-          bridge: br-ext	
-      proxy:	
-        eth2:	
-          bridge: br-mgm	
-        eth1:	
-          bridge: br-ctl	
-        eth0:	
-          bridge: br-prx	
-      osd:	
-        eth1:	
-          bridge: br-mgm	
-        eth0:	
-          bridge: br-ctl	
+      gateway:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+      cmp:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:  
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+      proxy:
+        eth2:
+          bridge: br-mgm
+        eth1:
+          bridge: br-ctl
+        eth0:
+          bridge: br-prx
+      osd:
+        eth1:
+          bridge: br-mgm
+        eth0:
+          bridge: br-ctl
+    disk:	
+      osd:
+      - system:
+          size: 51200
+      - osd1:
+          size: 102400
+      - osd2:
+          size: 102400
+      - osd3:
+          size: 102400
+      - osd4:
+          size: 102400
+      - osd5:
+          size: 102400
+      - osd6:
+          size: 102400
+      - osd7:
+          size: 102400
+      cmp:
+      - system:
+          size: 204800
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:

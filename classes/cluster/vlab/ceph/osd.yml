@@ -17,37 +17,13 @@ parameters:
           disks:
             - dev: /dev/vdc
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
             - dev: /dev/vdd
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
             - dev: /dev/vde
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
-            - dev: 
-              block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
             - dev: /dev/vdf
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
-            - dev: 
-              block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
             - dev: /dev/vdg
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
-            - dev: 
-              block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
             - dev: /dev/vdh
               block_db: /dev/vdb
-#              class: hdd
-#              weight: 1.5
