@@ -16,6 +16,7 @@ classes:
 - system.telegraf.agent.remote.input.http_listener
 - system.mongodb.server.cluster
 - system.prometheus.alerta
+- system.prometheus.alertmanager.notification.email
 - system.prometheus.alertmanager.notification.pushkin
 - system.prometheus.alertmanager.notification.alerta
 - system.prometheus.server.alert.labels_add.route
@@ -45,7 +46,14 @@ parameters:
     keepalived_prometheus_vip_interface: ${_param:keepalived_vip_interface}
     alertmanager_notification_pushkin_host: ${_param:stacklight_monitor_address}
     alertmanager_notification_pushkin_port: 8887
-    prometheus_server_alert_label_route: 'email,salesforce'
+    # Email notifications
+    alertmanager_notification_email_from : john.doe@example.org
+    alertmanager_notification_email_to : jane.doe@example.org
+    alertmanager_notification_email_require_tls: True
+    alertmanager_notification_email_password : password
+    alertmanager_notification_email_username: john.doe@example.org
+    alertmanager_notification_email_host: 127.0.0.1:587
+    prometheus_server_alert_label_route: 'email'
 
     cluster_vip_address: ${_param:stacklight_monitor_address}
     prometheus_storage_retention: 120h

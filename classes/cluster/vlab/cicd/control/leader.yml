@@ -6,6 +6,7 @@ classes:
   - system.docker.swarm.stack.gerrit
   - system.docker.swarm.stack.jenkins
   - system.docker.swarm.stack.ldap
+  - system.docker.swarm.stack.jenkins.slave_ssl
   # Jenkins
   - system.jenkins.master.config
   - system.jenkins.client

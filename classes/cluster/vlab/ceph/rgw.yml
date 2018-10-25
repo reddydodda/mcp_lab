@@ -13,7 +13,7 @@ parameters:
     haproxy_radosgw_source_port: 8080
     ceph_radosgw_bind_port: 8080
     keepalived_vip_password: ${_param:rgw_keepalived_vip_password_generated}
-    cluster_vip_address: 192.168.2.75
+    cluster_vip_address: 192.168.1.55
     cluster_node01_hostname: ${_param:ceph_rgw_node01_hostname}
     cluster_node01_address: ${_param:ceph_rgw_node01_address}
     cluster_node02_hostname: ${_param:ceph_rgw_node02_hostname}

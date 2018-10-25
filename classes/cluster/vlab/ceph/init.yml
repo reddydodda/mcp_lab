@@ -5,41 +5,35 @@ parameters:
     ceph_mon_node01_hostname: cmn01
     ceph_mon_node02_hostname: cmn02
     ceph_mon_node03_hostname: cmn03
-    ceph_mon_node01_address: 192.168.2.66
-    ceph_mon_node02_address: 192.168.2.67
-    ceph_mon_node03_address: 192.168.2.68
+    ceph_mon_node01_address: 192.168.1.51
+    ceph_mon_node02_address: 192.168.1.52
+    ceph_mon_node03_address: 192.168.1.53
 
     ceph_rgw_hostname: rgw
     ceph_rgw_node01_hostname: rgw01
     ceph_rgw_node02_hostname: rgw02
     ceph_rgw_node03_hostname: rgw03
-    ceph_rgw_address: 192.168.2.75
-    ceph_rgw_node01_address: 192.168.2.76
-    ceph_rgw_node02_address: 192.168.2.77
-    ceph_rgw_node03_address: 192.168.2.78
+    ceph_rgw_address: 192.168.1.55
+    ceph_rgw_node01_address: 192.168.1.56
+    ceph_rgw_node02_address: 192.168.1.57
+    ceph_rgw_node03_address: 192.168.1.58
 
     ceph_osd_rack01_hostname: osd
-    ceph_mon_node01_deploy_address: 192.168.0.66
-    ceph_mon_node02_deploy_address: 192.168.0.67
-    ceph_mon_node03_deploy_address: 192.168.0.68
-    ceph_rgw_node01_deploy_address: 192.168.0.76
-    ceph_rgw_node02_deploy_address: 192.168.0.77
-    ceph_rgw_node03_deploy_address: 192.168.0.78
+    ceph_mon_node01_deploy_address: 192.168.0.51
+    ceph_mon_node02_deploy_address: 192.168.0.52
+    ceph_mon_node03_deploy_address: 192.168.0.53
+    ceph_rgw_node01_deploy_address: 192.168.0.56
+    ceph_rgw_node02_deploy_address: 192.168.0.57
+    ceph_rgw_node03_deploy_address: 192.168.0.58
     ceph_osd_rack01_deploy_subnet: 192.168.0
     ceph_osd_node001_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.201
     ceph_osd_node002_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.202
     ceph_osd_node003_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.203
-    ceph_osd_node001_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.201
-    ceph_osd_node002_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.202
-    ceph_osd_node003_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.203
-    ceph_osd_node004_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.204
-    ceph_osd_node005_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.205
-    ceph_osd_node006_backend_address: ${_param:ceph_osd_rack01_backend_subnet}.206
 
-    backend_vlan: 102
+    backend_vlan: 100
     ceph_cluster_fsid: ${_param:ceph_cluster_fsid_generated}
-    ceph_osd_rack01_single_subnet: 192.168.2
-    ceph_osd_rack01_backend_subnet: 192.168.1
+    ceph_osd_rack01_single_subnet: 192.168.1
+    ceph_osd_rack01_backend_subnet: 192.168.0
     backend_network_netmask: 255.255.255.0
   linux:
     network:
@@ -79,33 +73,3 @@ parameters:
           names:
           - ${_param:ceph_rgw_node03_hostname}
           - ${_param:ceph_rgw_node03_hostname}.${_param:cluster_domain}
-#        osd01:
-#          address: ${_param:ceph_osd_node01_address}
-#          names:
-#          - ${_param:ceph_osd_node01_hostname}
-#          - ${_param:ceph_osd_node01_hostname}.${_param:cluster_domain}
-#        osd02:
-#          address: ${_param:ceph_osd_node02_address}
-#          names:
-#          - ${_param:ceph_osd_node02_hostname}
-#          - ${_param:ceph_osd_node02_hostname}.${_param:cluster_domain}
-#        osd03:
-##          address: ${_param:ceph_osd_node03_address}
-#          names:
-#          - ${_param:ceph_osd_node03_hostname}
-#          - ${_param:ceph_osd_node03_hostname}.${_param:cluster_domain}
-#        osd04:
-#          address: ${_param:ceph_osd_node04_address}
-#          names:
-#          - ${_param:ceph_osd_node04_hostname}
-#          - ${_param:ceph_osd_node04_hostname}.${_param:cluster_domain}
-#        osd05:
-#          address: ${_param:ceph_osd_node05_address}
-#          names:
-#          - ${_param:ceph_osd_node05_hostname}
-#          - ${_param:ceph_osd_node05_hostname}.${_param:cluster_domain}
-#        osd06:
-#          address: ${_param:ceph_osd_node06_address}
-#          names:
-#          - ${_param:ceph_osd_node06_hostname}
-#          - ${_param:ceph_osd_node06_hostname}.${_param:cluster_domain}

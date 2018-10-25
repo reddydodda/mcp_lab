@@ -5,31 +5,31 @@ parameters:
     ceph_remote_backup_server: ${_param:infra_kvm_node03_address}
     root_private_key: |
       -----BEGIN RSA PRIVATE KEY-----
-      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
+      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
       -----END RSA PRIVATE KEY-----
   ceph:
     backup:

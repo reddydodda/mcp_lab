@@ -35,7 +35,7 @@ parameters:
       key_file:  /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.key
       cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
       chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
-    cluster_vip_address: ${_param:openstack_proxy_proxy_address}
+    cluster_vip_address: ${_param:openstack_proxy_address}
   # wait for Gluster /srv/salt/pki mount before starting
   nginx:
     server:
