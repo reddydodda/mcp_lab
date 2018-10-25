@@ -2,12 +2,12 @@ classes:
 - cluster.vlab.ceph.osd
 parameters:
   _param:
-    backend_address: 192.168.1.203
-    ceph_crush_parent: rack01
-    deploy_address: 192.168.0.203
+    backend_address: 192.168.0.83
+    ceph_crush_parent: rack03
+    deploy_address: 192.168.0.83
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.203
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.83
   linux:
     system:
       name: osd003

@@ -2,12 +2,12 @@ classes:
 - cluster.vlab.openstack.message_queue
 parameters:
   _param:
-    deploy_address: 192.168.0.43
+    deploy_address: 192.168.0.23
     keepalived_vip_priority: 101
     linux_system_codename: xenial
     rabbitmq_cluster_role: slave
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.43
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.23
   linux:
     system:
       name: msg03

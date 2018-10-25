@@ -27,6 +27,7 @@ parameters:
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: ens3
     primary_second_nic: ens4
+    primary_third_nic: ens5
   nova:
     compute:
       reserved_host_memory_mb: 1100

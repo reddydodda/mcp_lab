@@ -3,11 +3,11 @@ classes:
 - cluster.vlab.stacklight.log_curator
 parameters:
   _param:
-    deploy_address: 192.168.0.62
+    deploy_address: 192.168.0.47
     keepalived_vip_priority: 102
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.62
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.47
   linux:
     system:
       name: log02

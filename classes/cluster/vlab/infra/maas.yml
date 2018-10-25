@@ -87,7 +87,7 @@ disk_layouts:
       volume:
         <<:
         - *volume_images_small
-  lvm_kvm_extra: &lvm_kvm_extra	
+  lvm_kvm_extra: &lvm_kvm_extra
     type: lvm
     devices:
       - md0
@@ -95,7 +95,7 @@ disk_layouts:
       <<:
       - *volume_root
       - *volume_images_large
-  
+
 parameters:
   _param:
     maas_region_port: 5240
@@ -180,7 +180,7 @@ parameters:
             power_type: ipmi
             power_user: engineer
           disk_layout: *disk_layout_kvm
-         kvm04: # cz7306
+        kvm04: # cz7306
           interface:
             mac: 0c:c4:7a:89:00:28
             subnet: deploy_network
@@ -192,13 +192,7 @@ parameters:
             power_password: password1
             power_type: ipmi
             power_user: engineer
-          disk_layout: &disk_layout_kvm
-            type: flat
-            bootable_device: sda
-            disk:
-              <<:
-              - *single_disk
-              - *lvm_compute
+          disk_layout: *disk_layout_kvm
     cluster:
       region:
         host: ${_param:deploy_address}

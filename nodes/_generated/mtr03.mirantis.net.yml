@@ -2,11 +2,11 @@ classes:
 - cluster.vlab.stacklight.telemetry
 parameters:
   _param:
-    deploy_address: 192.168.0.88
+    deploy_address: 192.168.0.43
     keepalived_vip_priority: 101
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.88
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.43
   linux:
     system:
       name: mtr03

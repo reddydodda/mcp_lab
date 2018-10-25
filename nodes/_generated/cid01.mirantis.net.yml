@@ -3,11 +3,11 @@ classes:
 parameters:
   _param:
     cicd_database_id: 1
-    deploy_address: 192.168.0.91
+    deploy_address: 192.168.0.241
     keepalived_vip_priority: 103
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.91
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.241
   linux:
     system:
       name: cid01

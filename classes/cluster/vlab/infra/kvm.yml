@@ -113,7 +113,7 @@ parameters:
           bridge: br-mgm
         eth0:
           bridge: br-ctl
-    disk:	
+    disk:
       osd:
       - system:
           size: 51200

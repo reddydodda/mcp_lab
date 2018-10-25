@@ -4,11 +4,11 @@ classes:
 - cluster.vlab.stacklight.server
 parameters:
   _param:
-    deploy_address: 192.168.0.71
+    deploy_address: 192.168.0.36
     keepalived_vip_priority: 103
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.71
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.36
   linux:
     system:
       name: mon01

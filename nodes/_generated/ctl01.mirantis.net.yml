@@ -3,14 +3,14 @@ classes:
 - cluster.vlab.openstack.control_init
 parameters:
   _param:
-    deploy_address: 192.168.0.11
+    deploy_address: 192.168.0.16
     keepalived_vip_priority: 103
     linux_system_codename: xenial
     opencontrail_database_id: 1
     openstack_node_role: primary
     rabbitmq_cluster_role: master
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.11
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.16
   linux:
     system:
       name: ctl01

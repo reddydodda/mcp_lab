@@ -2,11 +2,11 @@ classes:
 - cluster.vlab.openstack.gateway
 parameters:
   _param:
-    deploy_address: 192.168.0.226
+    deploy_address: 192.168.0.63
     linux_system_codename: xenial
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.226
-    tenant_address: 172.17.18.40
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.63
+    tenant_address: 192.168.2.63
   linux:
     system:
       name: gtw03

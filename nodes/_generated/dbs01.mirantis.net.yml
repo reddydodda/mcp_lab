@@ -4,12 +4,12 @@ classes:
 - cluster.vlab.openstack.database_init
 parameters:
   _param:
-    deploy_address: 192.168.0.51
+    deploy_address: 192.168.0.26
     keepalived_vip_priority: 103
     linux_system_codename: xenial
     mysql_cluster_role: master
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.51
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.26
   linux:
     system:
       name: dbs01

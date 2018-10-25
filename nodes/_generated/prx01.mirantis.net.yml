@@ -2,12 +2,13 @@ classes:
 - cluster.vlab.openstack.proxy
 parameters:
   _param:
-    deploy_address: 192.168.0.81
+    control_address: 192.168.1.6
+    deploy_address: 192.168.0.6
     keepalived_vip_priority: 102
     linux_system_codename: xenial
     proxy_address: 172.17.18.6
-    salt_master_host: 192.168.0.15
-    single_address: 192.168.2.81
+    salt_master_host: 192.168.0.11
+    single_address: 172.17.18.6
   linux:
     system:
       name: prx01
