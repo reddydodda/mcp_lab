@@ -31,7 +31,7 @@ disk_layouts:
       type: physical
       partition_schema:
         part1:
-          size: 750G
+          size: 790G
   single_disk: &single_disk
     sda:
       type: physical
@@ -54,7 +54,7 @@ disk_layouts:
       mount: '/srv/glusterfs/'
   volume_images: &volume_images_small
     images:
-      size: 700G
+      size: 770G
       type: ext4
       mount: '/var/lib/libvirt/images/'
   volume_images_large: &volume_images_large
@@ -103,8 +103,8 @@ parameters:
     maas_gateway: 192.168.0.1
   maas:
     region:
-      commissioning_scripts:
-        00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
+#      commissioning_scripts:
+#        00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
       bind:
         host: ${_param:deploy_address}
         port: ${_param:maas_region_port}
@@ -118,8 +118,8 @@ parameters:
           gateway_ip: ${_param:maas_gateway}
           ipranges:
             1:
-              end: 192.168.0.250
-              start: 192.168.0.10
+              end: 192.168.0.200
+              start: 192.168.0.100
               type: dynamic
               subnet: ${maas:region:subnets:deploy_network:name}
       fabrics:

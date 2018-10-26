@@ -17,20 +17,13 @@ parameters:
               provider: ${_param:infra_kvm_node01_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: ceph.osd
-              rng:
-                backend: /dev/urandom
             osd002:
               name: ${_param:ceph_osd_rack01_hostname}002
               provider: ${_param:infra_kvm_node02_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: ceph.osd
-              rng:
-                backend: /dev/urandom
             osd003:
               name: ${_param:ceph_osd_rack01_hostname}003
               provider: ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: ceph.osd
-              rng:
-                backend: /dev/urandom
-

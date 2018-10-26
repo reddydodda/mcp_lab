@@ -11,9 +11,10 @@ classes:
 - system.keystone.client.service.cinder3
 - system.keystone.client.service.keystone
 - system.keystone.client.service.radosgw-swift
+#- cluster.vlab.openstack.client
 parameters:
   _param:
-    openstack_region: RegionOne
+    openstack_region: DevLab
     radosgw_swift_cluster_port: 8080
     radosgw_service_host: ${_param:ceph_rgw_address}
     keystone_swift_password: ${_param:keystone_swift_password_generated}

@@ -11,24 +11,25 @@ classes:
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
 #- system.salt.control.cluster.openstack_upgrade_single
-- system.salt.control.sizes.openstack.minimal
-- system.salt.control.placement.openstack.minimal
-- system.salt.control.sizes.ovs.minimal
-- system.salt.control.placement.ovs.minimal
+- system.salt.control.sizes.openstack.compact
+- system.salt.control.placement.openstack.compact
+- system.salt.control.sizes.ovs.compact
+- system.salt.control.placement.ovs.compact
 #- system.salt.control.cluster.openstack_benchmark_single
 - system.salt.control.cluster.stacklight_server_cluster
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
-- system.salt.control.sizes.stacklight.minimal
-- system.salt.control.placement.stacklight.minimal
+- system.salt.control.sizes.stacklight.compact
+- system.salt.control.placement.stacklight.compact
 - system.salt.control.cluster.cicd_control_cluster
-- system.salt.control.sizes.cicd.minimal
-- system.salt.control.placement.cicd.minimal
+- system.salt.control.sizes.cicd.compact
+- system.salt.control.placement.cicd.compact
 - system.salt.control.cluster.ceph_mon_cluster
 - system.salt.control.cluster.ceph_rgw_cluster
 - system.salt.control.sizes.ceph
 - cluster.vlab.infra
 - cluster.vlab.infra.virtual_osd
+- cluster.vlab.infra.virtual_cmp
 - cluster.vlab.infra.networking.kvm
 parameters:
   _param:
@@ -36,9 +37,9 @@ parameters:
     cluster_node01_address: ${_param:infra_kvm_node01_address}
     cluster_node02_address: ${_param:infra_kvm_node02_address}
     cluster_node03_address: ${_param:infra_kvm_node03_address}
-    deploy_nic: eno1
-    primary_first_nic: eno2
-    primary_second_nic: eno3
+#    deploy_nic: eno1
+    primary_first_nic: eno1
+    primary_second_nic: eno2
     salt_control_size_cpu_openstack_proxy: 4
     salt_control_size_ram_openstack_proxy: 8192
     salt_control_size_disk_profile_openstack_proxy: small
@@ -47,13 +48,22 @@ parameters:
     salt_control_size_ram_openstack_gateway: 8192
     salt_control_size_disk_profile_openstack_gateway: small
     salt_control_size_net_profile_openstack_gateway: gateway
+    salt_control_size_cpu_openstack_message_queue: 4
+    salt_control_size_ram_openstack_message_queue: 16384
+    salt_control_size_cpu_ceph_mon: 4
+    salt_control_size_ram_ceph_mon: 12288
+    salt_control_size_cpu_ceph_rgw: 4
+    salt_control_size_ram_ceph_rgw: 12288
+
   salt:
     control:
       cluster:
         internal:
+          rng:
+            backend: "/dev/random"
           node:
-            bmk01:
-              image: ${_param:salt_control_xenial_image}
+#            bmk01:
+#              image: ${_param:salt_control_xenial_image}
             ctl01:
               image: ${_param:salt_control_xenial_image}
             ctl02:
@@ -97,7 +107,7 @@ parameters:
           bridge: br-mgm
         eth2:
           bridge: br-ctl
-        eth1:  
+        eth1:
           bridge: br-mesh
         eth0:
           bridge: br-ext

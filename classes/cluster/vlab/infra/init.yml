@@ -27,7 +27,7 @@ parameters:
   _param:
     # Don't set it "false" before you configure sudo policies and enable power users.
     linux_system_user_sudo: true
-
+    motd_company_name: mirantis
     apt_mk_version: 2018.8.0
     # TODO: Revert openstack repo part after refactoring here: https://mirantis.jira.com/browse/PROD-17500
     openstack_version: pike
@@ -118,6 +118,14 @@ parameters:
         - ${_param:salt_minion_ca_host}
   linux:
     network:
+      resolv:
+        dns:
+          - ${_param:dns_server01}
+          - ${_param:dns_server02}
+        search:
+          - ${_param:cluster_domain}
+        domain:
+          - ${_param:cluster_domain}
       dhclient:
         enabled: false
       host:

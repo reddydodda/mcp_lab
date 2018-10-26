@@ -65,7 +65,7 @@ parameters:
           - ${_param:dns_server01}
           - ${_param:dns_server02}
           use_interfaces:
-          - bond0            
+          - bond0
         br-ctl:
           enabled: true
           type: bridge
@@ -91,4 +91,4 @@ parameters:
           type: bridge
           proto: manual
           use_interfaces:
-          - bond0.${_param:public_vlan}            
+          - bond0.${_param:public_vlan}

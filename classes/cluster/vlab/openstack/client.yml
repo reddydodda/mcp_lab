@@ -1,0 +1,75 @@
+#### Over Cloud Network, Flavor setup
+classes:
+- system.nova.client.flavor.default
+- system.glance.client.image.cirros
+- system.neutron.client.service.public
+parameters:
+  _param:
+    cirros_image_url: "http://images.mirantis.com/cirros-x64-20170828.qcow2"
+    cirros_image_name:  "TestVM"
+    openstack_public_neutron_subnet_cidr: 172.17.18.32/27
+    openstack_public_neutron_subnet_allocation_start: 172.17.18.38
+    openstack_public_neutron_subnet_allocation_end: 172.17.18.62
+    openstack_public_neutron_subnet_gateway: 172.17.18.33
+
+  nova:
+    client:
+      server:
+        admin_identity:
+          flavor:
+            m1.tiny:
+              ram: 256
+              disk: 1
+              vcpus: 1
+            m1.medium80:
+              ram: 4096
+              disk: 80
+              vcpus: 2
+            m1.xxlarge40:
+              ram: 32300
+              disk: 40
+              vcpus: 16
+            m1.large20:
+              ram: 8128
+              disk: 20
+              vcpus: 4
+
+  glance:
+    client:
+      identity:
+        admin_identity:
+          endpoint_type: internalURL
+          image:
+            cirros:
+              name: ${_param:cirros_image_name}
+              location: ${_param:cirros_image_url}
+              import_from_format: 'qcow2'
+              container_format: 'bare'
+              disk_format: 'qcow2'
+              tags:
+                - 'cirros'
+              visibility: public
+              wait_timeout: 1000
+  neutron:
+    client:
+      server:
+        admin_identity:
+          endpoint_type: internalURL
+          network:
+            public:
+              tenant: admin
+              shared: True
+              router_external: True
+              default: True
+              admin_state_up: True
+              provider_network_type: flat
+              provider_physical_network: physnet1
+              subnet:
+                public-subnet:
+                  cidr: ${_param:openstack_public_neutron_subnet_cidr}
+                  allocation_pools:
+                    - start: ${_param:openstack_public_neutron_subnet_allocation_start}
+                      end: ${_param:openstack_public_neutron_subnet_allocation_end}
+                  gateway: ${_param:openstack_public_neutron_subnet_gateway}
+                  enable_dhcp: False
+

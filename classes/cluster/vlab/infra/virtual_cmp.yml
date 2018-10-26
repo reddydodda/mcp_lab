@@ -17,13 +17,9 @@ parameters:
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: cmp
-              rng:
-                backend: /dev/urandom
             cmp002:
               name: ${_param:openstack_compute_rack01_hostname}002
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: cmp
-              rng:
-                backend: /dev/urandom
 

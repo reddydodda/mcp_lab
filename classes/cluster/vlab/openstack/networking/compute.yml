@@ -11,19 +11,22 @@ parameters:
           proto: static
           name: ${_param:primary_first_nic}
           address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}          
+          netmask: ${_param:control_network_netmask}
         ens4:
           enabled: true
           type: eth
           proto: static
           name: ${_param:primary_second_nic}
           address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}          
+          netmask: ${_param:tenant_network_netmask}
         ens5:
           enabled: true
-          type: eth
+          name: ${_param:primary_third_nic}
           proto: manual
-          name: ${_param:primary_third_nic}       
+          ovs_port_type: OVSPort
+          type: ovs_port
+          ovs_bridge: br-floating
+          bridge: br-floating
         br-floating:
           enabled: true
           name: br-floating
