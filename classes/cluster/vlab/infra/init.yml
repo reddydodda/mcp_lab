@@ -118,14 +118,6 @@ parameters:
         - ${_param:salt_minion_ca_host}
   linux:
     network:
-      resolv:
-        dns:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
-        search:
-          - ${_param:cluster_domain}
-        domain:
-          - ${_param:cluster_domain}
       dhclient:
         enabled: false
       host:
