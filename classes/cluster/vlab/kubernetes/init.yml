@@ -21,7 +21,7 @@ parameters:
     # addresses and hostnames
     kubernetes_internal_api_address: 10.254.0.1
     kubernetes_internal_dns_address: 10.254.0.10
-    kubernetes_control_hostname: ctl
+    kubernetes_control_hostname: k8s-ctl
     kubernetes_control_address: 192.168.1.130
     kubernetes_control_node01_hostname: k8s-ctl01
     kubernetes_control_node02_hostname: k8s-ctl02
@@ -81,6 +81,23 @@ parameters:
     kubernetes_control_node02_tenant_address: 192.168.2.132
     kubernetes_control_node03_tenant_address: 192.168.2.133
 
+    kubernetes_control_node01_single_address: 192.168.1.131
+    kubernetes_control_node02_single_address: 192.168.1.132
+    kubernetes_control_node03_single_address: 192.168.1.133
+    # Compute nodes
+    kubernetes_compute_node01_hostname: k8s-cmp001
+    kubernetes_compute_node02_hostname: k8s-cmp002
+    kubernetes_compute_node03_hostname: k8s-cmp003
+    kubernetes_compute_node04_hostname: k8s-cmp004
+    kubernetes_compute_node01_address: 192.168.1.141
+    kubernetes_compute_node02_address: 192.168.1.142
+    kubernetes_compute_node03_address: 192.168.1.143
+    kubernetes_compute_node04_address: 192.168.1.144
+    kubernetes_compute_node01_tenant_address: 192.168.2.141
+    kubernetes_compute_node02_tenant_address: 192.168.2.142
+    kubernetes_compute_node03_tenant_address: 192.168.2.143
+    kubernetes_compute_node04_tenant_address: 192.168.2.144
+
   linux:
     network:
       resolv:
@@ -89,7 +106,7 @@ parameters:
           - ${_param:dns_server02}
           - ${_param:kubernetes_internal_dns_address}
         search:
-          - ${_param:cluster_domain}            
+          - ${_param:cluster_domain}
       host:
 #        prx:
 #          address: ${_param:kubernetes_proxy_address}
@@ -106,23 +123,43 @@ parameters:
 #          names:
 #          - ${_param:kubernetes_proxy_node02_hostname}
 #          - ${_param:kubernetes_proxy_node02_hostname}.${_param:cluster_domain}
-        ctl:
+        k8s-ctl:
           address: ${_param:kubernetes_control_address}
           names:
           - ${_param:kubernetes_control_hostname}
           - ${_param:kubernetes_control_hostname}.${_param:cluster_domain}
-        ctl01:
+        k8s-ctl01:
           address: ${_param:kubernetes_control_node01_address}
           names:
           - ${_param:kubernetes_control_node01_hostname}
           - ${_param:kubernetes_control_node01_hostname}.${_param:cluster_domain}
-        ctl02:
+        k8s-ctl02:
           address: ${_param:kubernetes_control_node02_address}
           names:
           - ${_param:kubernetes_control_node02_hostname}
           - ${_param:kubernetes_control_node02_hostname}.${_param:cluster_domain}
-        ctl03:
+        k8s-ctl03:
           address: ${_param:kubernetes_control_node03_address}
           names:
           - ${_param:kubernetes_control_node03_hostname}
           - ${_param:kubernetes_control_node03_hostname}.${_param:cluster_domain}
+        k8s-cmp001:
+          address: ${_param:kubernetes_compute_node01_address}
+          names:
+          - ${_param:kubernetes_compute_node01_hostname}
+          - ${_param:kubernetes_compute_node01_hostname}.${_param:cluster_domain}
+        k8s-cmp002:
+          address: ${_param:kubernetes_compute_node02_address}
+          names:
+          - ${_param:kubernetes_compute_node02_hostname}
+          - ${_param:kubernetes_compute_node02_hostname}.${_param:cluster_domain}
+        k8s-cmp003:
+          address: ${_param:kubernetes_compute_node03_address}
+          names:
+          - ${_param:kubernetes_compute_node03_hostname}
+          - ${_param:kubernetes_compute_node03_hostname}.${_param:cluster_domain}
+        k8s-cmp004:
+          address: ${_param:kubernetes_compute_node04_address}
+          names:
+          - ${_param:kubernetes_compute_node04_hostname}
+          - ${_param:kubernetes_compute_node04_hostname}.${_param:cluster_domain}

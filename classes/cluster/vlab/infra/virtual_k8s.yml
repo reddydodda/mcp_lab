@@ -1,19 +1,24 @@
+classes:
+- system.salt.control.cluster.kubernetes_control_cluster
 parameters:
   salt:
     control:
       size:
-        k8s-cmp:
+        k8s.cmp:
           cpu: 4
           ram: 16384
-          disk_profile: k8s-cmp
-          net_profile: k8s-cmp
-        k8s-cmp:
+          disk_profile: k8scmp
+          net_profile: k8scmp
+        k8s.ctl:
           cpu: 4
           ram: 16384
-          disk_profile: k8s-ctl
-          net_profile: k8s-ctl          
+          disk_profile: k8sctl
+          net_profile: k8sctl
+
       cluster:
         internal:
+          rng:
+            backend: "/dev/random"
           domain: ${_param:cluster_domain}
           engine: virt
           node:
@@ -21,35 +26,62 @@ parameters:
               name: ${_param:kubernetes_control_node01_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-ctl
+              size: k8s.ctl
             k8s-ctl02:
               name: ${_param:kubernetes_control_node02_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-ctl
-            k8s-ctl01:
+              size: k8s.ctl
+            k8s-ctl03:
               name: ${_param:kubernetes_control_node03_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-ctl
+              size: k8s.ctl
             k8s-cmp001:
-              name: ${_param:kubernetes_compute_rack01_hostname:}001
+              name: ${_param:kubernetes_compute_rack01_hostname}001
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-cmp
+              size: k8s.cmp
             k8s-cmp002:
-              name: ${_param:kubernetes_compute_rack01_hostname:}001
+              name: ${_param:kubernetes_compute_rack01_hostname}002
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-cmp
+              size: k8s.cmp
             k8s-cmp003:
-              name: ${_param:kubernetes_compute_rack01_hostname:}001
+              name: ${_param:kubernetes_compute_rack01_hostname}003
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-cmp
+              size: k8s.cmp
             k8s-cmp004:
-              name: ${_param:kubernetes_compute_rack01_hostname:}001
+              name: ${_param:kubernetes_compute_rack01_hostname}004
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s-cmp
+              size: k8s.cmp
 
+  virt:
+    nic:
+      k8sctl:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+      k8scmp:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+    disk:
+      k8scmp:
+      - system:
+          size: 204800
+      k8sctl:
+      - system:
+          size: 102400

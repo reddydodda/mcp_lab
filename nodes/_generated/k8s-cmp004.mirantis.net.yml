@@ -1,0 +1,14 @@
+classes:
+- cluster.vlab.kubernetes.compute
+parameters:
+  _param:
+    deploy_address: 192.168.0.144
+    salt_master_host: 192.168.0.11
+    single_address: 192.168.1.144
+    tenant_address: 192.168.2.144
+  linux:
+    system:
+      name: k8s-cmp004
+      domain: mirantis.net
+      cluster: default
+      environment: prd
