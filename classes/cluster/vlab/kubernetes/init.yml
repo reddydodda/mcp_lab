@@ -4,6 +4,8 @@ parameters:
     linux_system_codename: xenial
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
     salt_minion_ca_authority: salt_master_ca
+    primary_first_nic: ens3
+    primary_second_nic: ens4
 
     # kubernetes settings
     kubernetes_admin_user: admin

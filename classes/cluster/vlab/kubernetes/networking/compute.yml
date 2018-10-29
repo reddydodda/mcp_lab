@@ -4,49 +4,21 @@ parameters:
   linux:
     network:
       interface:
-        eth1:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_first_nic}
-          master: bond0
+        eth1: ${_param:linux_deploy_interface}
         eth2:
-          mtu: 9000
           enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
-        bond0:
-          mtu: 9000
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: active-backup
-        bond0.1:
-          mtu: 9000
-          name: bond0.${_param:control_vlan}
-          enabled: true
+          type: eth
           proto: static
-          type: vlan
-          use_interfaces:
-          - bond0
+          name: ${_param:primary_first_nic}
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
           post_up_cmds:
             - ip r rep 10.254.0.0/16 via ${_param:single_address}
-        bond0.2:
-          mtu: 9000
-          name: bond0.${_param:tenant_vlan}
+        ens4:
           enabled: true
+          type: eth
           proto: static
-          type: vlan
-          use_interfaces:
-          - bond0
+          name: ${_param:primary_second_nic}
           address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
+          netmask: ${_param:tenant_network_netmask}          
+        

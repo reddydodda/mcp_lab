@@ -2,10 +2,41 @@ classes:
 - system.reclass.storage.system.kubernetes_proxy_cluster
 - system.salt.minion.cert.k8s_server
 - system.reclass.storage.system.kubernetes_control_cluster
-
+- cluster.vlab.infra.virtual_k8s
 parameters:
-  _param:
 
+  virt:
+    nic:
+      default:
+        eth1:
+          bridge: br-mgm
+        eth0:
+          bridge: br-ctl
+      k8s-ctl:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+      k8s-cmp:
+        eth3:
+          bridge: br-mgm
+        eth2:
+          bridge: br-ctl
+        eth1:
+          bridge: br-mesh
+        eth0:
+          bridge: br-ext
+    disk:
+      k8s-cmp:
+      - system:
+          size: 204800
+      k8s-ctl:
+      - system:
+          size: 102400
 
   reclass:
     storage:

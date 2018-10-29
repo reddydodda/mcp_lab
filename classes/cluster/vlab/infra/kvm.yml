@@ -125,24 +125,24 @@ parameters:
           bridge: br-mgm
         eth0:
           bridge: br-ctl
-      k8s-ctl:
-        eth3:
-          bridge: br-mgm
-        eth2:
-          bridge: br-ctl
-        eth1:
-          bridge: br-prx
-        eth0:
-          bridge: br-ext
-      k8s-cmp:
-        eth3:
-          bridge: br-mgm
-        eth2:
-          bridge: br-ctl
-        eth1:
-          bridge: br-prx
-        eth0:
-          bridge: br-ext
+#      k8s-ctl:
+#        eth3:
+#          bridge: br-mgm
+#        eth2:
+#          bridge: br-ctl
+#        eth1:
+#          bridge: br-prx
+#        eth0:
+#          bridge: br-ext
+#      k8s-cmp:
+#        eth3:
+#          bridge: br-mgm
+#        eth2:
+#          bridge: br-ctl
+#        eth1:
+#          bridge: br-prx
+#        eth0:
+#          bridge: br-ext
 
     disk:
       osd:
@@ -162,15 +162,15 @@ parameters:
           size: 102400
       - osd7:
           size: 102400
-      cmp:
-      - system:
-          size: 204800
-      k8s-cmp:
-      - system:
-          size: 204800
-      k8s-ctl:
-      - system:
-          size: 102400
+#      cmp:
+#      - system:
+#          size: 204800
+#      k8s-cmp:
+#      - system:
+#          size: 204800
+#      k8s-ctl:
+#      - system:
+#          size: 102400
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:
