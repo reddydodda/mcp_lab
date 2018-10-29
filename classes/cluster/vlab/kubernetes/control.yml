@@ -1,0 +1,58 @@
+classes:
+- service.etcd.server.cluster
+- system.haproxy.proxy.listen.kubernetes.apiserver
+- system.keepalived.cluster.instance.kube_api_server_vip
+- system.linux.system.repo.docker_legacy
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
+- system.salt.minion.cert.etcd_server
+- system.salt.minion.cert.etcd_client
+- system.salt.minion.cert.k8s_client
+- system.kubernetes.master.cluster
+- system.kubernetes.master.auth.rbac
+- system.kubernetes.control.roles.cluster-admin
+- cluster.vlab.kubernetes.compute
+parameters:
+  _param:
+    keepalived_k8s_apiserver_vip_interface: ens3
+    keepalived_k8s_apiserver_vip_address: ${_param:kubernetes_control_address}
+    keepalived_k8s_apiserver_vip_password: password
+  etcd:
+    server:
+      source:
+        engine: docker_hybrid
+      ssl:
+        enabled: True
+      setup:
+        calico:
+          key: /calico/v1/ipam/v4/pool/${_param:calico_private_network}-${_param:calico_private_netmask}
+          value: '{"masquerade":true,"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
+          # if IP-in-IP is required
+          # value: '{"ipip":"tunl0","ipip_mode":"always","ipam":true,"disabled":false, "masquerade":true,"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
+  kubernetes:
+    master:
+      etcd:
+        ssl:
+          enabled: True
+      network:
+        calico:
+          enabled: true
+          etcd:
+            ssl:
+              enabled: True
+          prometheus:
+            enabled: true
+      namespace:
+        netchecker:
+          enabled: true
+    common:
+      addons:
+        netchecker:
+          enabled: true
+        helm:
+          enabled: false
+          metallb:
+            enabled: false
+            addresses:
+            - 172.17.10.192/26

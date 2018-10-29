@@ -32,6 +32,7 @@ classes:
 - cluster.vlab.infra
 - cluster.vlab.infra.backup.client_common
 - cluster.vlab.infra.networking.config
+- cluster.vlab.infra.k8s_config  
 parameters:
   _param:
     salt_master_base_environment: prd
@@ -136,7 +137,6 @@ parameters:
           classes:
           - system.elasticsearch.client.single
           - system.kibana.client.single
-          - system.kibana.client.vnf-onboarding
           params:
             deploy_address: ${_param:stacklight_log_node01_deploy_address}
         stacklight_log_node02:

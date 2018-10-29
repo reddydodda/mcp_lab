@@ -4,29 +4,21 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.saltstack
 - system.linux.system.repo.mcp.apt_mirantis.glusterfs
+
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.salt_pki
 - system.nginx.server.single
-- system.nginx.server.proxy.cicd.gerrit
-- system.nginx.server.proxy.cicd.jenkins
-- system.nginx.server.proxy.openstack_api
-- system.nginx.server.proxy.openstack_vnc
-- system.nginx.server.proxy.openstack_web
-- system.nginx.server.proxy.ceph_radosgw
-- system.nginx.server.proxy.openstack.ceilometer
-- system.horizon.server.single
-- system.salt.minion.cert.proxy  
-- system.salt.minion.cert.proxy.openstack
+
+- system.salt.minion.cert.proxy
 - system.salt.minion.cert.proxy.pki
 - system.sphinx.server.doc.reclass
 - service.keepalived.cluster.single
 - cluster.vlab.infra
-- cluster.vlab.openstack.dashboard
 - cluster.vlab.stacklight.proxy
-- cluster.vlab.openstack.networking.proxy
+
 parameters:
   _param:
-    keepalived_vip_interface: ens4
+    keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
@@ -36,9 +28,4 @@ parameters:
       key_file:  /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.key
       cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
       chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
-    cluster_vip_address: ${_param:openstack_proxy_address}
-  # wait for Gluster /srv/salt/pki mount before starting
-  nginx:
-    server:
-      wait_for_service:
-        - srv-salt-pki.mount
+    cluster_vip_address: ${_param:kubernetes_proxy_address}
