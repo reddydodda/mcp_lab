@@ -19,7 +19,7 @@ classes:
 - cluster.vlab.stacklight
 - cluster.vlab.ceph
 - cluster.vlab.cicd
-## K8S  
+## K8S
 - cluster.vlab.kubernetes
 #- cluster.vlab.infra.proxy
 - cluster.vlab.infra.ssh
@@ -46,8 +46,8 @@ parameters:
     cluster_name: vlab
     cluster_public_host: ${_param:openstack_proxy_address}
 
-    dns_server01: 8.8.8.8
-    dns_server02: 8.8.4.4
+    dns_server01: 172.19.0.6
+    dns_server02: 8.8.8.8
     control_vlan: 101
     tenant_vlan: 102
     proxy_vlan: 103

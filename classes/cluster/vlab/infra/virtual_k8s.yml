@@ -1,15 +1,15 @@
-classes:
-- system.salt.control.cluster.kubernetes_control_cluster
+#classes:
+#- system.salt.control.cluster.kubernetes_control_cluster
 parameters:
   salt:
     control:
       size:
-        k8s.cmp:
+        kubernetes.compute:
           cpu: 4
           ram: 16384
           disk_profile: k8scmp
           net_profile: k8scmp
-        k8s.ctl:
+        kubernetes.control:
           cpu: 4
           ram: 16384
           disk_profile: k8sctl
@@ -17,46 +17,46 @@ parameters:
 
       cluster:
         internal:
-          rng:
-            backend: "/dev/random"
-          domain: ${_param:cluster_domain}
-          engine: virt
+#          rng:
+#            backend: "/dev/random"
+#          domain: ${_param:cluster_domain}
+#          engine: virt
           node:
-            k8s-ctl01:
+            ctl01:
               name: ${_param:kubernetes_control_node01_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.ctl
-            k8s-ctl02:
+              size: kubernetes.control
+            ctl02:
               name: ${_param:kubernetes_control_node02_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.ctl
-            k8s-ctl03:
+              size: kubernetes.control
+            ctl03:
               name: ${_param:kubernetes_control_node03_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.ctl
-            k8s-cmp001:
+              size: kubernetes.control
+            cmp001:
               name: ${_param:kubernetes_compute_rack01_hostname}001
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.cmp
-            k8s-cmp002:
+              size: kubernetes.compute
+            cmp002:
               name: ${_param:kubernetes_compute_rack01_hostname}002
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.cmp
-            k8s-cmp003:
+              size: kubernetes.compute
+            cmp003:
               name: ${_param:kubernetes_compute_rack01_hostname}003
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.cmp
-            k8s-cmp004:
+              size: kubernetes.compute
+            cmp004:
               name: ${_param:kubernetes_compute_rack01_hostname}004
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
-              size: k8s.cmp
+              size: kubernetes.compute
 
   virt:
     nic:

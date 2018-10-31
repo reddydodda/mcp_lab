@@ -34,6 +34,7 @@ classes:
   - system.docker.swarm.master
 
   - cluster.vlab.cicd.control
+  - cluster.vlab.cicd.user
 
 parameters:
   _param:
@@ -61,3 +62,14 @@ parameters:
     gerrit_ldap_bind_password: ${_param:openldap_admin_password}
     gerrit_ldap_account_base: ou=people,${_param:openldap_dn}
     gerrit_ldap_group_base: ou=groups,${_param:openldap_dn}
+  gerrit:
+    client:
+      project:
+        cvp-sanity-checks:
+          enabled: true
+          description: Jenkins cvp-sanity repo
+          upstream: https://github.com/Mirantis/cvp-sanity-checks
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true

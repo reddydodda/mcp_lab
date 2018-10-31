@@ -36,7 +36,6 @@ classes:
 - cluster.vlab.infra
 - cluster.vlab.infra.backup.client_common
 - cluster.vlab.infra.networking.config
-- cluster.vlab.infra.k8s_config
 parameters:
   _param:
     salt_master_base_environment: prd
@@ -314,17 +313,17 @@ parameters:
         kubernetes_control_node01:
           params:
             tenant_address: ${_param:kubernetes_control_node01_tenant_address}
-            single-address: ${_param:kubernetes_control_node01_single_address}
+            single_address: ${_param:kubernetes_control_node01_single_address}
             deploy_address: ${_param:kubernetes_control_node01_deploy_address}
         kubernetes_control_node02:
           params:
             tenant_address: ${_param:kubernetes_control_node02_tenant_address}
-            single-address: ${_param:kubernetes_control_node02_single_address}
+            single_address: ${_param:kubernetes_control_node02_single_address}
             deploy_address: ${_param:kubernetes_control_node02_deploy_address}
         kubernetes_control_node03:
           params:
             tenant_address: ${_param:kubernetes_control_node03_tenant_address}
-            single-address: ${_param:kubernetes_control_node03_single_address}
+            single_address: ${_param:kubernetes_control_node03_single_address}
             deploy_address: ${_param:kubernetes_control_node03_deploy_address}
         kubernetes_compute_node001:
           name: ${_param:kubernetes_compute_rack01_hostname}001
@@ -334,8 +333,8 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: ${_param:kubernetes_compute_rack01_single_subnet}.141
-            deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.142
-            tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.143
+            deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.141
+            tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.141
         kubernetes_compute_node002:
           name: ${_param:kubernetes_compute_rack01_hostname}002
           domain: ${_param:cluster_domain}

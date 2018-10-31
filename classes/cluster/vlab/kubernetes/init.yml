@@ -7,6 +7,31 @@ parameters:
     primary_first_nic: ens3
     primary_second_nic: ens4
 
+    # kubernetes repo
+    mcp_docker_registry: docker-prod-local.artifactory.mirantis.com
+    kubernetes_calico_calicoctl_repo: ${_param:mcp_docker_registry}/mirantis/projectcalico/calico
+    kubernetes_calico_repo: ${_param:mcp_docker_registry}/mirantis/projectcalico/calico
+    kubernetes_calico_cni_repo: ${_param:mcp_docker_registry}/mirantis/projectcalico/calico
+    kubernetes_calico_kube_ctl_repo: ${_param:mcp_docker_registry}/mirantis/projectcalico/calico
+    kubernetes_hyperkube_repo: ${_param:mcp_docker_registry}/mirantis/kubernetes
+    kubernetes_contrail_cni_repo: ${_param:mcp_docker_registry}/mirantis/kubernetes
+    kubernetes_contrail_network_controller_repo: ${_param:mcp_docker_registry}/mirantis/kubernetes/contrail-integration
+    kubernetes_netchecker_agent_repo: mirantis
+    kubernetes_netchecker_server_repo: mirantis
+    kubernetes_virtlet_repo: mirantis
+    kubernetes_kubedns_repo: gcr.io/google_containers
+    kubernetes_externaldns_repo: ${_param:mcp_docker_registry}/mirantis/external-dns
+    kubernetes_genie_repo: https://docker-prod-local.artifactory.mirantis.com/artifactory/binary-prod-local/mirantis/kubernetes/cni-genie
+    kubernetes_flannel_repo: quay.io/coreos
+    kubernetes_metallb_repo: ${_param:mcp_docker_registry}/mirantis/metallb
+    kubernetes_sriov_repo: https://docker-prod-local.artifactory.mirantis.com/artifactory/binary-prod-local/mirantis/kubernetes/sriov-cni
+    kubernetes_cniplugins_repo: https://docker-prod-local.artifactory.mirantis.com/artifactory/binary-prod-local/mirantis/kubernetes/containernetworking-plugins
+    kubernetes_dashboard_repo: ${_param:mcp_docker_registry}/mirantis/kubernetes
+    kubernetes_coredns_repo: ${_param:mcp_docker_registry}/mirantis/coredns
+    kubernetes_ingressnginx_repo: ${_param:mcp_docker_registry}/mirantis/kubernetes-ingress-nginx
+    kubernetes_corends_etcd_operator_repo: quay.io/coreos
+    kubernetes_containerd_repo: https://github.com/kubernetes-sigs/cri-tools/releases/download
+
     # kubernetes settings
     kubernetes_admin_user: admin
     kubernetes_admin_password: ${_param:kubernetes_admin_password_generated}
@@ -53,7 +78,7 @@ parameters:
 
     cluster_vip_address: ${_param:kubernetes_control_address}
     cluster_local_address: ${_param:single_address}
-    glusterfs_service_host: ${_param:kubernetes_control_node03_address}
+    glusterfs_service_host: ${_param:infra_kvm_address}
     # etcd stuff
     cluster_node01_hostname: ${_param:kubernetes_control_node01_hostname}
     cluster_node01_address: ${_param:kubernetes_control_node01_address}

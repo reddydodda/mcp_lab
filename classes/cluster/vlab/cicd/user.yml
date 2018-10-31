@@ -1,0 +1,51 @@
+#classes:
+#  - system.openldap.client.people
+#  - system.openldap.client.groups
+parameters:
+  openldap:
+    client:
+      entry:
+        people:
+          entry:
+            admin22:
+              attr:
+                #openldap_organisation: "${_param:cluster_name}"
+                #openldap_dn: "dc=VW,dc=net"
+                #openldap_domain: "VW.net"
+                uid: admin22
+                userPassword: ${_param:openldap_admin_password}
+                uidNumber: 20003
+                gidNumber: ${openldap:client:entry:groups:entry:admins22:attr:gidNumber}
+                gecos: Administrator
+                givenName: Charlie22
+                sn: Root
+                homeDirectory: /home/admin22
+                loginShell: /bin/bash
+                mail: ${_param:admin_email}
+              classes:
+                - posixAccount
+                - inetOrgPerson
+                - top
+                - shadowAccount
+        groups:
+          entry:
+            admins22:
+              attr:
+                description: Admin22
+                gidNumber: 20003
+                memberUid:
+                  - admin22
+              classes:
+                - posixGroup
+                - top
+  gerrit:
+    client:
+#      group:
+#        devops-release:
+#          members:
+#          - admin22
+      user:
+        admin22:
+          fullname: admin22
+          groups:
+          - devops-release
