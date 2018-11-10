@@ -23,6 +23,14 @@ parameters:
     keystone_internal_path: "/"
     keystone_admin_path: "/"
   #TODO Need to research, implement and test moving keystone fernet repository from GlusterFS and use secured rsync to ship rotated keys across ctl nodes. PROD-18539
+  neutron:
+    server:
+      firewall_driver: iptables
+      backend:
+        mechanism:
+          lb:
+            driver: linuxbridge
+
   linux:
     system:
       job:

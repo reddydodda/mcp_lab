@@ -23,15 +23,29 @@ parameters:
           enabled: true
           name: ${_param:primary_third_nic}
           proto: manual
-          ovs_port_type: OVSPort
-          type: ovs_port
-          ovs_bridge: br-floating
-          bridge: br-floating
+          type: eth
         br-floating:
-          enabled: true
           name: br-floating
-          type: ovs_bridge
+          enabled: true
+          type: bridge
           proto: manual
+#          address: ${_param:public_address}
+#          netmask: ${_param:public_network_netmask}
           use_interfaces:
           - ens5
-      bridge: openvswitch
+#        ens5:
+#          enabled: true
+#          name: ${_param:primary_third_nic}
+#          proto: manual
+#          ovs_port_type: OVSPort
+#          type: ovs_port
+#          ovs_bridge: br-floating
+#          bridge: br-floating
+#        br-floating:
+#          enabled: true
+#          name: br-floating
+#          type: ovs_bridge
+#          proto: manual
+#          use_interfaces:
+#          - ens5
+#      bridge: openvswitch

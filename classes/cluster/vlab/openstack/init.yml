@@ -6,19 +6,19 @@ parameters:
     neutron_global_physnet_mtu: 1500
     neutron_external_mtu: 1500
 
-    neutron_enable_qos: True
+    neutron_enable_qos: False
     neutron_enable_vlan_aware_vms: False
     neutron_enable_bgp_vpn: False
     neutron_bgp_vpn_driver: bagpipe
     neutron_compute_external_access: True
-    neutron_control_dvr: True
-    neutron_gateway_dvr: True
-    neutron_compute_dvr: True
+    neutron_control_dvr: False
+    neutron_gateway_dvr: False
+    neutron_compute_dvr: False
 
     neutron_gateway_agent_mode: dvr_snat
-    neutron_compute_agent_mode: dvr
+    neutron_compute_agent_mode: legacy
 
-    neutron_l3_ha: False
+    neutron_l3_ha: True
     neutron_tenant_network_types: "flat,vxlan"
 
     cluster_internal_protocol: http
@@ -187,6 +187,7 @@ parameters:
     #billometer_identity_password: ${_param:keystone_billometer_password}
     #billometer_identity_host: ${_param:openstack_control_address}
     #billometer_identity_token: ${_param:keystone_service_token}
+
   linux:
     network:
       host:

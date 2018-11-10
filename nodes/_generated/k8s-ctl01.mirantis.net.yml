@@ -5,6 +5,7 @@ parameters:
     deploy_address: 192.168.0.131
     keepalived_vip_priority: 103
     linux_system_codename: xenial
+    proxy_address: 172.17.18.11
     salt_master_host: 192.168.0.11
     single_address: 192.168.1.131
     tenant_address: 192.168.2.131

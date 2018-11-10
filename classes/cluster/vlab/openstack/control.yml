@@ -41,3 +41,16 @@ parameters:
     cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
+
+  neutron:
+    server:
+      firewall_driver: iptables
+      backend:
+        mechanism:
+          lb:
+            driver: linuxbridge
+      agents:
+        dhcp:
+          interface_driver: linuxbridge
+        l3:
+          interface_driver: linuxbridge

@@ -98,7 +98,7 @@ parameters:
     kubernetes_genie_enabled: False
     kubernetes_calico_enabled: True
     kubernetes_opencontrail_enabled: False
-    kubernetes_metallb_enabled: False
+    kubernetes_metallb_enabled: True
     # calico
     calico_private_network: 10.0.0.0
     calico_private_netmask: 16

@@ -4,6 +4,7 @@ parameters:
   _param:
     deploy_address: 192.168.0.101
     linux_system_codename: xenial
+    public_address: 172.17.18.40
     salt_master_host: 192.168.0.11
     single_address: 192.168.1.101
     tenant_address: 192.168.2.101

@@ -31,6 +31,19 @@ parameters:
   nova:
     compute:
       reserved_host_memory_mb: 1100
+
+  neutron:
+    compute:
+      backend:
+        mechanism:
+          lb:
+            driver: linuxbridge
+#      dhcp_agent_enabled: True
+#      agents:
+#        l3:
+#          interface_driver: linuxbridge
+#        dhcp:
+#          interface_driver: linuxbridge
 ## Best practice configure high speed interface for live migrations
 #  nova:
 #    libvirt:

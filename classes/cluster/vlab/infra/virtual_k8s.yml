@@ -22,37 +22,37 @@ parameters:
 #          domain: ${_param:cluster_domain}
 #          engine: virt
           node:
-            ctl01:
+            k8s-ctl01:
               name: ${_param:kubernetes_control_node01_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.control
-            ctl02:
+            k8s-ctl02:
               name: ${_param:kubernetes_control_node02_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.control
-            ctl03:
+            k8s-ctl03:
               name: ${_param:kubernetes_control_node03_hostname}
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.control
-            cmp001:
+            k8s-cmp001:
               name: ${_param:kubernetes_compute_rack01_hostname}001
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.compute
-            cmp002:
+            k8s-cmp002:
               name: ${_param:kubernetes_compute_rack01_hostname}002
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.compute
-            cmp003:
+            k8s-cmp003:
               name: ${_param:kubernetes_compute_rack01_hostname}003
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
               size: kubernetes.compute
-            cmp004:
+            k8s-cmp004:
               name: ${_param:kubernetes_compute_rack01_hostname}004
               provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
               image: ${_param:salt_control_xenial_image}
@@ -70,14 +70,16 @@ parameters:
         eth0:
           bridge: br-ext
       k8scmp:
-        eth3:
+        eth4:
           bridge: br-mgm
-        eth2:
+        eth3:
           bridge: br-ctl
-        eth1:
+        eth2:
           bridge: br-mesh
-        eth0:
+        eth1:
           bridge: br-ext
+        eth0:
+          bridge: br-prx
     disk:
       k8scmp:
       - system:

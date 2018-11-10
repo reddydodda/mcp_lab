@@ -215,6 +215,7 @@ parameters:
         openstack_gateway_node01:
           params:
             deploy_address: ${_param:openstack_gateway_node01_deploy_address}
+            public_address: 172.17.18.41
         openstack_gateway_node02:
           params:
             deploy_address: ${_param:openstack_gateway_node02_deploy_address}
@@ -262,6 +263,7 @@ parameters:
             single_address: ${_param:openstack_compute_rack01_single_subnet}.101
             deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.101
             tenant_address: ${_param:openstack_compute_rack01_tenant_subnet}.101
+            public_address: 172.17.18.40
         openstack_compute_node002:
           name: ${_param:openstack_compute_rack01_hostname}002
           domain: ${_param:cluster_domain}
@@ -315,16 +317,19 @@ parameters:
             tenant_address: ${_param:kubernetes_control_node01_tenant_address}
             single_address: ${_param:kubernetes_control_node01_single_address}
             deploy_address: ${_param:kubernetes_control_node01_deploy_address}
+            proxy_address: 172.17.18.11
         kubernetes_control_node02:
           params:
             tenant_address: ${_param:kubernetes_control_node02_tenant_address}
             single_address: ${_param:kubernetes_control_node02_single_address}
             deploy_address: ${_param:kubernetes_control_node02_deploy_address}
+            proxy_address: 172.17.18.12
         kubernetes_control_node03:
           params:
             tenant_address: ${_param:kubernetes_control_node03_tenant_address}
             single_address: ${_param:kubernetes_control_node03_single_address}
             deploy_address: ${_param:kubernetes_control_node03_deploy_address}
+            proxy_address: 172.17.18.13
         kubernetes_compute_node001:
           name: ${_param:kubernetes_compute_rack01_hostname}001
           domain: ${_param:cluster_domain}
@@ -335,6 +340,7 @@ parameters:
             single_address: ${_param:kubernetes_compute_rack01_single_subnet}.141
             deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.141
             tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.141
+            proxy_address: 172.17.18.14
         kubernetes_compute_node002:
           name: ${_param:kubernetes_compute_rack01_hostname}002
           domain: ${_param:cluster_domain}
@@ -345,6 +351,7 @@ parameters:
             single_address: ${_param:kubernetes_compute_rack01_single_subnet}.142
             deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.142
             tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.142
+            proxy_address: 172.17.18.15
         kubernetes_compute_node003:
           name: ${_param:kubernetes_compute_rack01_hostname}003
           domain: ${_param:cluster_domain}
@@ -355,6 +362,7 @@ parameters:
             single_address: ${_param:kubernetes_compute_rack01_single_subnet}.143
             deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.143
             tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.143
+            proxy_address: 172.17.18.16
         kubernetes_compute_node004:
           name: ${_param:kubernetes_compute_rack01_hostname}004
           domain: ${_param:cluster_domain}
@@ -365,3 +373,4 @@ parameters:
             single_address: ${_param:kubernetes_compute_rack01_single_subnet}.144
             deploy_address: ${_param:kubernetes_compute_rack01_deploy_subnet}.144
             tenant_address: ${_param:kubernetes_compute_rack01_tenant_subnet}.144
+            proxy_address: 172.17.18.17

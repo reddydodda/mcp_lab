@@ -3,6 +3,7 @@ classes:
 parameters:
   _param:
     deploy_address: 192.168.0.141
+    proxy_address: 172.17.18.14
     salt_master_host: 192.168.0.11
     single_address: 192.168.1.141
     tenant_address: 192.168.2.141

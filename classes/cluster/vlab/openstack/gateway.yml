@@ -18,3 +18,15 @@ parameters:
     primary_first_nic: ens3
     primary_second_nic: ens4
     primary_third_nic: ens5
+
+  neutron:
+    gateway:
+      backend:
+        mechanism:
+          lb:
+            driver: linuxbridge
+      agents:
+        dhcp:
+          interface_driver: linuxbridge
+        l3:
+          interface_driver: linuxbridge
