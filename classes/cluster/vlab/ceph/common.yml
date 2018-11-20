@@ -22,9 +22,19 @@ parameters:
           caps:
             mon: "profile rbd"
             osd: "profile rbd pool=volumes, profile rbd-read-only pool=images"
+        cinder-backup:
+          name: cinder-backup
+          caps:
+            mon: "profile rbd"
+            osd: "profile rbd pool=volumes-backup, profile rbd-read-only pool=images, profile rbd pool=volumes"
         nova:
           name: ${_param:nova_storage_user}
           caps:
             mon: "profile rbd"
             osd: "profile rbd pool=vms, profile rbd-read-only pool=images"
+        kubernetes:
+          name: kubernetes
+          caps:
+            mon: "profile rbd"
+            osd: "profile rbd pool=kubernetes"
 

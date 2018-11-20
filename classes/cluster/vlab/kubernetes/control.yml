@@ -12,6 +12,8 @@ classes:
 - system.kubernetes.master.cluster
 - system.kubernetes.master.auth.rbac
 - system.kubernetes.control.roles.cluster-admin
+- system.ceph.common.cluster
+- cluster.vlab.ceph.common
 - cluster.vlab.kubernetes.compute
 parameters:
   _param:
@@ -56,3 +58,14 @@ parameters:
           enabled: true
           addresses:
           - 172.17.18.18-172.17.18.25
+        storageclass:
+          rbd:
+            enabled: True
+            default: True
+            provisioner: rbd
+            name: rbd
+            user_id: kubernetes
+            user_key: AQBY6u1b/zkZNRAAcGd6GlaUkUvNHYT+GOKM9A==
+            monitors: cmn01:6789,cmn02:6789,cmn03:6789
+            pool: kubernetes
+            fstype: ext4

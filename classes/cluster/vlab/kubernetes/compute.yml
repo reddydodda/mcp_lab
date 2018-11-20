@@ -6,6 +6,8 @@ classes:
 - system.kubernetes.pool.cluster
 - system.salt.minion.cert.k8s_client
 - system.salt.minion.cert.etcd_client
+- system.ceph.common.cluster
+- cluster.vlab.ceph.common
 - cluster.vlab.kubernetes.networking.compute
 - cluster.vlab.infra
 

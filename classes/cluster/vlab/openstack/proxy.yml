@@ -15,7 +15,8 @@ classes:
 - system.nginx.server.proxy.ceph_radosgw
 - system.nginx.server.proxy.openstack.ceilometer
 - system.horizon.server.single
-- system.salt.minion.cert.proxy  
+#- service.horizon.server.cluster
+- system.salt.minion.cert.proxy
 - system.salt.minion.cert.proxy.openstack
 - system.salt.minion.cert.proxy.pki
 - system.sphinx.server.doc.reclass
@@ -42,3 +43,9 @@ parameters:
     server:
       wait_for_service:
         - srv-salt-pki.mount
+  horizon:
+    server:
+      multidomain: true
+#  memcached:
+#    server:
+#      enabled: False

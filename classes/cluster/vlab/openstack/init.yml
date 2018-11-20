@@ -87,13 +87,13 @@ parameters:
 
     # openstack service addresses
     openstack_proxy_address: 172.17.18.5
-    openstack_proxy_node01_address: 172.17.18.6
+    openstack_proxy_node01_address: 172.17.18.8
     openstack_proxy_node02_address: 172.17.18.7
     openstack_proxy_node01_deploy_address: 192.168.0.6
     openstack_proxy_node02_deploy_address: 192.168.0.7
     openstack_proxy_node01_control_address: 192.168.1.6
     openstack_proxy_node02_control_address: 192.168.1.7
-    openstack_proxy_node01_proxy_address: 172.17.18.6
+    openstack_proxy_node01_proxy_address: 172.17.18.8
     openstack_proxy_node02_proxy_address: 172.17.18.7
 
 

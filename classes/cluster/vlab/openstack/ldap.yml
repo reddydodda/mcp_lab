@@ -1,0 +1,37 @@
+parameters:
+  keystone:
+    server:
+      service_name: apache2
+      domain:
+        mirantis:
+          description: "Local LDAP"
+          backend: ldap
+          identity:
+            backend: ldap
+            driver: ldap
+          assignment:
+            backend: sql
+            driver: sql
+          ldap:
+            url: ldap://192.168.1.240
+            bind_user: CN=admin,DC=mirantis,DC=net
+            query_scope: sub
+            page_size: 1000
+            password: XObFoGFeJrrsaale
+            suffix: DC=mirantis,DC=net
+            user_tree_dn: OU=people,DC=mirantis,DC=net
+            group_tree_dn: OU=groups,DC=mirantis,DC=net
+            user_objectclass: posixAccount
+            user_id_attribute: uidNumber
+            user_name_attribute: uid
+            user_pass_attribute: userPassword
+            user_enabled_attribute: shadowInactive
+            user_mail_attribute: mail
+            group_objectclass: posixGroup
+            group_id_attribute: gidNumber
+            group_name_attribute: cn
+            group_member_attribute: memberUid
+            group_desc_attribute: cn
+            filter:
+              user: "(&(&(objectClass=posixAccount)(uidNumber=*))(unixHomeDirectory=*))"
+              group: ""

@@ -27,6 +27,7 @@ classes:
 - system.ceph.common.cluster
 - cluster.vlab.ceph.common
 - cluster.vlab.infra
+- cluster.vlab.openstack.ldap
 - cluster.vlab.openstack.networking.virtual
 parameters:
   _param:
@@ -45,12 +46,18 @@ parameters:
   neutron:
     server:
       firewall_driver: iptables
-      backend:
-        mechanism:
-          lb:
-            driver: linuxbridge
+#      backend:
+#        mechanism:
+#          lb:
+#            driver: linuxbridge
       agents:
         dhcp:
           interface_driver: linuxbridge
         l3:
           interface_driver: linuxbridge
+  cinder:
+    controller:
+      backup:
+        engine: ceph
+        ceph_pool: volumes-backup
+        ceph_user: cinder-backup
