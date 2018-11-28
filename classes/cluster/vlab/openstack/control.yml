@@ -50,11 +50,11 @@ parameters:
 #        mechanism:
 #          lb:
 #            driver: linuxbridge
-      agents:
-        dhcp:
-          interface_driver: linuxbridge
-        l3:
-          interface_driver: linuxbridge
+#      agents:
+#        dhcp:
+#          interface_driver: linuxbridge
+#        l3:
+#          interface_driver: linuxbridge
   cinder:
     controller:
       backup:

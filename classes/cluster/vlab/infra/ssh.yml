@@ -60,6 +60,20 @@ parameters:
           full_name: Ramon Melero
           home: /home/rmelero
           email: rmelero@mirantis.com
+        osavatieiev:                                                                
+          enabled: true                                                         
+          name: osavatieiev                                                         
+          sudo: true                                                            
+          full_name: osavatieiev                                                    
+          home: /home/osavatieiev                                                   
+          email: osavatieiev@mirantis.com
+        mchernik:                                                                
+          enabled: true                                                         
+          name: mchernik                                                         
+          sudo: true                                                            
+          full_name: mchernik                                                    
+          home: /home/mchernik                                                   
+          email: mchernik@mirantis.com
   openssh:
     server:
       enabled: true
@@ -104,6 +118,16 @@ parameters:
           public_keys:
           - ${public_keys:rmelero}
           user: ${linux:system:user:rmelero}
+        osavatieiev:                                                                
+          enabled: true                                                         
+          public_keys:                                                          
+          - ${public_keys:osavatieiev}                                              
+          user: ${linux:system:user:osavatieiev}
+        mchernik:                                                                
+          enabled: true                                                         
+          public_keys:                                                          
+          - ${public_keys:mchernik}                                              
+          user: ${linux:system:user:mchernik}
   public_keys:
     vkhalin:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFv4D6guOZjHAgPiAiPqKfbA9z2oCYohWRJrXPERRoG5BCsxjjmNSU8Dg/ygJw/diaNIGve+qPUMWMbwTLp6Dhty7sMLu3VbzrR05JX59Y/OMaEeUTPkQgPKdkCOUGopjV1CbQAxJGnyiSysWQxQU/LW4N9B08tcyZX/z10/I4+RQ0A7setQyWqQMxNlwuCUF5cCPoDbbfbHEYIS/yKeFewdwjq01/sbpJcYt2wHV2WJJaiMYA5YqQLQHG4dNlx1kOWMLICkx9eP7j8k8AznAmHrJ/GvyRgUuqGBPgyPeKj2cvGPahnGRpIzv+T8ivV8ZaULK2MbWc20LmSfQBUAdb vkhalin@vkhalin.local
@@ -121,3 +145,7 @@ parameters:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC12Zn+Xbnw4K017LS6aVr75mwkkbNUbSbcLRBnNlNO7R/fe3852kLfJojp59Gau9HM1lMDYQJNU30+xWd9IucjPukD41f5UsaGIDgwVa9aJRuvPKbJCluNqkCZ1fAo0BSyeIb0+DKR+ujE23QDo7W/3nV5Dyh3NsCjZen4Xiv+bpKlW3H40rFA19xyflMyOWUKFqkLR0nF2yg/b342BmTYaxhQHWrJYjdcU32tg2xmlegSHxJlzeIVfC7L3arck1y6Op6qxpMZKQHDqVeS/ZVQxdLS3LQmEDJyLh7KiISBjWdP8Qsfy8mqgGELjaNnHzajEop95E/G1kwWjStVYvHn rmelero@mbp.local
     vpytlik:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCuhPI9BihjnSU66qCnp5W1rMP6bp/RAgVSY1KU+v8/zFplkycL7KwtNk7Th5fzaBgc1kDEt7vbxlpzCyexT0GmGTfrYp3VTs8kD4b2buN0TkWCvqaCussOI+OD4QM1yhGAMj0BtZE6LlEfyOPk83pwe+oKwb5CLiEb9nWROzzS2OTItkUSLaFEhECdwYifH77V7muYMBczbS9Ej/cifMaX2OijVS1/5F89LarAEK2IffAHzFZYV+e3n8L+Wt47siLwRaLvVO0AlP7SxpKKUYipPFZyRUaLBf3pMKvhmeAyZvYop3LBl94iCdJSSr1RER1oSz3clGeuRvvWp4kJWgf9 vpytlik@vpytlik
+    osavatieiev:                                                                    
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1LOY6PdhYlueDeIx2ASl+56z+eUGqYXA2Aqep5W5j68W7ZRB0lmuam2Bqh5WVRP14l2pTQrV9CsCd8G1Y4nQamAwIb86ipf+8KKEawVaeWjihcUQf5VVwKIZEeZEwdHJFk5wK9YfmICn2x6rhKlQJ5ibcHpHlhdOgoscxvHMixzVxLGeRVyGn3OOeiGCEF+Ltt/ug1vj8A/9ytOCL0OMJJ9Oj8bCxrp9VQlVMAJt6Jp7iL6K8Q0J97/MZ1MehVr5RrpVf2wKNKrydfSwdqw+ZgIiQWRVl6yzv4S8AWCVhyFRMe7b1hMRpSQOqsW3oKgDyxfhc34/FFBNLOdAsQCSf osavatieiev@mirantis.com
+    mchernik:                                                                    
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiYzcWNIP1K3DnSfztIZdMTl6zSr133eixsHDWWqI71Fj5UOny4kMH2P/qYk0WHhm7P9kwBNDgmJBY/eO5jb00D2w9BGHyvsOnkpAgzw5neL4ivRT7qLWkRdbcLo8AAFQN7VW+bgMb8gFfYWfttHyfkbJOQlU2xmi8fvhQ+2IM/12S0f0lP2uIYgVn8g9f+1OmtXKOWi/cKx0+6NYsuFjM2oVRlBhwlhPD2mI00rSL6zYjz/8GapPPkylQnds09NueNmrScjsPmJl6lPzU8maxHABZ/KctIZW/0ucMolv/3Ybm5FJIsj6YGUdz7AWzdE9o4tSfugFR3P7Ng/scxXpZ mchernik@mirantis.com

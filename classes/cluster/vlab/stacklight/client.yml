@@ -31,3 +31,23 @@ parameters:
     grafana_prometheus_address: ${_param:stacklight_telemetry_address}
     grafana_prometheus_port: ${_param:prometheus_relay_bind_port}
     stacklight_prometheus_port: 15010
+#### Testing keycloak
+
+  docker:
+    client:
+      stack:
+        dashboard:
+          service:
+            grafana:
+              environment:
+#                GF_DATABASE_TYPE: ${_param:grafana_database_type}
+#                GF_DATABASE_NAME: grafana
+#                GF_DATABASE_USER: grafana
+#                GF_DATABASE_PASSWORD: ${_param:grafana_database_password}
+#                GF_DATABASE_HOST: "${_param:grafana_database_host}:${_param:grafana_database_port}"
+#                GF_SECURITY_ADMIN_PASSWORD: ${_param:grafana_admin_password}
+                GF_AUTH_GENERIC_OAUTH_ENABLED: 'True'
+                GF_AUTH_GENERIC_OAUTH_CLIENT_ID: testgrafana
+                GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: 91062345-e838-4f1e-8c9f-a1695c953294
+                GF_AUTH_GENERIC_OAUTH_AUTH_URL: http://192.168.1.240:18086/auth
+

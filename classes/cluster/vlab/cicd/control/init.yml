@@ -14,6 +14,8 @@ classes:
   - system.glusterfs.client.volume.salt_pki
   - system.glusterfs.client.volume.mysql
   - system.glusterfs.client.volume.openldap
+#  - system.glusterfs.server.volume.keycloak
+  - system.glusterfs.client.volume.keycloak
  #- system.glusterfs.client.volume.salt
   # Docker
   - system.docker.host
@@ -34,6 +36,7 @@ classes:
   - system.haproxy.proxy.listen.docker.visualizer
   - system.haproxy.proxy.listen.openldap
   - system.haproxy.proxy.listen.phpldapadmin
+  - system.haproxy.proxy.listen.keycloak
   - system.haproxy.proxy.listen.mysql
   - system.haproxy.proxy.listen.stats
   - cluster.vlab.infra

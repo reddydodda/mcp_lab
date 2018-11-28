@@ -7,6 +7,12 @@ classes:
   - system.docker.swarm.stack.jenkins
   - system.docker.swarm.stack.ldap
   - system.docker.swarm.stack.jenkins.slave_ssl
+  - system.docker.swarm.stack.keycloak
+  - system.docker.swarm.network.keycloak_backend
+  # Keycloak application proxy settings
+  - system.keycloak.proxy.application.devops_portal
+  - service.keycloak.proxy
+  - service.keycloak.server
   # Jenkins
   - system.jenkins.master.config
   - system.jenkins.client
